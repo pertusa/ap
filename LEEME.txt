@@ -12,4 +12,3 @@ mkdocs build
 [commit and push to github]
 [github/settings/github pages: branch gh-pages /root]
 
-
