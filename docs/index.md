@@ -6,7 +6,7 @@
 
 ## Course Syllabus and Rules
 
-These are the teaching materials for the course Aprendizaje Profundo, coordinated by professor [Antonio Pertusa Ibáñez][japerez_url] at the University of Alacant and also taught by professors [Juan Antonio Pérez](japerez_url) ([@japer3z][japerez_twitter]), Andrés Fuster, Jorge Azorín, and Jorge Calvo.
+These are the teaching materials for the course Aprendizaje Profundo, coordinated by professor [Antonio Pertusa Ibáñez][pertusa_url] at the University of Alacant and also taught by professors [Juan Antonio Pérez][japerez_url] ([@japer3z][japerez_twitter]), Andrés Fuster, Jorge Azorín, and Jorge Calvo.
 
 For information regarding the course assessment, please refer to the [course official info page][syllabus]. Some additional aspects not covered in the syllabus include:
 

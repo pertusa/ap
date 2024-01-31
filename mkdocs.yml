@@ -6,3 +6,8 @@ markdown_extensions:
   - toc:
       permalink: true
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  
