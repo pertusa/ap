@@ -1,0 +1,8 @@
+site_name: Aprendizaje Profundo
+theme:
+  name: material
+
+markdown_extensions:
+  - toc:
+      permalink: true
+
