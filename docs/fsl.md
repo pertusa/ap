@@ -75,7 +75,7 @@ On the other hand, the query set – typically denoted as $Q$ – contains all o
 
 ### The Goal
 
-![The goal](../images/fsl/foundations/fsl-the-goal.png)
+![The goal](images/fsl/foundations/fsl-the-goal.png)
 
 The goal of few-shot learning algorithms is to learn a classification model $f_\theta$ that is able to generalize to a set of $K$ previously unseen classes at inference time, with a small support set of $N$ examples for each previously unseen class.
 
@@ -87,7 +87,7 @@ In order for a classifier to be able to learn a novel class with only a few labe
 
 ### Class-conditional splits
 
-![Class-conditional splits](../images/fsl/foundations/class-conditional-splits.png)
+![Class-conditional splits](images/fsl/foundations/class-conditional-splits.png)
 
 In supervised learning, one typically creates a train/test split in the dataset while ensuring that the classes seen during training are the same as those seen during testing.
 
@@ -100,7 +100,7 @@ A train/test split with no overlap between classes is called a **class-condition
 
 To take full advantage of a large training set for few-shot learning, we use a technique referred to as **episodic training** {cite}`vinyals2016matching, ravi2017optimization`. 
 
-![Episodic training](../images/fsl/foundations/episodic-training.png)
+![Episodic training](images/fsl/foundations/episodic-training.png)
 
 > Episodic training is an efficient way of leveraging a large training dataset to train a few-shot learning model.
 
