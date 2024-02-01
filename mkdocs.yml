@@ -1,6 +1,8 @@
 site_name: Aprendizaje Profundo
 theme:
   name: material
+  features:
+    - content.code.copy
 
 markdown_extensions:
   - toc:
@@ -12,7 +14,7 @@ markdown_extensions:
   - pymdownx.superfences
   - mdx_math
   - codehilite:
-      linenums: true
+      linenums: false
   - footnotes
   - meta
   - sane_lists
