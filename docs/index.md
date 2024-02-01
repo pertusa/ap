@@ -1,4 +1,4 @@
-# Aprendizaje Profundo, 2023-2024
+# Summary
 
 ## Homework Assignments
 
