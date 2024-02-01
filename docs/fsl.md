@@ -21,7 +21,7 @@ Even with the help of transfer learning or unsupervised learning, we often still
 
 Few-shot learning (FSL) and zero-shot learning (ZSL), on the other hand, tackle the labeled data scarcity issue from a different angle. They are learning paradigms that aim to learn a model that can learn a new concept (e.g. recognize a new class) quickly, based on just *a handful of labeled examples* (few-shot) or some *side information or metadata* (zero-shot). 
 
-### An example
+#### An example
 
 To have a better idea of how FSL and ZSL differ from standard supervised learning, let's consider an example of training a musical instrument classifier. We assume that there is an existing dataset in which we have abundant labeled examples for common instruments.
 
@@ -114,7 +114,7 @@ Validation and Evaluation during episodic training can be done in a similar fash
 --->
 -------------------------
 
-## Approaches
+## Few-Shot Learning approaches
 
 Now that we have a grasp of the foundations of few-shot learning,  we'll take a look at some of the most common approaches to the solving few-shot problems. 
 
@@ -129,7 +129,7 @@ Here are the few-shot learning approaches covered in this course:
 2. **Optimization-based few-shot learning**
 
 
-## Metric-Based Few-Shot Learning
+### Metric-Based Few-Shot Learning
 
 Metric-based approaches to few-shot learning are able to learn an embedding space where examples that belong to the same class are close together according to some **metric**, even if the examples belong to classes that were not seen during training. 
 
@@ -146,7 +146,7 @@ There are many different metric-based approaches to few-shot learning, and they 
 
 Among the most popular metric-based approaches are Prototypical Networks {cite}`snell2017prototypical`, Matching Networks {cite}`vinyals2016matching`, and Relation Networks {cite}`sung2018relation`.
 
-### Example: Prototypical networks
+##### Example: Prototypical networks
 
 ![Prototypical net](images/fsl/foundations/prototypical-net.png)
 
@@ -183,7 +183,7 @@ In this zero-shot learning scenario, we are mapping from two different domains: 
 This means that we are learning two different backbone models that map to the **same embedding space**: \(f_\theta\) for the input query and \(g_\theta\) for the class metadata vectors.
 --->
 
-## Optimization-Based Few-Shot Learning 
+### Optimization-Based Few-Shot Learning 
 
 Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML) {cite}`finn2017model`,
 and it's successors {cite}`li2017meta, sun2019mtl`. 
@@ -201,7 +201,7 @@ The MAML algorithm accomplishes this by training the model to adapt from a start
 
 Note that MAML makes no assumption of the model architecture, thus the "model-agnostic" part of the method.
 
-### The MAML algorithm
+#### The MAML algorithm
 
 ![MAML](images/fsl/foundations/maml.png)
 
@@ -234,7 +234,7 @@ At inference time, we are given a few-shot learning task with support and query 
 
 -------
 
-# Zero-Shot Learning Foundations
+## Zero-Shot Learning Foundations
 
 Zero-shot learning (ZSL) is yet another approach for classifying the classes that are not observed during training. Main difference from few-shot learning is that it does not require any additional label data for novel class inputs. 
 
@@ -247,7 +247,7 @@ Therefore, in zero-shot learning, there is no further training step for unseen c
 ZSL was originally inspired by human’s ability to infer novel objects or create new categories dynamically based on prior semantic knowledge, where general relationship between seen and unseen classes are learned.
 
 
-# Overview on Zero-shot Learning Paradigm 
+### Overview on Zero-shot Learning Paradigm 
 
 
 Let's look into a case of an audio-based instrument classication task. First, given training audio and their associated class labels (seen classes), we train a classifier that projects input vectors onto the audio embedding space. 
