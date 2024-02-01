@@ -4,6 +4,6 @@
 
     This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
 
-Test equations: \(f(x)=y\)
-Test inline: $$i=\sum_0^N(f(x))$$
+Test inline equation \(f(x)=y\) in Latex format
+Test offline equations: $$i=\sum_0^N(f(x))$$
 
