@@ -40,7 +40,7 @@ It should come with no surprise that data is at the core of few-shot learning pr
 
 When solving traditional classification problems, we typically consider a closed set of classes. That is, we expect to see the same set of classes during inference as we did during training. Few-shot learning breaks that assumption and instead expects that the classification model will encounter novel classes during inference. There is one caveat: there are a **few labeled examples** for each novel class at inference time. 
 
-![thinking-about-data](../images/fsl/foundations/thinking-about-data.png)
+![thinking-about-data](images/fsl/foundations/thinking-about-data.png)
 
 
 In few-shot learning, we expect to see **novel** classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. 
@@ -55,7 +55,7 @@ Instead, we will focus on the topic of **meta-learning** – or learning to lear
 Consider that we would like to classify between $K$ classes, and we have exactly $N$ labeled examples for each of those classes. 
 We say that few-shot models are trained to solve a $K$-way, $N$-Shot classification task. 
 
-![Support query](../images/fsl/foundations/support-query.png)
+![Support query](images/fsl/foundations/support-query.png)
 
 A few-shot learning problem splits data into two separate sets: the support set (the few labeled examples of novel data) and the query set (the data we want to label).
 
