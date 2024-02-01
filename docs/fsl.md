@@ -45,7 +45,6 @@ When solving traditional classification problems, we typically consider a closed
 
 In few-shot learning, we expect to see **novel** classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. 
 
-
 > Transfer learning and data augmentation are often considered approaches to few-shot learning  {cite}`song2022comprehensive`, since both of these approaches are used to learn new tasks with limited data. 
 However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here.
 Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning in MIR {cite}`wang2020fewshotdrum,flores2021leveraging,wang2022fewshot`. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
