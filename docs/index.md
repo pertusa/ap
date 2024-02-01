@@ -15,8 +15,6 @@ For information regarding the course assessment, please refer to the Moodle cont
 [japerez_twitter]: https://twitter.com/japer3z
 [syllabus]: https://cvnet.cpd.ua.es/Guia-Docente/GuiaDocente/Index?wcodest=D114&wcodasi=43509&wlengua=es&scaca=2023-24
 
-\(f(x)=y\)
-
 Regarding the methodology:
 
 - The theory contents should be revised by the student before attending the practical sessions. A test will be answered before each session to ensure that these contents are read and understood by the student. The tests represent 30% of the final grade. 
