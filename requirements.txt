@@ -3,3 +3,4 @@ weasyprint
 mkdocs-pdf-export-plugin
 python-markdown-math
 mkdocs-bibtex
+pandoc
