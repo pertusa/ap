@@ -10,22 +10,24 @@ The following contents are copied (and slighly adapted) to the AI master from th
 
 Before we dive right into FSL and ZSL, we would like to start with a brief discussion about the labeled data scarcity problem to illustrate the motivation and relevance of few-shot and zero-shot learning.  
 
-Deep learning has been highly successful in data-intensive applications, but is often hampered when the dataset is small. A deep model that generalizes well typically needs to be trained on a large amount of labeled data. However, most MIR datasets are small in size compared to datasets in other domains, such as image and text. This is not only because collecting musical data may be riddled with copyright issues, but annotating musical data can also be very costly. The annotation process often requires expert knowledge and takes a long time as we need to listen to audio recordings multiple times. Therefore, many current MIR studies are built upon relatively small datasets with less-than-ideal model generalizability. MIR researchers have been studying strategies to tackle this scarcity issue for labeled data. These strategies can be roughly summarized into two categories:
+Deep learning has been highly successful in data-intensive applications, but is often hampered when the dataset is small. A deep model that generalizes well typically needs to be trained on a large amount of labeled data. However, in some applications such as music, most datasets are small in size compared to datasets in other domains, such as image and text. This is not only because collecting musical data may be riddled with copyright issues, but annotating musical data can also be very costly. The annotation process often requires expert knowledge and takes a long time as we need to listen to audio recordings multiple times. Therefore, many current music studies are built upon relatively small datasets with less-than-ideal model generalizability. Researchers have been studying strategies to tackle this scarcity issue for labeled data. These strategies can be roughly summarized into two categories:
 
-- **Data**: crowdsourcing {cite}`levy2011`{cite}`cartwright2015`, data augmentation {cite}`mcfee2015`{cite}`Uhlich2017`, data synthesis {cite}`cartwright2018`{cite}`manilow2019cutting`, etc.
-- **Learning Paradigm**: transfer learning {cite}`pons2018`, semi-supervised learning {cite}`li2004`{cite}`You2007`, etc.
+- **Data**: crowdsourcing, data augmentation, data synthesis, etc.
+- **Learning Paradigm**: transfer learning, semi-supervised learning , etc.
 
-However, there are different challenges for each of these approaches. For example, crowdsourcing still requires a large amount of human effort with potential label noise, the diversity gain from data augmentation is limited, and models trained on synthetic data might have issues generalizing to real-world audio.
+However, there are different challenges for each of these approaches. For example, crowdsourcing still requires a large amount of human effort with potential label noise, the diversity gain from data augmentation is limited, and models trained on synthetic data might have issues generalizing to real-world data.
+
 Even with the help of transfer learning or unsupervised learning, we often still need a significant amount of labeled data (e.g. hundreds of thousands of examples) for the target downstream tasks, which could still be hard for rare classes. 
 
 Few-shot learning (FSL) and zero-shot learning (ZSL), on the other hand, tackle the labeled data scarcity issue from a different angle. They are learning paradigms that aim to learn a model that can learn a new concept (e.g. recognize a new class) quickly, based on just *a handful of labeled examples* (few-shot) or some *side information or metadata* (zero-shot). 
 
 ### An example
+
 To have a better idea of how FSL and ZSL differ from standard supervised learning, let's consider an example of training a musical instrument classifier. We assume that there is an existing dataset in which we have abundant labeled examples for common instruments.
 
 - In a standard supervised learning scenario, we train the classification model on the training set `(guitar, piano)`, then at test time, the model classifies *"new examples"* of *"seen classes"* `(guitar, piano)`.
-- In a few-shot learning scenario, we also train the model with the same training set that is available `(guitar, piano)`. But at test time, the goal is for the few-shot model to recognize *"new examples"* from *"unseen classes"* (like `(banjo, kazoo)`) by providing a very small amount of labeled examples.  
-- In a zero-shot learning scenario, we train the model on the available training set `(guitar, piano)`. But at test time, the goal is for the zero-shot model to recognize *"new examples"* from *"unseen classes"* (like `(banjo, kazoo)`) by providing some side information or metadata (e.g. the instrument family, e.g. string, wind, percussion, etc.) or a text embedding.
+- In a few-shot learning scenario, we also train the model with the same training set that is available `(guitar, piano)`. But at test time, the goal is for the few-shot model to recognize new examples from **unseen classes** (like `(banjo, kazoo)`) by providing a **very small amount** of labeled examples.  
+- In a zero-shot learning scenario, we train the model on the available training set `(guitar, piano)`. But at test time, the goal is for the zero-shot model to recognize new examples from **unseen classes** (like `(banjo, kazoo)`) by providing **some side information or metadata** (e.g. the instrument family, e.g. string, wind, percussion, etc.) or a text embedding.
 
 ![Alt text](images/fsl/FZSL_tutorial_fig.png)
 
@@ -41,19 +43,16 @@ When solving traditional classification problems, we typically consider a closed
 
 In few-shot learning, we expect to see **novel** classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. 
 
-> Transfer learning and data augmentation are often considered approaches to few-shot learning  {cite}`song2022comprehensive`, since both of these approaches are used to learn new tasks with limited data. 
-However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here.
-Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning in MIR {cite}`wang2020fewshotdrum,flores2021leveraging,wang2022fewshot`. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
+> Transfer learning and data augmentation are often considered approaches to few-shot learning  {cite}`song2022comprehensive`, since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
 
 
 ### Defining the Problem
 
-Consider that we would like to classify between \(K\) classes, and we have exactly \(N\) labeled examples for each of those classes. 
-We say that few-shot models are trained to solve a \(K\)-way, \(N\)-Shot classification task. 
+Consider that we would like to classify between \(K\) classes, and we have exactly \(N\) labeled examples for each of those classes. We say that few-shot models are trained to solve a \(K\)-way, \(N\)-Shot classification task. 
 
 ![Support query](images/fsl/foundations/support-query.png)
 
-A few-shot learning problem splits data into two separate sets: the support set (the few labeled examples of novel data) and the query set (the data we want to label).
+> A few-shot learning problem splits data into two separate sets: the support set (the few labeled examples of novel data) and the query set (the data we want to label).
 
 Few shot learning tasks divide the few labeled data we have and the many unlabeled data we would like to to label into two separate subsets: the **support set** and the **query set**. 
 
@@ -108,10 +107,11 @@ Practically, this means that for each episode, we have to choose a subset of \(K
 
 
 ### Evaluating a Few-Shot Model
+
 Validation and Evaluation during episodic training can be done in a similar fashion to training. We can build a series of episodes from our validation and evaluation datasets, and then evaluate the model on each episode using standard classifcation metrics, like [precision, accuracy, F-score,](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall) and [AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc). 
 
-We've now covered the basic foundations of few-shot learning. In the next chapter, we'll look at some of the most common approaches to few-shot learning, namely **metric**-based, **optimization**-based, and **memory**-based approaches. 
-
+<!---We've now covered the basic foundations of few-shot learning. Next, we'll look at some of the most common approaches to few-shot learning, namely **metric**-based, **optimization**-based, and **memory**-based approaches. 
+--->
 -------------------------
 
 # Approaches
@@ -120,10 +120,12 @@ Now that we have a grasp of the foundations of few-shot learning,  we'll take a 
 
 Recall that the goal of few-shot learning is to be able to learn to solve a new machine learning task given only a few labeled examples. In few-shot learning problems, we are given a small set of labeled examples for each class we would like to predict (the support set), as well as a larger set of unlabeled examples (the query set). We tend to refer to few-shot learning tasks as \(K\)-way, \(N\)-shot classification tasks, where \(K\) is the number of classes we would like to predict, and \(N\) is the number of labeled examples we are given for each class. 
 
-When training a model to solve a few-shot learning task, we typically sample episodes from a large training dataset. An episode is a simulation of a few-shot learning task, where we sample \(K\) classes and \(N\) labeled examples for each class. Training a deep model by sampling few-shot learning episodes from a large training dataset is known as **episodic training**.
+When training a model to solve a few-shot learning task, we typically sample episodes from a large training dataset. An episode is a simulation of a few-shot learning task, where we sample \(K\) classes and \(N\) labeled examples for each class. As we have seen, training a deep model by sampling few-shot learning episodes from a large training dataset is known as **episodic training**.
 
-Here are the few-shot learning approaches covered in this tutorial:
+Here are the few-shot learning approaches covered in this course:
+
 1. **Metric-based few-shot learning**
+
 2. **Optimization-based few-shot learning**
 
 
@@ -164,6 +166,7 @@ $$p(y = k | x_q) = \frac{exp(-d(x_q, c_k))}{\sum_{k'} exp(-d(x_q, c_{k'}))}$$
 
 where \(x_q\) is a query example, \(c_k\) is the prototype for class \(k\), and \(d\) is the squared euclidean distance between two vectors.
 
+<!---
 ## Prototypical Networks are Zero-Shot Learners too!
 
 ![Protonet ZSL](images/fsl/foundations/protonet-zsl.png)
@@ -178,6 +181,7 @@ The class metadata vector \(v_k\) is a vector that contains some information abo
 In this zero-shot learning scenario, we are mapping from two different domains: the domain of the class metadata vectors \(v_k\) (ex: text) and the domain of the query examples \(x_q\) (ex: audio). 
 
 This means that we are learning two different backbone models that map to the **same embedding space**: \(f_\theta\) for the input query and \(g_\theta\) for the class metadata vectors.
+--->
 
 # Optimization-Based Few-Shot Learning 
 
@@ -207,21 +211,17 @@ Suppose we are given a meta-training set composed of many few-shot episodes \(D_
 
 
 Overview of the MAML algorithm {cite}`finn2017model`:
-1. Initialize model parameters $\theta$ randomly, choose a step sizes \(\alpha\) and \(\beta\).  
-2. **while** not converged **do**
 
-    3. Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
-    4. **for** each episode \(E_i\) in the batch **do**
 
-        5. Using the current parameters \(\theta\), compute the gradient of the loss \(L_if(\theta)\) for episode $E_i$.
-
-        6. Compute a new set of parameters \(\theta_i\) by fine-tuning in the direction of the gradient w.r.t. the starting parameters \(\theta\): 
+* Initialize model parameters $\theta$ randomly, choose a step sizes \(\alpha\) and \(\beta\).  
+* **while** not converged **do**
+    * Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
+    * **for** each episode \(E_i\) in the batch **do**
+        *  Using the current parameters \(\theta\), compute the gradient of the loss \(L_if(\theta)\) for episode $E_i$.
+        * Compute a new set of parameters \(\theta_i\) by fine-tuning in the direction of the gradient w.r.t. the starting parameters \(\theta\): 
         $$\theta_i = \theta - \alpha \nabla_{\theta} L_i$$
-
-    7. Using the fine-tuned parameters \(\theta_i\) for each episode, make a prediction and compute the loss \(L_{i}f(\theta_i)\).
-
-    8. Update the starting parameters \(\theta\) by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters \(L_{i}f(\theta_i)\):
-
+    * Using the fine-tuned parameters \(\theta_i\) for each episode, make a prediction and compute the loss \(L_{i}f(\theta_i)\).
+    * Update the starting parameters \(\theta\) by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters \(L_{i}f(\theta_i)\):
         $$\theta = \theta - \beta \nabla_{\theta} \sum_{E_i \in D_{train}}L_i f(\theta_i)$$
 
 
