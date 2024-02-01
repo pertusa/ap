@@ -17,8 +17,8 @@ For information regarding the course assessment, please refer to the Moodle cont
 
 Regarding the methodology:
 
-- The theory contents should be revised by the student before attending the practical sessions. A test will be answered before each session to ensure that these contents are read and understood by the student. The tests represent 30% of the final grade. 
-- Practical assignments (jupyter notebooks) are to be completed individually or in pairs, as indicated in each assignment description. Each of the course blocks will have one or more practical assignments. The assignments represent 70% of the final grade.
+- The theory contents should be revised by the student before attending the practical sessions. A test will be answered to ensure that these contents are read and understood by the student. The tests represent 30% of the final grade. 
+- Practical assignments (jupyter notebooks) are to be completed as indicated in each assignment description. Each of the course blocks will have one or more practical assignments. The assignments represent 70% of the final grade.
 <!--
 - Attendance in practical sessions is mandatory. Roll call will be taken in each in-person session. A maximum of 1 unexcused absence is allowed. If a student accumulates more unexcused absences than the allowed limit, they will not be able to pass the practical component of the course in the C2 examination. However, they will have the opportunity to pass it in the C4.
 -->
@@ -35,7 +35,7 @@ Please note that the content may change throughout the course.
 
 The course has the following blocks:
 
-* [From Shallow to Deep Neural Networks (Andrés Fuster)]()
+* From Shallow to Deep Neural Networks (Andrés Fuster)
 * [Convolutional Neural Networks (Jorge Azorín)]()
 * [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
 * [Recurrent architectures (Juan Antonio Pérez)]()
