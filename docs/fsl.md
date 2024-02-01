@@ -5,3 +5,5 @@
 # Few and Zero Shot Learning
 
 Test equations: \(f(x)=y\)
+Test inline: $i=\sum_0^N(f(x))$
+
