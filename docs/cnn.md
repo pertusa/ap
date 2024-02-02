@@ -58,18 +58,15 @@ https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html#convolution
 **Notes:** 
 
 * The result of a convolution filter with size $fxf$ to an image of $(h,w)$ size with a padding $p$ is:
-	$ \left((h+2p-f)+1, (w+2p-f)+1\right) $
-* The result of a convolution filter with size $fxf$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: $ (\lfloor \div{h+2p-f}{s}+1 \rfloor, lfloor \div{w+2p-f}{s}+1 \rfloor $
-* Let $c_{l-1}$ the number of channels of the previous layer $l$ of a convolutonal layer, $f$ the filter height and widht and $c$ the number of filters in the layer. The number of parameters of the convulational layer is: $(f x f x c_{l-1} + 1) x c_l$
+	\( \left((h+2p-f)+1, (w+2p-f)+1\right) \)
+* The result of a convolution filter with size $fxf$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: \( (\lfloor \div{h+2p-f}{s}+1 \rfloor, lfloor \div{w+2p-f}{s}+1 \rfloor \)
+* Let \(c_{l-1}\) the number of channels of the previous layer \(l\) of a convolutonal layer, \(f\) the filter height and widht and \(c\) the number of filters in the layer. The number of parameters of the convulational layer is: \((f x f x c_{l-1} + 1) x c_l\)
 
 ##### Exercise
 
 1. Calculate the size of the filters of the different layers (a,b,c), (d,e,f) and (g,h,i) of the following image:
 
-<figure markdown>
-  ![Image title]("../images/exercise1.svg"){ width="300" }
-  <figcaption>Image caption</figcaption>
-</figure>
+![Alt text](images/cnn/exercise1.svg)
 
 
 #### 1.3 Pooling layer
