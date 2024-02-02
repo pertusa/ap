@@ -38,7 +38,7 @@ Please note that the content may change throughout the course.
 The course has the following blocks:
 
 * From Shallow to Deep Neural Networks (Andrés Fuster)
-* [Convolutional Neural Networks (Jorge Azorín)]()
+* [Convolutional Neural Networks (Jorge Azorín)](cnn.md)
 * [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
 * [Recurrent architectures (Juan Antonio Pérez)]()
 * [Fine tuning and knowledge distillation (Juan Antonio Pérez)]()
