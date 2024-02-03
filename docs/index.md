@@ -6,11 +6,12 @@
 
 ## Course Syllabus and Rules
 
-These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa][pertusa_url] and also taught by professors [Juan Antonio Pérez][japerez_url] ([@japer3z][japerez_twitter]), Andrés Fuster, [Jorge Azorín][jazorin_url] ([@JAzorinL][jazorin_twitter]), and Jorge Calvo.
+These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa][pertusa_url] and also taught by professors [Juan Antonio Pérez][japerez_url] ([@japer3z][japerez_twitter]), Andrés Fuster, [Jorge Azorín][jazorin_url] ([@JAzorinL][jazorin_twitter]), and [Jorge Calvo][calvo_url].
 
 For information regarding the course assessment, please refer to the Moodle contents at UACloud and the [course official info page][syllabus]. 
 
 [pertusa_url]: www.dlsi.ua.es/~pertusa
+[calvo_url]: https://www.dlsi.ua.es/~jcalvo/
 [japerez_url]: https://cvnet.cpd.ua.es/curriculum-breve/es/perez-ortiz-juan-antonio/15404
 [japerez_twitter]: https://twitter.com/japer3z
 [jazorin_url]: https://cvnet.cpd.ua.es/curriculum-breve/es/azorin-lopez-jorge/9826
