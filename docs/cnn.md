@@ -96,6 +96,11 @@ In the laboratory class (2 hours 🕒️ duration), we will see how certain comp
 
 The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.
 
+!!! danger
+
+    This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
+
+
 ## 2.  Second session of this block (14th February 2024)
 
 ### Contents to prepare before (online)
@@ -109,6 +114,7 @@ The contents of this first session are related to the objetive 2, being the foll
 A typical CNN has several convolution plus pooling layers, each responsible for feature extraction at different levels of abstraction: filters in first layer detect horizontal, vertical, and diagonal edge; filters in the next layer detect shapes; filters in the following layers detect collection of shapes, etc.
 
 A good starting point to understand the architecture of a simple CNN is to study the [LeNet model](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html#convolutional-neural-networks-lenet) designed in the 90s. LeNet, one of the earliest convolutional neural networks, was designed by Yann LeCun et al. for handwritten and machine-printed character recognition. It laid the groundwork for many of the CNN architectures that followed. LeNet is relatively small by today's standards, with approximately 60K parameters. This makes it computationally efficient and easy to understand. LeNet's architecture reduces width and height dimensions through its layers, while increasing the depth (number of filters). This reduction is achieved through the use of convolutional layers with strides and pooling layers, which also help in achieving spatial invariance to input distortions and shifts. The composition of layers is:
+
 * `Input Layer`: The original LeNet was designed for 32x32 pixel input images.
 * `Convolutional Layer`: The first convolutional layer uses a set of learnable filters. Each filter produces one feature map, capturing basic features like edges or corners. 
 * `Pooling Layer`: Follows the first convolutional layer, reducing the spatial size (width and height) of the input volume for the next convolutional layer, reducing the number of parameters and computation in the network, and hence also controlling overfitting.
@@ -127,10 +133,49 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.2. Classic networks
 
-* Alexnet
+* Alexnet: [[DDL23, Section 8.1]](https://d2l.ai/chapter_convolutional-modern/alexnet.html#alexnet)
 	* AlexNet represents a significant milestone in the development of convolutional neural networks and played a pivotal role in demonstrating the power of deep learning for image recognition tasks.
 	* It was significantly larger and deeper than its predecessors like LeNet (with about 60M parameters).  This increase in scale allowed AlexNet to capture more complex and abstract features from images, contributing to its superior performance.
 	* It was one of the first CNNs to successfully use ReLU activation functions instead of the sigmoid or tanh functions that were common at the time. ReLUs help to alleviate the vanishing gradient problem, allowing deeper networks to be trained more effectively.
+	* It introduced overlapping pooling, where the pooling windows overlap with each other, as opposed to the non-overlapping pooling used in earlier architectures like LeNet. This was found to reduce overfitting and improve the network's performance.
+	* It introduced data augmentation techniques such as image translations, horizontal reflections, and alterations to the intensities of the RGB channels.
+	* Layers:
+		* `Input Layer`: The network accepts an input image size of 227x227 pixels with 3 color channels (RGB).
+		* `First Convolutional Layer (Conv1)`: It uses 96 kernels of size 11x11 with a stride of 4 and applies ReLU activation. This large kernel size is chosen for the first convolutional layer to capture the low-level features from the larger input image.
+		* `Max Pooling Layer`: kernel size of 3x3 and a stride of 2.
+		* `Second Convolutional Layer (Conv2)`: It has 256 kernels of size 5x5, with padding applied to preserve the spatial dimensions. ReLU activation is used.
+		* `Max Pooling Layer`: kernel size of 3x3 and a stride of 2.
+		* `Third Convolutional Layer (Conv3)`: It has 384 kernels of size 3x3, with padding and ReLU activation.
+		* `Fourth Convolutional Layer (Conv4)`: Similar to Conv3, it has 384 kernels of size 3x3 with padding and ReLU activation.
+		* `Fifth Convolutional Layer (Conv5)`: It has 256 kernels of size 3x3, again with padding and ReLU activation.
+		* `Max Pooling Layer`: kernel size of 3x3 and a stride of 2.
+		* `Fully Connected Layer (FC6)`: This dense layer has 4096 neurons and includes ReLU activation and dropout with a dropout rate of 0.5 to prevent overfitting.
+		* `Fully Connected Layer (FC7)`: Also consists of 4096 neurons with ReLU activation and dropout.
+		* `Fully Connected Layer (FC8)`: / The final FC layer has 1000 neurons (corresponding to the 1000 classes in the ImageNet challenge) 
+		* `Output layer`: Softmax activation function to output the probability distribution over the classes.
+
+* VGG-16 [[DDL23, Section 8.2]](https://d2l.ai/chapter_convolutional-modern/vgg.html)
+	* VGG-16, developed by the Visual Graphics Group (VGG) at Oxford, is known for its simplicity and depth. It was a runner-up in the 2014 ImageNet competition.
+	* The architecture's significant number of parameters (138M) makes it prone to overfitting, which is mitigated by using dropout and data augmentation techniques.
+	* The model is characterized by its use of 3x3 convolutional layers stacked on top of each other in increasing depth.
+	* It has an uniform architecture consistent of using 3x3 convolutional filters and 2x2 max-pooling layers throughout the network
+	* It duplicate filters, starting at 64, doubles after each max-pooling layer, following the sequence 64, 128, 256, 512, 512
+	* Layers:
+		* `Input Layer`: size 224x224 pixels with 3 channels (RGB)
+		* `Conv1`: 2x [Conv3x3-64] + MaxPool (2x2, stride 2)
+		* `Conv2`: 2x [Conv3x3-128] + MaxPool (2x2, stride 2)
+		* `Conv3`: 3x [Conv3x3-256] + MaxPool (2x2, stride 2)
+		* `Conv4`: 3x [Conv3x3-512] + MaxPool (2x2, stride 2)
+		* `Conv5`: 3x [Conv3x3-512] + MaxPool (2x2, stride 2)
+		* `FC1`: 4096 neurons, ReLU activation
+		* `FC2`: 4096 neurons, ReLU activation
+		* `FC3`: 1000 neurons (for 1000 ImageNet classes), Softmax activation
+
+
+#### 2.2. Residual networks
+
+
+- 
 
 ## Biblography
 
