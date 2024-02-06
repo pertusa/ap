@@ -57,10 +57,10 @@ https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html#convolution
 
 **Notes:** 
 
-* The result of a convolution filter with size $fxf$ to an image of $(h,w)$ size with a padding $p$ is:
-	\( \left((h+2p-f)+1, (w+2p-f)+1\right) \)
-* The result of a convolution filter with size $fxf$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: \( (\lfloor \div{h+2p-f}{s}+1 \rfloor, lfloor \div{w+2p-f}{s}+1 \rfloor \)
-* Let \(c_{l-1}\) the number of channels of the previous layer \(l\) of a convolutonal layer, \(f\) the filter height and widht and \(c\) the number of filters in the layer. The number of parameters of the convulational layer is: \((f x f x c_{l-1} + 1) x c_l\)
+* The result of a convolution filter with size $f \cdot f$ to an image of $(h,w)$ size with a padding $p$ is:
+	$\left((h+2p-f)+1, (w+2p-f)+1)\right)$
+* The result of a convolution filter with size $f \cdot f$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: $ \lfloor \frac{h+2p-f}{s}+1 \rfloor, \lfloor \frac{w+2p-f}{s}+1 \rfloor $
+* Let $c_{l-1}$ the number of channels of the previous layer $l$ of a convolutonal layer, $f$ the filter height and widht and $c$ the number of filters in the layer. The number of parameters of the convulational layer is: $(f \cdot f \cdot c_{l-1} + 1) \cdot c_l$
 
 ##### Exercise
 
@@ -92,7 +92,7 @@ A more detailed explanation could be found in the [Pooling section](https://d2l.
 
 
 ### Contents for the presential class
-In the laboratory class (2 hours 🕒️ duration), we will see how certain components of a convolutional neural network are implemented <a href="https://colab.research.google.com/github/jaspock/me/blob/main/docs/materials/transformers/assets/notebooks/logistic.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
+In the laboratory class (2 hours 🕒️ duration), we will see how certain components of a convolutional neural network are implemented <a href="https://colab.research.google.com/drive/1RT9lqTnTgkv_STXHk4k97wgKMTYSPWHw?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
 
 The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.
 
@@ -108,16 +108,29 @@ The contents of this first session are related to the objetive 2, being the foll
 
 A typical CNN has several convolution plus pooling layers, each responsible for feature extraction at different levels of abstraction: filters in first layer detect horizontal, vertical, and diagonal edge; filters in the next layer detect shapes; filters in the following layers detect collection of shapes, etc.
 
-A good starting point to understand the architecture of a simple CNN is to study the [LeNet model](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html#convolutional-neural-networks-lenet). 
+A good starting point to understand the architecture of a simple CNN is to study the [LeNet model](https://d2l.ai/chapter_convolutional-neural-networks/lenet.html#convolutional-neural-networks-lenet) designed in the 90s. LeNet, one of the earliest convolutional neural networks, was designed by Yann LeCun et al. for handwritten and machine-printed character recognition. It laid the groundwork for many of the CNN architectures that followed. LeNet is relatively small by today's standards, with approximately 60K parameters. This makes it computationally efficient and easy to understand. LeNet's architecture reduces width and height dimensions through its layers, while increasing the depth (number of filters). This reduction is achieved through the use of convolutional layers with strides and pooling layers, which also help in achieving spatial invariance to input distortions and shifts. The composition of layers is:
+* `Input Layer`: The original LeNet was designed for 32x32 pixel input images.
+* `Convolutional Layer`: The first convolutional layer uses a set of learnable filters. Each filter produces one feature map, capturing basic features like edges or corners. 
+* `Pooling Layer`: Follows the first convolutional layer, reducing the spatial size (width and height) of the input volume for the next convolutional layer, reducing the number of parameters and computation in the network, and hence also controlling overfitting.
+* `Convolutional Layer`: A second convolutional layer that further processes the features from the previous pooling layer, detecting higher-level features.
+* `Pooling Layer`: this layer further reduces the dimensionality of the feature maps.
+* `Fully Connected Layer`: The flattened output from the previous layer is fed into a fully connected layer that begins the high-level reasoning process in the network.
+* `Fully Connected Layer`: An additional fully connected layer to continue the pattern analysis from the previous layer, leading to the final classification.
+* `Output Layer`: The final layer uses a softmax to output the probabilities for each class.
 
-
-
-
+**Notes**
+* In some versions of LeNet, the sigmoid function and the hyperbolic tangent (tanh) function were used as the activation function in the convolutional and fully connected layers. 
 
 ##### Exercise
 
 1. Calculate the number of the learning parameters of LeNet architecture
 
+#### 2.2. Classic networks
+
+* Alexnet
+	* AlexNet represents a significant milestone in the development of convolutional neural networks and played a pivotal role in demonstrating the power of deep learning for image recognition tasks.
+	* It was significantly larger and deeper than its predecessors like LeNet (with about 60M parameters).  This increase in scale allowed AlexNet to capture more complex and abstract features from images, contributing to its superior performance.
+	* It was one of the first CNNs to successfully use ReLU activation functions instead of the sigmoid or tanh functions that were common at the time. ReLUs help to alleviate the vanishing gradient problem, allowing deeper networks to be trained more effectively.
 
 ## Biblography
 
@@ -129,11 +142,11 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 ### Webpages
 
-* https://cs231n.github.io/convolutional-networks/
+* [https://cs231n.github.io/convolutional-networks/](https://cs231n.github.io/convolutional-networks/)
 
 
 ### Others
-* https://arxiv.org/pdf/1603.07285.pdf: Extra information for Convolutional parameters
+* [https://arxiv.org/pdf/1603.07285.pdf](https://arxiv.org/pdf/1603.07285.pdf): Extra information for Convolutional parameters
 
 
 
