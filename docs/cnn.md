@@ -174,8 +174,34 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.2. Residual networks
 
+* ResNet [[FDL2023, Section 9.5]](https://www.bishopbook.com), [[TDS]](https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a),[[DDL2023, Section 8.6]](https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-networks-resnet-and-resnext)
+	* ResNet (Residual Network) was introduced by He et al. in 2015 and won the ImageNet competition by a significant margin.
+	* It addresses the vanishing gradient problem in deep neural networks through the use of residual blocks, enabling the training of networks that are much deeper than previous architectures. This is by using shortcut connections that allow gradients to flow through the network more effectively. his approach allows for the construction of very deep networks (ResNet variants come in depths of 50, 101, 152 layers, and more) without degradation in performance due to vanishing gradients.
+	* The core building block of ResNet that enables the network to learn identity functions, ensuring that deeper layers can at least perform as well as shallower ones.
+	* A **residual block** allows the input to a series of layers to be added to their output, facilitating the learning process by allowing the network to learn modifications to the identity mapping rather than the entire transformation from scratch. It is composed by:
+		* Shortcut Connection that skips one or more layers.
+		* Two or three convolutional layers, each followed by batch normalization and a ReLU activation function.
+		* The output of the weighted layers is added to the shortcut connection's output. If the input and output dimensions are the same, the shortcut connection directly adds the input \(x\) to the output of the convolutional layers \(F(x)\), resulting in \(F(x) + x\). If the dimensions of \(x\) and \(F(x)\) do not match, a linear projection \(W_s\) is applied to \(x\) through a convolutional operation to match the dimensions. The resulting output is \(F(x) + W_s x\).
+	* Layers of ResNet-34:
+		* `Input Layer`: size 224x224 pixels with 3 channels (RGB) 
+		* `Convolutional Layer`: 7x7 convolutions, 64 filters, stride of 2, ReLU Activation
+		* `Max Pooling`: 3x3, stride of 2
+		* `Residual blocks`: The blocks in each stage have the same number of filters, but the number of filters increases as the network deepens.
+			* 3 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 64 filters each. Shortcut connections add the input of the block to its output without any modification since the dimensions match.
+			* 4 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 128 filters each. The first block uses a stride of 2 for down-sampling and a 1x1 convolution in the shortcut connection to match the increased depth.
+			* 6 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 256 filters each. Similar to the previous stage 2, the first block uses a stride of 2 for down-sampling, and the shortcut connection includes a 1x1 convolution to match the depth.
+			* 3 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 512 filters each. Again, the first block in this stage applies a stride of 2 for down-sampling, and the shortcut connection includes a 1x1 convolution to match the depth.
+		* `Global Average Pooling`: Applied after the last convolutional block to reduce spatial dimensions to 1x1.
+		* `Fully Connected Layer`: Ends with a fully connected layer with 1000 neurons (for the 1000 classes of the ImageNet dataset), followed by a softmax activation for classification.
 
-- 
+![alt text](resnet34.jpg)[From He et al. 2015]
+
+**Note:**
+
+* [1x1 convolution](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578): 1X1 Conv are used to increase/reduce the number of channels while introducing non-linearity.
+
+
+#### 2.3. Inception
 
 ## Biblography
 
@@ -187,7 +213,9 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 ### Webpages
 
-* [https://cs231n.github.io/convolutional-networks/](https://cs231n.github.io/convolutional-networks/)
+* [https://cs231n.github.io/convolutional-networks/](https://cs231n.github.io/convolutional-networks/): CNN fundamentals
+* [https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a](https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a): ResNet
+* [https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578](https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578):1x1 convolution
 
 
 ### Others
