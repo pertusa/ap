@@ -57,8 +57,9 @@ https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html#convolution
 
 **Notes:** 
 
-* The result of a convolution filter with size $f \cdot f$ to an image of $(h,w)$ size with a padding $p$ is:
-	$\left((h+2p-f)+1, (w+2p-f)+1)\right)$
+
+* The result of a convolution filter with size \((f \cdot f\)) to an image of \((h,w)\) size with a padding $p$ is:
+	\(\left((h+2p-f)+1, (w+2p-f)+1)\right)\)
 * The result of a convolution filter with size $f \cdot f$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: $ \lfloor \frac{h+2p-f}{s}+1 \rfloor, \lfloor \frac{w+2p-f}{s}+1 \rfloor $
 * Let $c_{l-1}$ the number of channels of the previous layer $l$ of a convolutonal layer, $f$ the filter height and widht and $c$ the number of filters in the layer. The number of parameters of the convulational layer is: $(f \cdot f \cdot c_{l-1} + 1) \cdot c_l$
 
@@ -194,7 +195,7 @@ A good starting point to understand the architecture of a simple CNN is to study
 		* `Global Average Pooling`: Applied after the last convolutional block to reduce spatial dimensions to 1x1.
 		* `Fully Connected Layer`: Ends with a fully connected layer with 1000 neurons (for the 1000 classes of the ImageNet dataset), followed by a softmax activation for classification.
 
-![alt text](resnet34.jpg)[From He et al. 2015]
+![alt text](images/cnn/resnet34.jpg)[From He et al. 2015]
 
 **Note:**
 
@@ -203,7 +204,52 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.3. Inception
 
+The Inception architecture [[UDL 2023, Section 8.3]](https://d2l.ai/chapter_convolutional-modern/googlenet.html#multi-branch-networks-googlenet), particularly known from the GoogLeNet (Inception v1) model introduced in the 2014 ImageNet competition, is notable for its novel approach to convolutional network design. It introduced the "Inception module," a building block that allows the network to choose from different filter sizes and operations within the same layer. Some important notes:
+* The Inception architecture revolutionizes the design of convolutional layers by incorporating multiple filter sizes within the same module, allowing the network to adapt to various spatial hierarchies of features in images.
+* The Inception module:
+	* 1x1 Convolutions: To perform dimensionality reduction or increase, reducing the computational cost and the number of parameters in the network and to increase the network's ability to capture nonlinearities without a significant increase in computational complexity.
+	* Multiple Filter Sizes: Within each Inception module, convolutional operations with different filter sizes (e.g., 1x1, 3x3, and 5x5) are performed in parallel to capture information from various spatial extents. The outputs of these parallel paths are concatenated along the channel dimension, allowing the network to decide which filters to emphasize for each new input.
+	* Pooling: Inception modules also include a parallel pooling path, typically max pooling, followed by 1x1 convolutions to reduce dimensionality before concatenation.
+	* Dimensionality Reduction: Before applying larger convolutions (e.g., 3x3 and 5x5), 1x1 convolutions are used for dimensionality reduction, decreasing the computational burden.
+* The Inception modules' combination of parallel convolutional paths with different filter sizes and 1x1 convolutions for dimensionality management allows the network to be both wide (in terms of capturing a broad range of features) and deep (in terms of layers), while maintaining computational efficiency. This design philosophy has been extended and refined in subsequent versions of the Inception architecture, such as Inception v2, v3, and v4, each introducing further optimizations and improvements.
+
+![Inception module](images/cnn/inceptionModule.jpg)
+
+![GoogleNet](images/cnn/googleNet.jpg) [From Szegedy et al. 2014]
+
+#### 2.4. Computational efficient networks
+
+* MobileNet [Medium](https://medium.com/@godeep48/an-overview-on-mobilenet-an-efficient-mobile-vision-cnn-f301141db94d)
+	*  The key innovation is in their efficient architectural design, aimed at **reducing computational cost while maintaining high performance**, especially on mobile and embedded devices.
+	* The core innovation is the use of **[depthwise separable convolutions](https://machinelearningmastery.com/using-depthwise-separable-convolutions-in-tensorflow/)**.
+		* Instead of using standard convolutions, it employs depthwise separable convolutions, which use a standard convolution into a depthwise convolution and a 1x1 pointwise convolution.
+		*The input is first processed by a depthwise convolution $(n_w \cdot n_h \cdot n_c)$, applying a single filter per input channel. This is followed by a pointwise convolution $(1 \cdot 1 \cdot n_c')$ convolutions that combines the outputs of the depthwise convolution, adjusting the depth as necessary.
+		* The computational cost is significantly reduced compared to standard convolutions.
+
+Example: 
+
+
+## MobileNetV2 Enhancements
+
+### Residual Connections
+- **Introduction**: MobileNetV2 introduces residual connections similar to those in ResNet, but within the framework of inverted residual blocks.
+- **Function**: These connections allow the input to bypass one or more layers, facilitating the flow of gradients during training and mitigating the vanishing gradient problem.
+
+### Inverted Residual Blocks
+- **Expansion Layer**: Each block starts with a 1x1 convolution that expands the input's depth, increasing the representation capacity and allowing the network to learn more complex functions.
+- **Depthwise Convolution**: Follows the expansion layer, applying spatial filtering within each channel.
+- **Projection Layer**: A 1x1 convolution that projects the expanded feature map back to a lower dimension, reducing the size and computational cost of the feature map.
+- **Efficiency**: This expansion-projection strategy increases the network's expressiveness while keeping the computational cost low by expanding the feature space only temporarily within the block.
+
+### Observations
+- **Efficiency and Performance**: MobileNet architectures are highly efficient, providing a good balance between performance and computational cost, making them ideal for applications with limited computational resources.
+- **Versatility**: Despite being designed for mobile devices, these architectures have proven effective for a wide range of tasks beyond image classification, including object detection and segmentation.
+
+
 ## Biblography
+
+
+
 
 ### Textbooks
 
