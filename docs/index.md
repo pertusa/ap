@@ -2,7 +2,7 @@
 
 ## Homework Assignments
 
-- Assignments **before the class of Feb 07, 2024**: Read the materials related...
+- Assignments **before the class of Feb 07, 2024**: Read in Moodle the materials related.
 
 ## Course Syllabus and Rules
 
