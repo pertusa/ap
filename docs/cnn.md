@@ -58,10 +58,10 @@ https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html#convolution
 **Notes:** 
 
 
-* The result of a convolution filter with size \((f \cdot f\)) to an image of \((h,w)\) size with a padding $p$ is:
+* The result of a convolution filter with size \((f \cdot f\)) to an image of \((h,w)\) size with a padding \(p\) is:
 	\(\left((h+2p-f)+1, (w+2p-f)+1)\right)\)
-* The result of a convolution filter with size $f \cdot f$ to an image of $(h,w)$ size with a padding $p$ and a stride of $s$ is: $ \lfloor \frac{h+2p-f}{s}+1 \rfloor, \lfloor \frac{w+2p-f}{s}+1 \rfloor $
-* Let $c_{l-1}$ the number of channels of the previous layer $l$ of a convolutonal layer, $f$ the filter height and widht and $c$ the number of filters in the layer. The number of parameters of the convulational layer is: $(f \cdot f \cdot c_{l-1} + 1) \cdot c_l$
+* The result of a convolution filter with size \((f \cdot f\) to an image of \((h,w)\) size with a padding \(p\) and a stride of \(s\) is: \( \lfloor \frac{h+2p-f}{s}+1 \rfloor, \lfloor \frac{w+2p-f}{s}+1 \rfloor \)
+* Let \(c_{l-1}\) the number of channels of the previous layer \(l\) of a convolutonal layer, \(f\) the filter height and widht and \(c\) the number of filters in the layer. The number of parameters of the convulational layer is: \((f \cdot f \cdot c_{l-1} + 1) \cdot c_l\)
 
 ##### Exercise
 
@@ -223,7 +223,7 @@ The Inception architecture [[UDL 2023, Section 8.3]](https://d2l.ai/chapter_conv
 	*  The key innovation is in their efficient architectural design, aimed at **reducing computational cost while maintaining high performance**, especially on mobile and embedded devices.
 	* The core innovation is the use of **[depthwise separable convolutions](https://machinelearningmastery.com/using-depthwise-separable-convolutions-in-tensorflow/)**.
 		* Instead of using standard convolutions, it employs depthwise separable convolutions, which use a standard convolution into a depthwise convolution and a 1x1 pointwise convolution.
-		*The input is first processed by a depthwise convolution $(n_w \cdot n_h \cdot n_c)$, applying a single filter per input channel. This is followed by a pointwise convolution $(1 \cdot 1 \cdot n_c')$ convolutions that combines the outputs of the depthwise convolution, adjusting the depth as necessary.
+		*The input is first processed by a depthwise convolution \((n_w \cdot n_h \cdot n_c)\), applying a single filter per input channel. This is followed by a pointwise convolution \((1 \cdot 1 \cdot n_c')\) convolutions that combines the outputs of the depthwise convolution, adjusting the depth as necessary.
 		* The computational cost is significantly reduced compared to standard convolutions.
 
 Example: 
