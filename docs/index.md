@@ -2,7 +2,7 @@
 
 ## Homework Assignments
 
-- Assignments **before the class of Feb 07, 2024**: Read the materials related...
+- Assignments **before the class of Feb 07, 2024**: Read in Moodle the materials related.
 
 ## Course Syllabus and Rules
 
@@ -38,11 +38,11 @@ Please note that the content may change throughout the course.
 
 The course has the following blocks:
 
-* From Shallow to Deep Neural Networks (Andrés Fuster)
-* [Convolutional Neural Networks (Jorge Azorín)](cnn.md)
-* [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
-* [Recurrent architectures (Juan Antonio Pérez)]()
-* [Fine tuning and knowledge distillation (Juan Antonio Pérez)]()
-* [Deep Reinforcement Learning (Jorge Calvo)]()
-* [Self-Supervised Learning (Antonio Pertusa)]()
+* Feb. 7: From Shallow to Deep Neural Networks (Andrés Fuster)
+* Feb. 7 + Feb. 14: [Convolutional Neural Networks (Jorge Azorín)](cnn.md)
+* Feb 14: [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
+* Feb. 21: [Recurrent architectures (Juan Antonio Pérez)]()
+* Feb. 21: [Fine tuning and knowledge distillation (Juan Antonio Pérez)]()
+* Feb. 28: [Deep Reinforcement Learning (Jorge Calvo)]()
+* Mar. 6: [Self-Supervised Learning (Antonio Pertusa)]()
 

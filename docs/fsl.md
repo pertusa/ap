@@ -43,7 +43,7 @@ When solving traditional classification problems, we typically consider a closed
 
 In few-shot learning, we expect to see **novel** classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. 
 
-> Transfer learning and data augmentation are often considered approaches to few-shot learning  {cite}`song2022comprehensive`, since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
+> Transfer learning and data augmentation are often considered approaches to few-shot learning [@song2022comprehensive], since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
 
 
 ### Defining the Problem
@@ -118,11 +118,13 @@ Validation and Evaluation during episodic training can be done in a similar fash
 
 Now that we have a grasp of the foundations of few-shot learning,  we'll take a look at some of the most common approaches to the solving few-shot problems. 
 
+<!--
 Recall that the goal of few-shot learning is to be able to learn to solve a new machine learning task given only a few labeled examples. In few-shot learning problems, we are given a small set of labeled examples for each class we would like to predict (the support set), as well as a larger set of unlabeled examples (the query set). We tend to refer to few-shot learning tasks as \(K\)-way, \(N\)-shot classification tasks, where \(K\) is the number of classes we would like to predict, and \(N\) is the number of labeled examples we are given for each class. 
+-->
 
 When training a model to solve a few-shot learning task, we typically sample episodes from a large training dataset. An episode is a simulation of a few-shot learning task, where we sample \(K\) classes and \(N\) labeled examples for each class. As we have seen, training a deep model by sampling few-shot learning episodes from a large training dataset is known as **episodic training**.
 
-Here are the few-shot learning approaches covered in this course:
+Here are the few-shot learning approaches covered in this document:
 
 1. **Metric-based few-shot learning**
 
@@ -150,13 +152,15 @@ Among the most popular metric-based approaches are Prototypical Networks {cite}`
 
 ![Prototypical net](images/fsl/foundations/prototypical-net.png)
 
-The figure above illustrates a 5-shot, 3-way classification task between tambourine (red), maracas (green), and djembe (blue). In prototypical networks, each of the 5 support vectors are averaged to create a prototype for each class (\(c_k\)). The query vector \(x\) is compared against each of the prototypes using squared eucldean distance. The query vector (shown as \(x\)) is assigned to the class of the prototype that it is most similar to. Here, the prototypes \(c_k\) are shown as black circles. 
+The figure above illustrates a 5-shot, 3-way classification task between tambourine (red), maracas (green), and djembe (blue). In prototypical networks, each of the 5 support vectors are averaged to create a prototype for each class (\(c_k\)). The query vector \(x\) is compared against each of the prototypes using squared euclidean distance. The query vector (shown as \(x\)) is assigned to the class of the prototype that it is most similar to. Here, the prototypes \(c_k\) are shown as black circles. 
 
-> Prototypical networks {cite}`snell2017prototypical` work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class.
+> Prototypical networks {cite}`snell2017prototypical` work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
+
+> Although not mentioned explicitly in the paper, [Siamese Neural Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is a kind of metric learning predecessor for prototypical networks as well. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.
 
 The prototype (denoted as \(c_k\)) for a class \(k\) is defined as: 
 
-$$c_k = 1 / |S_k| \sum_{x_k \in S_k} f_\theta(x_k)$$
+$$c_k = \frac{1}{|S_k|} \sum_{x_k \in S_k} f_\theta(x_k)$$
 
 where \(S_k\) is the set of all examples in the support set that belong to class \(k\), \(x_k\) is an example in \(S_k\), and \(f_\theta\) is the backbone model we are trying to learn. 
 
@@ -205,15 +209,16 @@ Note that MAML makes no assumption of the model architecture, thus the "model-ag
 
 ![MAML](images/fsl/foundations/maml.png)
 
-> The MAML algorithm {cite}`finn2017model`. The starting model parameters are depcted as $\theta$, while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as $\theta_1^*$, $\theta_2^*$, and $\theta_3^*$, respectively. 
+> The MAML algorithm {cite}`finn2017model`. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
 
 Suppose we are given a meta-training set composed of many few-shot episodes \(D_{train} = \{E_1, E_2, ..., E_n\}\), where each episode contains a support set and train set \(E_i = (S_i, Q_i)\). We can follow the MAML algorithm to learn parameters \(\theta\) that can be adapted to new tasks using only a few examples and a few gradient steps. 
 
 
 Overview of the MAML algorithm {cite}`finn2017model`:
 
+-------
 
-* Initialize model parameters $\theta$ randomly, choose a step sizes \(\alpha\) and \(\beta\).  
+* Initialize model parameters \(\theta\) randomly, choose step sizes \(\alpha\) and \(\beta\).  
 * **while** not converged **do**
     * Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
     * **for** each episode \(E_i\) in the batch **do**
@@ -224,8 +229,11 @@ Overview of the MAML algorithm {cite}`finn2017model`:
     * Update the starting parameters \(\theta\) by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters \(L_{i}f(\theta_i)\):
         $$\theta = \theta - \beta \nabla_{\theta} \sum_{E_i \in D_{train}}L_i f(\theta_i)$$
 
+-------
 
 At inference time, we are given a few-shot learning task with support and query set \(E_{test} = (S_{test}, Q_{test})\). We can use the learned parameters \(\theta\) as a starting point, and follow a process similar to the one above to make a prediction for the query set \(Q_{test}\):  
+
+-------
 
 1. Initialize model parameters \(\theta\) to the learned parameters from meta-training.
 2. Compute the gradient \(\nabla_{\theta} L_{test} f(\theta)\) of the loss \(L_{test}f(\theta)\) for the test episode \(E_{test}\).
@@ -247,10 +255,12 @@ Therefore, in zero-shot learning, there is no further training step for unseen c
 ZSL was originally inspired by human’s ability to infer novel objects or create new categories dynamically based on prior semantic knowledge, where general relationship between seen and unseen classes are learned.
 
 
-### Overview on Zero-shot Learning Paradigm 
+<!---### Overview on Zero-shot Learning Paradigm 
+---->
 
+Let's look into a case of an audio-based musical instrument classification task. 
 
-Let's look into a case of an audio-based instrument classication task. First, given training audio and their associated class labels (seen classes), we train a classifier that projects input vectors onto the audio embedding space. 
+First, given training audio and their associated class labels (seen classes), we train a classifier that projects input vectors onto the audio embedding space. 
 
 
 ![Zero-shot process 1](images/fsl/zsl/zsl_process_01.svg)
@@ -262,11 +272,15 @@ However, there isn't a way to make prediction of unseen labels for unseen audio 
 
 As forementioned we use the side information that can inform the relationships between both seen and unseen labels. 
 
-There are various sources of the side information, such as class-attribute vectors infered from an annotated dataset, or general word embedding vectors trained on a large corpus of documents. We will go over in detail in the later section.  
+There are various sources of the side information, such as class-attribute vectors infered from an annotated dataset, or general word embedding vectors trained on a large corpus of documents. 
+<!--
+We will go over in detail in the later section.  
+--->
 
 ![Zero-shot process 3](images/fsl/zsl/zsl_process_03.svg)
 
 The core of zero-shot learning paradigm is to learn the compatibility function between the embedding space of the inputs and the side information space of their labels. 
+
 - Compatibility function : \(F(x, y ; W)=\theta(x)^T W \phi(y)\)
     - \(\theta(x)\) : input embedding function.
     - \(W\) : mapping function. 
@@ -274,6 +288,8 @@ The core of zero-shot learning paradigm is to learn the compatibility function b
 
 
 ![Zero-shot process 4](images/fsl/zsl/zsl_process_04.svg)
+
+### Learning a mapping function
 
 A typical approach is to train a mapping function between the two.
 By unveiling relationship between the side information space and the our input feature space, it is possible to map vectors from one space to the other.
@@ -283,6 +299,8 @@ By unveiling relationship between the side information space and the our input f
 After training, arbitrary inputs of unseen labels can be predicted to the corresponding class. 
 
 ![Zero-shot process 6](images/fsl/zsl/zsl_process_06.svg)
+
+### Metric-learning approach
 
 Another option is to train a separate zero-shot embedding space where the embeddings from both spaces are projected (a metric-learning approach).
 
@@ -297,13 +315,15 @@ In this case, the inputs and the classes are projected onto another zero-shot em
 
 This space-aligning technique is one of the main branches of zero-shot learning framework. Next, we'll go over another branch or research direction, the generative approach.  
 
-One example of the generative approach is to employ a conditional Generative Adversarial Network (GAN) to generate samples related to the unseen classes. Its training process is consist of two parts. 
+### Generative approach
+
+One example of the generative approach is to employ a conditional Generative Adversarial Network (GAN) to generate samples related to the unseen classes. Its training process  consists of two parts. 
 
 At the first part of the training phase, with the audio data annotated with the seen classes, we train the GAN architecture (a generator and a discriminator) combined with the audio encoder and an additional classification model. The convolutional neural network (CNN) audio encoder will try to embed the audio into the *CNN feature vectors* that well represents the class characteristics by being evaluated by the discriminator. At the same time, given the class representative vectors we get from the side information space, the generator will try to **mimic** the *CNN audio feature vector* that is produced by the audio encoder. There could be an additional classification module that is aimed to classify the labels from the generated *CNN audio feature vector*. This module helps the regularization of the GAN framework.  
 
 ![ZSL Generative 1](images/fsl/zsl/zsl_generative_01.svg)
 
-After training the GAN framework, we can now generate the *CNN audio feature vector* of an arbitrary unseen class, given the class' representative vector on the side information space. 
+After training the GAN framework, we can now generate the *CNN audio feature vector* of an arbitrary unseen class, given the class representative vector on the side information space. 
 
 ![ZSL Generative 2](images/fsl/zsl/zsl_generative_02.svg)
 
@@ -323,7 +343,7 @@ After training, we are now ready with the audio encoder and the classifier. The 
 
 ![ZSL Generative 6](images/fsl/zsl/zsl_generative_06.svg)
 
-So far, we've gone through the broad concepts of the two major zero-shot learning paradigms. 
+So far, we've gone through the broad concepts of the major zero-shot learning paradigms. 
 
 <!----
 
