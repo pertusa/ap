@@ -1,4 +1,4 @@
-# Introduction to Convolutional Neural Networks (CNN)
+# Convolutional Neural Networks (CNN)
 
 Convolutional Neural Networks (CNNs) are specifically tailored for computer vision tasks (classification, detection, segmentation, synthesis, etc.) (See Chapter 10.1 [[FDL2023]](https://www.bishopbook.com)). In 1989, LeCun proposed LeNet, a CNN for recognizing handwritten digits in images that was trained by backpropagation. It was widely recognised as the first CNN model achievieng outstanding results matching the performance of support vector machines, then a dominant approach in supervised learning. It laid the foundation for modern CNN architectures and demonstrated the power of convolutional layers and their ability to learn spatial hierarchies of features in an image, a principle that remains central in modern CNNs used for more complex tasks in computer vision.  
 
@@ -226,14 +226,22 @@ The Inception architecture [[UDL 2023, Section 8.3]](https://d2l.ai/chapter_conv
 		*The input is first processed by a depthwise convolution \((n_w \cdot n_h \cdot n_c)\), applying a single filter per input channel. This is followed by a pointwise convolution \((1 \cdot 1 \cdot n_c')\) convolutions that combines the outputs of the depthwise convolution, adjusting the depth as necessary.
 		* The computational cost is significantly reduced compared to standard convolutions.
 
-Example: 
+	* Example: 
 
+For the following convolution, the number of calculations is `filter parameters` x `filter positions` x `humber of filters`. This is (3 x 3 x 3) x (10 x 10) x 5 = 13.500 operations.
 
-## MobileNetV2 Enhancements
+![alt text](images/cnn/normalConvolution.png)
 
-### Residual Connections
-- **Introduction**: MobileNetV2 introduces residual connections similar to those in ResNet, but within the framework of inverted residual blocks.
-- **Function**: These connections allow the input to bypass one or more layers, facilitating the flow of gradients during training and mitigating the vanishing gradient problem.
+In case, we would use depthwise separable convolutions, as in the following figure:
+
+![alt text](images/cnn/depthwiseConvolution-1.png)
+
+The number of calculations will be reduced. First, the depthwise convolutions are applied for each channel obtaining that the number of calculations is again `filter parameters` x `filter positions` x `humber of filters`. This is (3 x 3) x (10 x 10) x 3 = 2.700 operations. Moreover, the pointwise (1x1) convolution, would be: (1 x 1 x 3) x (10 x 10) x 5 = 1.500 operations. Added to the previous calculations, we have a total of 4.200 operations, about a 30% of the previous operations.
+
+![alt text](images/cnn/depthwiseConvolution-2.png)
+
+* MobileNetV2
+	* It introduces residual connections similar to those in ResNet, but within the framework of inverted residual blocks. These connections allow the input to bypass one or more layers, facilitating the flow of gradients during training and mitigating the vanishing gradient problem.
 
 ### Inverted Residual Blocks
 - **Expansion Layer**: Each block starts with a 1x1 convolution that expands the input's depth, increasing the representation capacity and allowing the network to learn more complex functions.
@@ -241,9 +249,8 @@ Example:
 - **Projection Layer**: A 1x1 convolution that projects the expanded feature map back to a lower dimension, reducing the size and computational cost of the feature map.
 - **Efficiency**: This expansion-projection strategy increases the network's expressiveness while keeping the computational cost low by expanding the feature space only temporarily within the block.
 
-### Observations
-- **Efficiency and Performance**: MobileNet architectures are highly efficient, providing a good balance between performance and computational cost, making them ideal for applications with limited computational resources.
-- **Versatility**: Despite being designed for mobile devices, these architectures have proven effective for a wide range of tasks beyond image classification, including object detection and segmentation.
+* EfficientNet:  
+
 
 
 ## Biblography
