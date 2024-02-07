@@ -97,11 +97,6 @@ In the laboratory class (2 hours 🕒️ duration), we will see how certain comp
 
 The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.
 
-!!! danger
-
-    This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
-
-
 ## 2.  Second session of this block (14th February 2024)
 
 ### Contents to prepare before (online)
@@ -240,17 +235,32 @@ The number of calculations will be reduced. First, the depthwise convolutions ar
 
 ![alt text](images/cnn/depthwiseConvolution-2.png)
 
-* MobileNetV2
+* MobileNetV2:
 	* It introduces residual connections similar to those in ResNet, but within the framework of inverted residual blocks. These connections allow the input to bypass one or more layers, facilitating the flow of gradients during training and mitigating the vanishing gradient problem.
+	* Inverted Residual Blocks
+		* `Pointwise convolution`: Each block starts with a 1x1 convolution that expands the input's depth, increasing the representation capacity and allowing the network to learn more complex functions.
+		* `Depthwise Convolution`: Follows the expansion layer, applying spatial filtering within each channel.
+		* `Projection Layer`: A 1x1 convolution that projects the expanded feature map back to a lower dimension, reducing the size and computational cost of the feature map.
+	* This expansion-projection strategy increases the network's expressiveness while keeping the computational cost low by expanding the feature space only temporarily within the block.
 
-### Inverted Residual Blocks
-- **Expansion Layer**: Each block starts with a 1x1 convolution that expands the input's depth, increasing the representation capacity and allowing the network to learn more complex functions.
-- **Depthwise Convolution**: Follows the expansion layer, applying spatial filtering within each channel.
-- **Projection Layer**: A 1x1 convolution that projects the expanded feature map back to a lower dimension, reducing the size and computational cost of the feature map.
-- **Efficiency**: This expansion-projection strategy increases the network's expressiveness while keeping the computational cost low by expanding the feature space only temporarily within the block.
+* EfficientNet [[Medium]](https://medium.com/mlearning-ai/understanding-efficientnet-the-most-powerful-cnn-architecture-eaeb40386fad):  
+	* These architectures systematically scale up CNNs in a more structured manner to achieve better efficiency and accuracy. The key innovation of EfficientNet is the use of a compound scaling method that uniformly scales network **width**, **depth**, and **resolution** with a set of fixed scaling coefficients.
+	* It is able to achieve state-of-the-art accuracy with significantly fewer parameters and FLOPs (floating-point operations per second) compared to previous architectures.
 
-* EfficientNet:  
 
+#### 2.5. Image augmentation
+
+Finally, [image augmentation](https://d2l.ai/chapter_computer-vision/image-augmentation.html#image-augmentation) is a technique used to enhance the diversity of a training dataset without actually collecting new images. This is achieved by applying a series of random transformations to the existing images in the dataset, such as rotations, translations, flips, scaling, shearing, and color variations. These transformations produce altered versions of the images, which help the model generalize better from the training data, making it more robust to variations it might encounter in real-world data.
+
+The benefits are:
+	* Enhanced Generalization: Augmentation increases the diversity of the training set, helping the model generalize better to unseen data.
+	* Reduced Overfitting: By providing varied examples, it prevents the model from memorizing specific images.
+	* Improved Robustnes: Models become more robust to variations in input data, such as different angles, lighting conditions, and occlusions.
+
+### Contents for the presential class
+In the laboratory class (2 hours 🕒️ duration), we will implement a convolutional neural network <a href="https://colab.research.google.com/drive/1RT9lqTnTgkv_STXHk4k97wgKMTYSPWHw?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
+
+The aim is for the notebook to be modified.
 
 
 ## Biblography
