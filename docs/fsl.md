@@ -1,10 +1,13 @@
 # Few and Zero Shot Learning
 
+<!---
 !!! danger
 
     This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
 
-The following contents are copied (and slighly adapted) to the AI master from the [ISMIR 2022 tutorial](https://github.com/music-fsl-zsl/tutorial) created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under [Creative Commons BY-NC-SA 4.0](https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE).
+-->
+
+Some of the following contents are copied (and  adapted) to the AI master from the [ISMIR 2022 tutorial](https://github.com/music-fsl-zsl/tutorial) created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under [Creative Commons BY-NC-SA 4.0](https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE).
 
 ## What is Few-Shot Learning (FSL) and Zero-Shot Learning (ZSL)?
 
@@ -352,13 +355,13 @@ There are also more complex zero/few-shot mainstream alternatives with widesprea
 
 ### Contrastive Language-Image Pre-Training (CLIP)
 
-Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip) uses an encoder-decoder architecture for **multimodal zero-shot** learning. The illustration below explains how CLIP works.
+Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip)[@clip] uses an encoder-decoder architecture for **multimodal zero-shot** learning. The illustration below explains how CLIP works.
 
 ![CLIP](images/fsl/clip.png)
 
 CLIP (Contrastive Language–Image Pre-training) builds on a large body of work on zero-shot transfer, natural language supervision, and multimodal learning. It inputs text snippets into a text encoder (TE) and images into an image encoder (IE). It trains the encoders to predict the correct class by matching images with the appropriate text descriptions.
 
-The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet or VisionTransformer. For TE, Continuous BOW (CBOW).
+The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet [@resnet] or VisionTransformer [@vit]. For TE, Continuous BOW (CBOW).
 
 For pre-training, 400 million pairs of the form (image, text) are used, which are fed to the input of IE and TE. Then a matrix is ​​considered, the element \((i, j)\) of which is the cosine similarity from the normalized vector representation of the \(i\)-th image and the \(j\)-th textual description. 
 
@@ -368,7 +371,7 @@ Once CLIP has been trained, you can use it to classify images from any set of cl
 
 ### OpenAI GPT-3
 
-In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, named [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf), describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
+In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, named [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf)[@gpt3], describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
 
 Those tasks include zero-shot, one-shot, and few-shot learning, where the model is given a task deﬁnition and/or a few examples and must perform the task without additional training. That is, no ﬁne-tuning is used. It is as though humans perform a new language task from only a few examples of simple instructions. The question posed in the paper is: can a pre-trained language model become a meta-learner?
 
