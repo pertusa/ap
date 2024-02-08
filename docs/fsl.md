@@ -93,7 +93,8 @@ A train/test split with no overlap between classes is called a **class-condition
 
 #### Episodic Training
 
-To take full advantage of a large training set for few-shot learning, we use a technique referred to as **episodic training** {cite}`vinyals2016matching, ravi2017optimization`. 
+To take full advantage of a large training set for few-shot learning, we use a technique referred to as **episodic training** 
+[@vinyals2016matching;@ravi2017optimization]. 
 
 ![Episodic training](images/fsl/foundations/episodic-training.png)
 
@@ -146,7 +147,7 @@ This similarity comparison is typically done in the embedding space of some neur
 
 There are many different metric-based approaches to few-shot learning, and they all differ in how they define the similarity metric \(g_{sim}\), and how they use it to compare query examples to support examples as well as formulate a training objective.
 
-Among the most popular metric-based approaches are Prototypical Networks {cite}`snell2017prototypical`, Matching Networks {cite}`vinyals2016matching`, and Relation Networks {cite}`sung2018relation`.
+Among the most popular metric-based approaches are Prototypical Networks [@snell2017prototypical], Matching Networks [@vinyals2016matching], and Relation Networks [@sung2018relation].
 
 ##### Example: Prototypical networks
 
@@ -154,7 +155,7 @@ Among the most popular metric-based approaches are Prototypical Networks {cite}`
 
 The figure above illustrates a 5-shot, 3-way classification task between tambourine (red), maracas (green), and djembe (blue). In prototypical networks, each of the 5 support vectors are averaged to create a prototype for each class (\(c_k\)). The query vector \(x\) is compared against each of the prototypes using squared euclidean distance. The query vector (shown as \(x\)) is assigned to the class of the prototype that it is most similar to. Here, the prototypes \(c_k\) are shown as black circles. 
 
-> Prototypical networks {cite}`snell2017prototypical` work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
+> Prototypical networks [@snell2017prototypical] work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
 
 > Although not mentioned explicitly in the paper, [Siamese Neural Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is a kind of metric learning predecessor for prototypical networks as well. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.
 
@@ -189,8 +190,8 @@ This means that we are learning two different backbone models that map to the **
 
 ### Optimization-Based Few-Shot Learning 
 
-Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML) {cite}`finn2017model`,
-and it's successors {cite}`li2017meta, sun2019mtl`. 
+Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML) [@finn2017model],
+and it's successors [@li2017meta; @sun2019mtl]. 
 
 The intuition behind MAML is that some representations are more easily transferrable to new tasks than others. 
 
@@ -209,12 +210,12 @@ Note that MAML makes no assumption of the model architecture, thus the "model-ag
 
 ![MAML](images/fsl/foundations/maml.png)
 
-> The MAML algorithm {cite}`finn2017model`. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
+> The MAML algorithm [@finn2017model]. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
 
 Suppose we are given a meta-training set composed of many few-shot episodes \(D_{train} = \{E_1, E_2, ..., E_n\}\), where each episode contains a support set and train set \(E_i = (S_i, Q_i)\). We can follow the MAML algorithm to learn parameters \(\theta\) that can be adapted to new tasks using only a few examples and a few gradient steps. 
 
 
-Overview of the MAML algorithm {cite}`finn2017model`:
+Overview of the MAML algorithm [@finn2017model]:
 
 -------
 
