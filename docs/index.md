@@ -43,6 +43,6 @@ The course has the following blocks:
 * Feb 14: [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
 * Feb. 21: [Recurrent architectures (Juan Antonio Pérez)]()
 * Feb. 21: [Fine tuning and knowledge distillation (Juan Antonio Pérez)]()
-* Feb. 28: [Deep Reinforcement Learning (Jorge Calvo)]()
+* Feb. 28: [Deep Reinforcement Learning (Jorge Calvo)](drl.md)
 * Mar. 6: [Self-Supervised Learning (Antonio Pertusa)]()
 
