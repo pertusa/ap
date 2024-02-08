@@ -5,9 +5,11 @@ theme:
     - content.code.copy
 
 nav:
-- Index: 'index.md'
+- Summary: 'index.md'
 - Convolutional Neural Networks: 'cnn.md'
 - Few and Zero Shot Learning: 'fsl.md'
+#- Recurrent Neural Networks: 'rnn.md'
+#- Deep Reinforcement Learning: 'drl.md'
 
 markdown_extensions:
   - toc:
