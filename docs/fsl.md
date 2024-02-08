@@ -383,7 +383,7 @@ Since then, however, they saw a growing trend in the capacity of transformer lan
 
 Therefore, OpenAI researchers trained a 175 billion parameter language model (GPT-3) and measured its in-context learning abilities.
 
-### Few-Shot, One-Shot, and Zero-Shot Learning in GPT-3
+#### Few-Shot, One-Shot, and Zero-Shot Learning in GPT-3
 
 They evaluated GPT-3 on three conditions:
 
