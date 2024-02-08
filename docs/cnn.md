@@ -199,7 +199,7 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.3. Inception
 
-The Inception architecture [[UDL 2023, Section 8.3]](https://d2l.ai/chapter_convolutional-modern/googlenet.html#multi-branch-networks-googlenet), particularly known from the GoogLeNet (Inception v1) model introduced in the 2014 ImageNet competition, is notable for its novel approach to convolutional network design. It introduced the "Inception module," a building block that allows the network to choose from different filter sizes and operations within the same layer. Some important notes:
+The Inception architecture [[DDL 2023, Section 8.4]](https://d2l.ai/chapter_convolutional-modern/googlenet.html#multi-branch-networks-googlenet), particularly known from the GoogLeNet (Inception v1) model introduced in the 2014 ImageNet competition, is notable for its novel approach to convolutional network design. It introduced the "Inception module," a building block that allows the network to choose from different filter sizes and operations within the same layer. Some important notes:
 * The Inception architecture revolutionizes the design of convolutional layers by incorporating multiple filter sizes within the same module, allowing the network to adapt to various spatial hierarchies of features in images.
 * The Inception module:
 	* 1x1 Convolutions: To perform dimensionality reduction or increase, reducing the computational cost and the number of parameters in the network and to increase the network's ability to capture nonlinearities without a significant increase in computational complexity.
