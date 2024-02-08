@@ -304,8 +304,6 @@ After training, arbitrary inputs of unseen labels can be predicted to the corres
 
 ![Zero-shot process 6](images/fsl/zsl/zsl_process_06.svg)
 
-### Metric-learning approach
-
 Another option is to train a separate zero-shot embedding space where the embeddings from both spaces are projected (a metric-learning approach).
 
 - E.g. Training mapping functions \(W_1\) and \(W_2\) with a pairwise loss function : \(\sum_{y \in \mathcal{Y}^{seen}}\left[\Delta\left(y_n, y\right)+F\left(x_n, y ; W_1, W_2\right)-F\left(x_n, y_n ; W_1, W_2\right)\right]_{+}\)
@@ -347,15 +345,17 @@ After training, we are now ready with the audio encoder and the classifier. The 
 
 ![ZSL Generative 6](images/fsl/zsl/zsl_generative_06.svg)
 
-So far, we've gone through the broad concepts of the major zero-shot learning paradigms. 
+
 
 ## Popular Few/Zero Shot learning models
 
-There are also more complex zero/few-shot mainstream alternatives with widespread application in the industry, such as CLIP.
+So far, we've gone through the broad concepts of the major few and zero-shot learning paradigms. However, there are also recent approaches using other architectures that take advantage of massive data. 
+
+In this section we describe two zero/few-shot mainstream alternatives with widespread application in the industry: OpenAI CLIP and GPT-3.
 
 ### Contrastive Language-Image Pre-Training (CLIP)
 
-Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip)[@clip] uses an encoder-decoder architecture for **multimodal zero-shot** learning. The illustration below explains how CLIP works.
+Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip)[@clip] uses an encoder-decoder architecture for **multimodal zero-shot** learning. The figure below explains how CLIP works.
 
 ![CLIP](images/fsl/clip.png)
 
@@ -367,11 +367,11 @@ For pre-training, 400 million pairs of the form (image, text) are used, which ar
 
 Thus, the correct pairs will end up on the main diagonal. Finally, by minimizing the cross-entropy along each vertical and horizontal axis of the resulting matrix, we maximize its values ​​on the main diagonal.
 
-Once CLIP has been trained, you can use it to classify images from any set of classes — simply submit this set of classes, presented as descriptions, to TE, and the image to IE, and see which class represents the cosine similarity of the image with the greatest value.
+Once CLIP has been trained, you can use it to classify images from any set of classes — simply submit this set of classes, presented as descriptions, to TE, and the image to IE, and see which class represents the cosine similarity of the image with the highest value.
 
 ### OpenAI GPT-3
 
-In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, named [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf)[@gpt3], describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
+In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, entitled [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf)[@gpt3], describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
 
 Those tasks include zero-shot, one-shot, and few-shot learning, where the model is given a task deﬁnition and/or a few examples and must perform the task without additional training. That is, no ﬁne-tuning is used. It is as though humans perform a new language task from only a few examples of simple instructions. The question posed in the paper is: can a pre-trained language model become a meta-learner?
 
