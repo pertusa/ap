@@ -105,7 +105,7 @@ The contents of this first session are related to the objetive 2, being the foll
 
 #### 2.1 Introduction
 
-	[This part can take about 1 hour 🕒️ of personal working.]
+	[This part can take about 0,5 hours 🕒️ of personal working.]
 
 A typical CNN has several convolution plus pooling layers, each responsible for feature extraction at different levels of abstraction: filters in first layer detect horizontal, vertical, and diagonal edge; filters in the next layer detect shapes; filters in the following layers detect collection of shapes, etc.
 
@@ -128,6 +128,8 @@ A good starting point to understand the architecture of a simple CNN is to study
 1. Calculate the number of the learning parameters of LeNet architecture
 
 #### 2.2. Classic networks
+
+	[This part can take about 1 hour 🕒️ of personal working.]
 
 * Alexnet: [[DDL23, Section 8.1]](https://d2l.ai/chapter_convolutional-modern/alexnet.html#alexnet)
 	* AlexNet represents a significant milestone in the development of convolutional neural networks and played a pivotal role in demonstrating the power of deep learning for image recognition tasks.
@@ -170,6 +172,9 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.2. Residual networks
 
+	[This part can take about 0,5 hours 🕒️ of personal working.]
+
+
 * ResNet [[FDL2023, Section 9.5]](https://www.bishopbook.com), [[TDS]](https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a),[[DDL2023, Section 8.6]](https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-networks-resnet-and-resnext)
 	* ResNet (Residual Network) was introduced by He et al. in 2015 and won the ImageNet competition by a significant margin.
 	* It addresses the vanishing gradient problem in deep neural networks through the use of residual blocks, enabling the training of networks that are much deeper than previous architectures. This is by using shortcut connections that allow gradients to flow through the network more effectively. his approach allows for the construction of very deep networks (ResNet variants come in depths of 50, 101, 152 layers, and more) without degradation in performance due to vanishing gradients.
@@ -199,6 +204,8 @@ A good starting point to understand the architecture of a simple CNN is to study
 
 #### 2.3. Inception
 
+	[This part can take about 0,5 hours 🕒️ of personal working.]
+
 The Inception architecture [[DDL 2023, Section 8.4]](https://d2l.ai/chapter_convolutional-modern/googlenet.html#multi-branch-networks-googlenet), particularly known from the GoogLeNet (Inception v1) model introduced in the 2014 ImageNet competition, is notable for its novel approach to convolutional network design. It introduced the "Inception module," a building block that allows the network to choose from different filter sizes and operations within the same layer. Some important notes:
 
 * The Inception architecture revolutionizes the design of convolutional layers by incorporating multiple filter sizes within the same module, allowing the network to adapt to various spatial hierarchies of features in images.
@@ -215,7 +222,9 @@ The Inception architecture [[DDL 2023, Section 8.4]](https://d2l.ai/chapter_conv
 
 #### 2.4. Computational efficient networks
 
-* MobileNet [Medium](https://medium.com/@godeep48/an-overview-on-mobilenet-an-efficient-mobile-vision-cnn-f301141db94d)
+	[This part can take about 1 hour 🕒️ of personal working.]
+
+* MobileNet [[Medium]](https://medium.com/@godeep48/an-overview-on-mobilenet-an-efficient-mobile-vision-cnn-f301141db94d)
 	*  The key innovation is in their efficient architectural design, aimed at **reducing computational cost while maintaining high performance**, especially on mobile and embedded devices.
 	* The core innovation is the use of **[depthwise separable convolutions](https://machinelearningmastery.com/using-depthwise-separable-convolutions-in-tensorflow/)**.
 		* Instead of using standard convolutions, it employs depthwise separable convolutions, which use a standard convolution into a depthwise convolution and a 1x1 pointwise convolution.
@@ -250,6 +259,8 @@ The number of calculations will be reduced. First, the depthwise convolutions ar
 
 
 #### 2.5. Image augmentation
+
+	[This part can take about 0,25 hours 🕒️ of personal working.]
 
 Finally, [image augmentation](https://d2l.ai/chapter_computer-vision/image-augmentation.html#image-augmentation) is a technique used to enhance the diversity of a training dataset without actually collecting new images. This is achieved by applying a series of random transformations to the existing images in the dataset, such as rotations, translations, flips, scaling, shearing, and color variations. These transformations produce altered versions of the images, which help the model generalize better from the training data, making it more robust to variations it might encounter in real-world data.
 
