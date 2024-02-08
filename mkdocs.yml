@@ -4,6 +4,11 @@ theme:
   features:
     - content.code.copy
 
+nav:
+- Index: 'index.md'
+- Convolutional Neural Networks: 'cnn.md'
+- Few and Zero Shot Learning: 'fsl.md'
+
 markdown_extensions:
   - toc:
       permalink: true
@@ -26,4 +31,5 @@ plugins:
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+
   
