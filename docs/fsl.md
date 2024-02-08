@@ -292,7 +292,7 @@ The core of zero-shot learning paradigm is to learn the compatibility function b
 ### Learning a mapping function
 
 A typical approach is to train a mapping function between the two.
-By unveiling relationship between the side information space and the our input feature space, it is possible to map vectors from one space to the other.
+By unveiling relationship between the side information space and our input feature space, it is possible to map vectors from one space to the other.
 
 ![Zero-shot process 5](images/fsl/zsl/zsl_process_05.svg)
 
@@ -345,199 +345,63 @@ After training, we are now ready with the audio encoder and the classifier. The 
 
 So far, we've gone through the broad concepts of the major zero-shot learning paradigms. 
 
-<!----
+# Popular Few/Zero Shot learning models
 
-# Zero-shot learning task formulation
+There are also more complex zero/few-shot mainstream alternatives with widespread application in the industry, such as CLIP.
 
-Now, we'll go over more detailed formulation of zero-shot learning. Basic task formulation of zero-shot learning frames work is as follows. 
+## Contrastive Language-Image Pre-Training (CLIP)
 
-## Problem definition
+Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip) uses an encoder-decoder architecture for **multimodal zero-shot** learning. The illustration below explains how CLIP works.
 
-Given a dataset of input feature vectors \(\mathcal{X}\) and their associated labels \(\mathcal{Y}\), we first split the class labels into seen and unseen groups (\(\mathcal{Y}^{seen}\), \(\mathcal{Y}^{unseen}\)). The resulted 'seen' split is composed of \(\mathcal{S}^{seen}\equiv\{\left(x_n, y_n\right)\}_{n=1}^{N}\), where an input \(x_n\) is a feature vector on a \(D\)-dimensional space \(\mathcal{X}\) (\(x_n \in \mathcal{X} \stackrel{\text{def}}{=}\mathbb{R}^D\)) and \(y_n\) is one of \(C_0\) label classes (\(y_n \in \mathcal{Y}^{seen} \equiv\left\{1, \ldots, C_0\right\}\)). 
+![CLIP](images/fsl/clip.png)
 
-The other set is denoted as the *unseen* split \(\mathcal{S}^{unseen} \equiv\left\{\left(x_n^{\prime}, y_n^{\prime}\right)\right\}_{n=1}^{N^{\prime}}\), where \(\mathbf{x}_n^{\prime}\) is also a vector from the feature space \(\mathcal{X}\) (\(x_n^{\prime} \in \mathcal{X}\)), while \(y_n^{\prime}\) is from the other set of classes (\(y_n^{\prime} \in \mathcal{Y}^{unseen} \equiv\) \(\left\{C_0+1, \ldots, C_0+C_1\right\}\)). Note that \(\mathcal{Y}^{seen} \cap \mathcal{Y}^{unseen}=\varnothing\).
+CLIP (Contrastive Language–Image Pre-training) builds on a large body of work on zero-shot transfer, natural language supervision, and multimodal learning. It inputs text snippets into a text encoder (TE) and images into an image encoder (IE). It trains the encoders to predict the correct class by matching images with the appropriate text descriptions.
 
-To simulate a zero-shot condition where the model is supposed to infer an input to a novel class,  only a subset of input and 'seen' label pairs (\(\mathcal{S}^{seen}\)) are used in training. 
-At test time, the other subset of the input and 'unseen' label pairs (\(\mathcal{S}^{unseen}\)) are used for evaluation. 
+The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet or VisionTransformer. For TE, Continuous BOW (CBOW).
 
-Another main ingredient for the zero-shot model is the side information, which is often given as an additional representational space of the label classes, \(\{\phi(y) ; y \in \mathcal{Y}^{seen} \cup \mathcal{Y}^{unseen}\}\), where 
-\(\phi(y) \in \Phi \equiv \mathbb{R}^{D^{\prime}}\).
+For pre-training, 400 million pairs of the form (image, text) are used, which are fed to the input of IE and TE. Then a matrix is ​​considered, the element \((i, j)\) of which is the cosine similarity from the normalized vector representation of the \(i\)-th image and the \(j\)-th textual description. 
 
-The goal of zero-shot learning is to learn a classfier \(f: \mathcal{X} \rightarrow \mathcal{Y}\)  that is well-generalized to \(\mathcal{Y}^{unseen}\) even without seeing any training instances for \(\mathcal{Y}^{unseen}\) (\(\mathcal{Y}^{seen} \subset \mathcal{Y}, \mathcal{Y}^{unseen} \subset \mathcal{Y}\)).
+Thus, the correct pairs will end up on the main diagonal. Finally, by minimizing the cross-entropy along each vertical and horizontal axis of the resulting matrix, we maximize its values ​​on the main diagonal.
 
-To summarize, given $\mathcal{S^{seen}}=\left\{\left(x_n, y_n\right), n=1 \ldots N\right\}$, with $x_n \in \mathcal{X}^{seen}$ and $y_n \in \mathcal{Y}^{seen}$, where
-- $\mathcal{S}^{seen}$ refers to the set of seen input vectors and their associated classes.
-    - $\mathcal{Y^{seen}}$ is the set of seen classes.
-    - $\mathcal{X^{seen}}$ is the set of input vectors that are paired with the seen classes. 
-- $x_n$ is a $D$-dimensional input vector in $\mathcal{X}$ ($x_n \in \mathcal{X} \stackrel{\text{def}}{=}\mathbb{R}^D$).
-- $y_n \in \{1,...,C_0\}$ is the class label that corresponds to $x_n$.
-- $N$ is the size of the seen training pairs.  
+Once CLIP has been trained, you can use it to classify images from any set of classes — simply submit this set of classes, presented as descriptions, to TE, and the image to IE, and see which class represents the cosine similarity of the image with the greatest value.
 
-we learn $f: \mathcal{X} \rightarrow \mathcal{Y}$ by minimizing the regularized loss function :
+## OpenAI GPT-3
 
-$$
-\frac{1}{N} \sum_{n=1}^N L\left(y_n, f\left(x_n ; W\right)\right)+\Omega(W)
-$$
+In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, named [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf), describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
 
-, where $L()$ is a loss function and $\Omega()$ is a regularization term.
+Those tasks include zero-shot, one-shot, and few-shot learning, where the model is given a task deﬁnition and/or a few examples and must perform the task without additional training. That is, no ﬁne-tuning is used. It is as though humans perform a new language task from only a few examples of simple instructions. The question posed in the paper is: can a pre-trained language model become a meta-learner?
 
-This looks quite similar to a classical supervised learning process, however, the model should be able to make predictions for the general class set $\mathcal{Y}$. At the test phase, the model makes prediction on inputs that are associated with the unseen label set $\mathcal{Y^{unseen}}$ by calculating the maximum compatibility. 
+To answer this, they use in-context learning. Below is a demonstrative diagram of how in-context learning works, where the model develops a broad set of capabilities and learns to adapt them to perform tasks defined via natural language examples.
 
-## Modeling $f$ 
+![Figure 1.1 of the paper](images/fsl/gpt31.png)
 
-### Compatibility between the input data and the label data.
+The outer loop refers to the unsupervised pre-training where the model acquires language skills. On the other hand, the inner loop occurs when we feed forward a sequence of examples to the model, which learns the context from the sequence to predict what comes next. It is like a human reading a sequence of examples and thinking about the next instance. As the model uses the language skills learned during the pre-training phase to learn the context given in the sequence, no neural network parameter updates are involved in this learning phase. They call it in-context learning.
 
-$f$ is usually modeled by using a certain compatibility function :
-- $f(x ; W)=\underset{y \in \mathcal{Y}}{\operatorname{argmax}}F(x, y ; W)$, where $F(x, y ; W)$ is a compatibility function that measures how compatible the input is with a class label.
+The diagram’s first (left-most) example provides a context for performing arithmetic addition. Then, the second (middle) demonstrates how to correct spelling mistakes. The last (right-most) provides examples of English-to-French word translations. Given the respective context, the model must learn how to perform the intended task. They tried this approach with GPT-2, but the result wasn’t good enough to be a practical method of solving language tasks.
 
-Since inputs and labels are represented as vectors $\theta(x), \phi(y)$ using corresponding embedding functions, 
-- $\theta$ is a representational embedding function for input features.
-- $\phi$ is a representational embedding function for class labels as described abolve.
+Since then, however, they saw a growing trend in the capacity of transformer language models in terms of the number of parameters, bringing improvements to text generation and other downstream NLP tasks. They hypothesized that in-context learning would show similarly substantial gains with scale.
 
-taking the $\underset{y \in \mathcal{Y}}{\operatorname{argmax}}$ of compatibility is often acheived by choosing the nearest neighbor vector on the embedding space.
-- $F(x, y ; W)$ can be rewritten as $F^{\prime}(\theta(x), \phi(y) ; W)$.
-- $W$ is a learnable matrix (our model).
+Therefore, OpenAI researchers trained a 175 billion parameter language model (GPT-3) and measured its in-context learning abilities.
 
+### Few-Shot, One-Shot, and Zero-Shot Learning in GPT-3
 
-And when dealing with explicit attribute annotations for each class, $f$ can also be modeled in a more explicit fashion. Given explicit attribute classes $a \in A$, where $A\equiv \{1, \ldots, M\}$, $f$ can be modeled using the combination of the conditional probabilities of attributes given the input feature. 
+They evaluated GPT-3 on three conditions:
 
-- $f(x)=\underset{y \in \mathcal{Y}}{\operatorname{argmax}} \prod_{m=1}^M \frac{p\left(a_m^y \mid x\right)}{p\left(a_m^y\right)}$. 
-    - $M$ : number of attributes
-    - $a_m^y$ is the m-th attribute of class $y$ 
-    - $p\left(a_m^y \mid x\right)$ is the attribute probability given input $x$ which is obtained from the attribute classifiers (our estimator).
-    - $p\left(a_m^y\right)$ is the attribute prior estimated by the empirical mean of attributes over training classes. 
-- e.g. Direct Attribute Projection (DAP) and Indirect Attribute Projection (IAP) {cite}`lampert2009dap`
+* Zero-Shot allows no demonstrations and gives only instruction in natural language.
+* One-Shot allows only one demonstration.
+* Few-Shot (or in-context) learning allows as many demonstrations (typically 10 to 100).
 
-```{image} ../assets/zsl/DAP.png
-:width: 800px
-```
+The below diagram explains the three settings (on the left) of GPT-3 evaluations, compared with the traditional fine-tuning (on the right).
 
-Training objectives for the compatibility function is as follows.
+![Figure 2.1 from the paper](images/fsl/gpt32.png)
 
-#### 1-1) Maximizing the compatibility.
-- e.g. Linear compatibility function (learnable)
-    - $F(x, y ; W)=\theta(x)^T W \phi(y)$
-        - $\theta$ is a representational embedding function for input features.
-        - $\phi$ is a representational embedding function for class labels as described abolve.
-    - This can also be seen as learning a projection matrix that maximizes the dot product.
+The following graph shows the model performance on the learning task where it needs to remove extraneous (unnecessary) symbols from a word. The model performance improves over the number of in-context examples (\(K\)), with or without a prompt (natural language task description), where \(K = 0\) is zero-shot, \(K = 1\) is one-shot, and \(K > 1\) is few-short learning. It makes sense that the model performs better with a larger K as it can learn from more examples. Moreover, a prompt would give more context, improving the model’s accuracy, especially where \(K\) is smaller. In other words, no prompt means that the model must infer what is being asked (i.e., guess the prompt) from the examples.
 
-or by
-#### 1-2) Minimizing a distance loss function.
-- Nonlinear mapping function (neural network layer $W_1$ and $W_2$) trained with a loss function
-    - $\sum_{y \in \mathcal{Y}^{seen}} \sum_{x \in \mathcal{X}_y} \| \phi(y)-W_1 \tanh \left(W_2 \cdot \theta(x)\right) \|^2$ 
-        - $\theta$ is a representational embedding function for input features.
-        - $\phi$ is a representational embedding function for class labels as described abolve.
-    - Other distance metrics such as cosine distance can also be used.
+![Figure 1.2 from the paper](images/fsl/gpt33.png)
 
+As we can see, the largest model with 175 billion parameters has the steepest improvement, proving that the larger capacity of the model increases the model’s ability to recognize patterns from the in-context examples. Therefore, the main conclusion is that **LLM size Does Matter To In-Context Learning**.
 
+It should be reiterated that the accuracy improvement does not require gradient updates or fine-tuning. The increasing number of demonstrations given as conditioning allows the model to learn more contexts to improve its prediction accuracy.
 
 
-## Synthesizing zero-shot class embeddings given $\phi(y)$ 
 
-Other than directly modeling the relationship between seen and unseen class embeddings, there is another direction of leveraging generative models, such as GAN. Unlike conventional GAN models that generate audio or images directly, zero-shot related GAN models learn to generate feature embeddings given $\phi(y)$ (side information) as conditional input. 
-
-After the generator and discriminator are trained, for any given unseen class $y$, unseen class embeddings can be generated by computing $G(z,\phi(y^{unseen}))$. 
-
-Then a synthetic class embedding $\{(\tilde{x},y^{unseen},c(y^{unseen}))\}$ can be constructed for training of unseen classes (any arbitrary input features $\tilde{x}$ can be synthesized). The problem now becomes a simple classification task where .
-
-
-## Available data while training
-
-To simulate a proper zero-shot learning situation, unseen classes should be strictly blinded during training phase. 
-However, depending on the scope of information that the zero-shot model sees during training, there are two broad types of setup. One is inductive zero-shot learning and the other is transductive zero-shot learning. 
-In transductive learning setup, in addition to the seen classes and their labeled data samples, the model takes unlabeled data samples from the unseen classes into account. This alleviates the projection domain shift problem by letting the model catch the distribution of unseen class instances and learn a more discriminative projection. 
-
-- Inductive zero-shot learning 
-    - A common setup is the inductive zero-shot learning. In this approaches, only labeled training samples and auxiliary information of seen classes are available during training.
-- Transductive zero-shot learning 
-    - Labeled training samples, unlabelled test samples, and auxiliary information of all classes are available during training.
-
-```{image} ../assets/zsl/inductive_transductive.png
-:width: 1000px
-```
-
-
-
-
-# Zero-shot evlauation scheme
-
-## 'Generalized' zero-shot evaluation setup
-
-In conventional zero-shot learning setup, the trained model was evaluated on the set of unseen classes and their associated data samples. Under this formulation,conventional zero-shot learning research have verified that the basic concept of zero-shot knowledge transfer actually works. 
-
-However, in the real world problem, the practical advantage of zero-shot learning is in its generalizability where the prediction scope can expand to a large number of classes present on the side information space. {cite}`bendale2016gzsl` To strictly verify this cabability, the 'generalized' zero-shot evaluation had been proposed. Since zero-shot learning models are prone to overfit on the seen classes, they often perform poorly under the generalized zero-shot learning setup. 
-
-Since then, generalized zero-shot evaluation became the standard criterion of zero-shot model performance. 
-
-```{image} ../assets/zsl/zsl_vs_gzsl.png
-:width: 800px
-```
-
-
-
-# Different approaches for zero-shot learning
-
-## (1) Case 1 : Learning by pairwise ranking of compatibility
-DeViSE: A Deep Visual-Semantic Embedding Model (Frome et al., 2013) {cite}`frome2013devise`
-
-Maximize the following objective function using pairwise ranking:
-
-$$
-\sum_{y \in \mathcal{Y}^{t r}}\left[\Delta\left(y_n, y\right)+F\left(x_n, y ; W\right)-F\left(x_n, y_n ; W\right)\right]_{+}
-$$
-
-- Ranking objective to map training inputs close to continuous embedding vectors corresponding to correct labels.
-- $\Delta\left(y_n, y\right)=1$ if $y_n=y$, otherwise 0
-- Optimized by gradient descent.
-
-
-
-## (2) Case 2 : Learning by maximizing probability function 
-
-Learning to detect unseen object classes by between-class attribute transfer (Lampert et al., 2009) {cite}`lampert2009dap`
-
-CONSE (Norouzi et al., 2014) {cite}`norouzi2013conse`
-
-Instead of learning the mapping function $f: \mathcal{X} \rightarrow \mathcal{Y}$ explicitly, learn a classifier from training inputs to seen labels. The probability of an input $\mathbf{x}$ belonging to a class label $y \in \mathcal{Y}_{seen}$ can then be estimated, denoted $p_{seen}(y \mid x)$, where $\sum_{y=1}^{n} p_{seen}(y \mid x)=1$.
-
-- $f(x, t)$ : $\mathrm{t}^{th}$ most likely label for input $x$
-    - $f(x, 1) \equiv \underset{y \in \mathcal{Y}_{seen}}{\operatorname{argmax}} p_{seen}(y \mid x)$ : probability of an input $x$ belonging to a seen class:
-- Each class label $y(1 \leq y \leq n)$ is associated with a semantic embedding vector $\phi(y) \in \Phi \equiv \mathbb{R}^{D^{\prime}}$. 
-- Given a test input, the ConSE simply runs the convolutional classifier and considers the top T predictions of the model. Then, the convex combination of the corresponding $T$ semantic embedding vectors in the semantic space is computed, which defines a deterministic transformation from the outputs of the Softmax classifier into the embedding space.
-
-
-Combination of semantic embeddings $(\phi)$ is used to assign an unknown input to an unseen class:
-
-$$
-\frac{1}{Z} \sum_{i=1}^T p_{seen}(f(x, t) \mid x) \phi(f(x, t))
-$$
-
-- $Z $: normalization factor given by $Z=\sum_{i=1}^T p_{seen}(f(x, t) \mid x)$
-- $T$ : hyperparameter of controlling the maximum number of semantic embedding vectors to be considered.
-
-If the classifier is confident in its prediction of a label $y$ for $x$, i.e., $p_{seen}(y \mid x) \approx 1$, then $f(x) \approx \phi(y)$. If not, predicted semantic embedding is somewhere between $T$ most likely classes (weighted-sum).
-
-
-## (3) Case 3 : Autoencoder approach
-
-SAE (Kodirov et al., 2017) {cite}`kodirov2017sae`
-
-Minimize the reconstruction loss (similar to the linear auto-encoder).
-
-$$
-\min _W\left\|\theta(x)-W^T \phi(y)\right\|^2+\lambda\|W \theta(x)-\phi(y)\|^2,
-$$
-
-- Learns a linear projection from $\theta(x)$ to $\phi(y)$, being similar to above approaches. 
-- Reconstruction of the original input embedding is set as the training objective .
-
-
-## (4) Case 4 : Generative approach
-
-f-CLSWGAN (Xian et al., 2017) {cite}`xian2017fclsgan`
-
-- Phase 1. Using seen class and image pairs, train a conditional GAN architecture to synthesize image feature vectors. 
-- Phase 2. Use the generator to synthesize pseudo image feature vectors for unseen classes.
-- Phase 3. Train a classifier with the synthesized image feature vectors and their associated (unseen) classes
-
---->
