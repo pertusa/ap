@@ -345,11 +345,11 @@ After training, we are now ready with the audio encoder and the classifier. The 
 
 So far, we've gone through the broad concepts of the major zero-shot learning paradigms. 
 
-# Popular Few/Zero Shot learning models
+## Popular Few/Zero Shot learning models
 
 There are also more complex zero/few-shot mainstream alternatives with widespread application in the industry, such as CLIP.
 
-## Contrastive Language-Image Pre-Training (CLIP)
+### Contrastive Language-Image Pre-Training (CLIP)
 
 Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip) uses an encoder-decoder architecture for **multimodal zero-shot** learning. The illustration below explains how CLIP works.
 
@@ -365,7 +365,7 @@ Thus, the correct pairs will end up on the main diagonal. Finally, by minimizing
 
 Once CLIP has been trained, you can use it to classify images from any set of classes — simply submit this set of classes, presented as descriptions, to TE, and the image to IE, and see which class represents the cosine similarity of the image with the greatest value.
 
-## OpenAI GPT-3
+### OpenAI GPT-3
 
 In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, named [_Language Models are Few-Shot Learners_](https://arxiv.org/pdf/2005.14165.pdf), describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.
 
