@@ -1,4 +1,4 @@
-# Few and Zero Shot Learning
+# Few and Zero Shot Learning (14th February 2024). Contents to prepare before (online)
 
 <!---
 !!! danger
@@ -7,7 +7,7 @@
 
 -->
 
-Some of the following contents are copied (and  adapted) to the AI master from the [ISMIR 2022 tutorial](https://github.com/music-fsl-zsl/tutorial) created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under [Creative Commons BY-NC-SA 4.0](https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE).
+Part of the following contents are copied and adapted to the AI master from the [ISMIR 2022 tutorial](https://github.com/music-fsl-zsl/tutorial) created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under [Creative Commons BY-NC-SA 4.0](https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE).
 
 ## What is Few-Shot Learning (FSL) and Zero-Shot Learning (ZSL)?
 
@@ -46,7 +46,7 @@ When solving traditional classification problems, we typically consider a closed
 
 In few-shot learning, we expect to see **novel** classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. 
 
-> Transfer learning and data augmentation are often considered approaches to few-shot learning [@song2022comprehensive], since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
+> Transfer learning and data augmentation are often considered approaches to few-shot learning[@song2022comprehensive], since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of **meta-learning** – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.
 
 
 ### Defining the Problem
@@ -96,8 +96,7 @@ A train/test split with no overlap between classes is called a **class-condition
 
 #### Episodic Training
 
-To take full advantage of a large training set for few-shot learning, we use a technique referred to as **episodic training** 
-[@vinyals2016matching;@ravi2017optimization]. 
+To take full advantage of a large training set for few-shot learning, we use a technique referred to as **episodic training**[@vinyals2016matching;@ravi2017optimization]. 
 
 ![Episodic training](images/fsl/foundations/episodic-training.png)
 
@@ -150,7 +149,7 @@ This similarity comparison is typically done in the embedding space of some neur
 
 There are many different metric-based approaches to few-shot learning, and they all differ in how they define the similarity metric \(g_{sim}\), and how they use it to compare query examples to support examples as well as formulate a training objective.
 
-Among the most popular metric-based approaches are Prototypical Networks [@snell2017prototypical], Matching Networks [@vinyals2016matching], and Relation Networks [@sung2018relation].
+Among the most popular metric-based approaches are Prototypical Networks[@snell2017prototypical], Matching Networks[@vinyals2016matching], and Relation Networks[@sung2018relation].
 
 ##### Example: Prototypical networks
 
@@ -158,7 +157,7 @@ Among the most popular metric-based approaches are Prototypical Networks [@snell
 
 The figure above illustrates a 5-shot, 3-way classification task between tambourine (red), maracas (green), and djembe (blue). In prototypical networks, each of the 5 support vectors are averaged to create a prototype for each class (\(c_k\)). The query vector \(x\) is compared against each of the prototypes using squared euclidean distance. The query vector (shown as \(x\)) is assigned to the class of the prototype that it is most similar to. Here, the prototypes \(c_k\) are shown as black circles. 
 
-> Prototypical networks [@snell2017prototypical] work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
+> Prototypical networks[@snell2017prototypical] work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
 
 > Although not mentioned explicitly in the paper, [Siamese Neural Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is a kind of metric learning predecessor for prototypical networks as well. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.
 
@@ -193,8 +192,8 @@ This means that we are learning two different backbone models that map to the **
 
 ### Optimization-Based Few-Shot Learning 
 
-Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML) [@finn2017model],
-and it's successors [@li2017meta; @sun2019mtl]. 
+Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML[@finn2017model]),
+and it's successors[@li2017meta; @sun2019mtl]. 
 
 The intuition behind MAML is that some representations are more easily transferrable to new tasks than others. 
 
@@ -213,17 +212,17 @@ Note that MAML makes no assumption of the model architecture, thus the "model-ag
 
 ![MAML](images/fsl/foundations/maml.png)
 
-> The MAML algorithm [@finn2017model]. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
+> The MAML[@finn2017model] algorithm. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
 
 Suppose we are given a meta-training set composed of many few-shot episodes \(D_{train} = \{E_1, E_2, ..., E_n\}\), where each episode contains a support set and train set \(E_i = (S_i, Q_i)\). We can follow the MAML algorithm to learn parameters \(\theta\) that can be adapted to new tasks using only a few examples and a few gradient steps. 
 
 
-Overview of the MAML algorithm [@finn2017model]:
+Overview of the MAML[@finn2017model] algorithm:
 
 -------
 
-* Initialize model parameters \(\theta\) randomly, choose step sizes \(\alpha\) and \(\beta\).  
-* **while** not converged **do**
+1. Initialize model parameters \(\theta\) randomly, choose step sizes \(\alpha\) and \(\beta\).  
+2. **while** not converged **do**
     * Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
     * **for** each episode \(E_i\) in the batch **do**
         *  Using the current parameters \(\theta\), compute the gradient of the loss \(L_if(\theta)\) for episode \(E_i\).
@@ -361,7 +360,7 @@ Introduced by OpenAI in 2021, [CLIP](https://openai.com/research/clip)[@clip] us
 
 CLIP (Contrastive Language–Image Pre-training) builds on a large body of work on zero-shot transfer, natural language supervision, and multimodal learning. It inputs text snippets into a text encoder (TE) and images into an image encoder (IE). It trains the encoders to predict the correct class by matching images with the appropriate text descriptions.
 
-The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet [@resnet] or VisionTransformer [@vit]. For TE, Continuous BOW (CBOW).
+The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet[@resnet] or VisionTransformer[@vit]. For TE, Continuous BOW (CBOW).
 
 For pre-training, 400 million pairs of the form (image, text) are used, which are fed to the input of IE and TE. Then a matrix is ​​considered, the element \((i, j)\) of which is the cosine similarity from the normalized vector representation of the \(i\)-th image and the \(j\)-th textual description. 
 
@@ -408,4 +407,6 @@ As we can see, the largest model with 175 billion parameters has the steepest im
 It should be reiterated that the accuracy improvement does not require gradient updates or fine-tuning. The increasing number of demonstrations given as conditioning allows the model to learn more contexts to improve its prediction accuracy.
 
 
-
+<!---
+TODO: Add SAM, it's zero-shot!
+--->
