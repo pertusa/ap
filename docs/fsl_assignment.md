@@ -2,13 +2,13 @@
 Para otros años, mirar también este código: https://github.com/jakesnell/prototypical-networks/blob/master/protonets/models/few_shot.py
 -->
 
-> Submission of the assignments is due to Feb. 21th
+> This assigment must be submitted by **February 21th** using Moodle
 
-# Prototypical Networks
+## Prototypical Networks
 
-This assignment is part of the HW2 exercise from the [Stanford CS330 Autumn 2020 Homework 2 Model-Agnostic Meta-Learning and Prototypical Networks](http://cs330.stanford.edu/fall2020/index.html) course.
+The following exercise is part of the HW2 task from the [Stanford CS330 Autumn 2020 Homework 2 Model-Agnostic Meta-Learning and Prototypical Networks](http://cs330.stanford.edu/fall2020/index.html) course.
 
-In this assignment we will experiment with prototypical networks [@snell2017prototypical], training a model for \(K\)-shot, \(N\)-way classification. For this, we will work with the Omniglot dataset [@omniglot], which includes 1623 handwritten characters from 50 different alphabets. You can see some samples of this dataset below:
+In this exercise we will experiment with prototypical networks[@snell2017prototypical], training a model for \(K\)-shot, \(N\)-way classification. For this, we will work with the Omniglot dataset[@omniglot], which includes 1623 handwritten characters from 50 different alphabets. You can see some samples of this dataset below:
 
 ![Omniglot](images/fsl/omniglot.jpg)
 
@@ -18,7 +18,7 @@ As discussed in the [theory contents](https://pertusa.github.io/ap/fsl/#metric-b
 
 > If you think that you didn't fully understand prototypical networks after reading the provided materials, please see also [this video](https://www.youtube.com/watch?v=rHGPfl0pvLY), which clearly explains their foundations.
 
-## Exercise 1
+### Exercise 1
 
 First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os8TAItF42rLtAINNJfaqDJYXRJ7X?usp=sharing) which contains some code to be completed with **TODO** marks. You need to save a copy of this notebook to your Google Drive in order to make edits, and then upload the final `.ipynb` to Moodle.
 
@@ -30,7 +30,7 @@ First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os
 
 4. Try with \(K = 4, 6, 8, 10\) at _meta-test_ time. Compare the _meta-test_ performance by analyzing the _meta-test_ accuracies over different choices of \(K\) and discuss the results at the end of the notebook.
 
-# Few-shot learning using OpenAI GPT and Google Gemini
+## Few-shot learning using OpenAI GPT and Google Gemini
 
 We know many of you are GPT fans, so we are going to make an assignment using this tool. 
 
@@ -58,17 +58,17 @@ The goal of the following exercise is assesssing your understanding of how to ef
 
 > [Google Gemini](https://gemini.google.com/app) is a very recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access the web to search for updated information. 
 
-## Exercise 2
+### Exercise 2
 
 In this second exercise, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *Other pathology* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding labels. Then, given a new set of symptoms, it could predict the possible pathology.
 
-> You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm). An example prompt could be: "Input: I have fever and a headache. Output: Flu."
+> You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm). An example prompt could be: `Input: I have fever and a headache. Diagnosis: Flu`
 
 Make a comparison between GPT3 and Gemini, discussing how do the prompt, ordering and balance of the different classes affect the results. 
 
 Finally, submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
-### Assessment criteria
+#### Assessment criteria
 
 - **Prompt Engineering:** Students will be evaluated on their ability to engineer effective prompts that leverage the few-shot examples. This includes the clarity of the prompt, the relevance of the examples to the test case, and the prompt's ability to guide the model towards the desired output.
 - **Model Interaction:** Students may need to iteratively refine their prompts based on the model's responses, demonstrating an understanding of how different prompt structures influence the outcome.
