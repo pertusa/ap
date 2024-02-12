@@ -54,9 +54,9 @@ Run this prompt and check the result. We have just created a sentiment analysis 
 This is a simple example, but making reliable prompts for accurate few-shot learning classifiers is not straighforward. Please, have a look to this paper first:
 https://arxiv.org/abs/2102.09690. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.
 
-The goal of this assignment is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT and Gemini models. 
+The goal of this assignment is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT and Gemini[@gemini] models. 
 
-> [Google Gemini](https://gemini.google.com/app) is another recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access to the web to search for updated information. 
+> [Google Gemini](https://gemini.google.com/app) is a very recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access to the web to search for updated information. 
 
 ## Exercise 2
 
