@@ -5,7 +5,11 @@
 
     This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
 
--->
+--->
+
+<!---
+Importante: Mirar este video para entender bien prototypical: https://www.youtube.com/watch?v=rHGPfl0pvLY
+--->
 
 Part of the following contents are copied and adapted to the AI master from the [ISMIR 2022 tutorial](https://github.com/music-fsl-zsl/tutorial) created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under [Creative Commons BY-NC-SA 4.0](https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE).
 
@@ -223,13 +227,13 @@ Overview of the MAML[@finn2017model] algorithm:
 
 1. Initialize model parameters \(\theta\) randomly, choose step sizes \(\alpha\) and \(\beta\).  
 2. **while** not converged **do**
-    * Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
-    * **for** each episode \(E_i\) in the batch **do**
-        *  Using the current parameters \(\theta\), compute the gradient of the loss \(L_if(\theta)\) for episode \(E_i\).
-        * Compute a new set of parameters \(\theta_i\) by fine-tuning in the direction of the gradient w.r.t. the starting parameters \(\theta\): 
+    3. Sample a batch of episodes (tasks) from the training set \(D_{train} = \{E_1, E_2, ..., E_n\}\)
+    4. **for** each episode \(E_i\) in the batch **do**
+        5. Using the current parameters \(\theta\), compute the gradient of the loss \(L_if(\theta)\) for episode \(E_i\).
+        6. Compute a new set of parameters \(\theta_i\) by fine-tuning in the direction of the gradient w.r.t. the starting parameters \(\theta\): 
         $$\theta_i = \theta - \alpha \nabla_{\theta} L_i$$
-    * Using the fine-tuned parameters \(\theta_i\) for each episode, make a prediction and compute the loss \(L_{i}f(\theta_i)\).
-    * Update the starting parameters \(\theta\) by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters \(L_{i}f(\theta_i)\):
+    7. Using the fine-tuned parameters \(\theta_i\) for each episode, make a prediction and compute the loss \(L_{i}f(\theta_i)\).
+    8. Update the starting parameters \(\theta\) by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters \(L_{i}f(\theta_i)\):
         $$\theta = \theta - \beta \nabla_{\theta} \sum_{E_i \in D_{train}}L_i f(\theta_i)$$
 
 -------
@@ -398,7 +402,7 @@ The below diagram explains the three settings (on the left) of GPT-3 evaluations
 
 ![Figure 2.1 from the paper](images/fsl/gpt32.png)
 
-The following graph shows the model performance on the learning task where it needs to remove extraneous (unnecessary) symbols from a word. The model performance improves over the number of in-context examples (\(K\)), with or without a prompt (natural language task description), where \(K = 0\) is zero-shot, \(K = 1\) is one-shot, and \(K > 1\) is few-short learning. It makes sense that the model performs better with a larger K as it can learn from more examples. Moreover, a prompt would give more context, improving the model’s accuracy, especially where \(K\) is smaller. In other words, no prompt means that the model must infer what is being asked (i.e., guess the prompt) from the examples.
+The following graph shows the model performance on the learning task where it needs to remove extraneous (unnecessary) symbols from a word. The model performance improves over the number of in-context examples (\(K\)), with or without a prompt (natural language task description), where \(K = 0\) is zero-shot, \(K = 1\) is one-shot, and \(K > 1\) is few-short learning. It makes sense that the model performs better with a larger \(K\) as it can learn from more examples. Moreover, a prompt would give more context, improving the model’s accuracy, especially where \(K\) is smaller. In other words, no prompt means that the model must infer what is being asked (i.e., guess the prompt) from the examples.
 
 ![Figure 1.2 from the paper](images/fsl/gpt33.png)
 
