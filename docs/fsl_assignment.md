@@ -47,24 +47,24 @@ Input: Amazing.
 Sentiment:
 ```
 
-> Hint: If you want to insert a new line without sending the prompt, simultaneously press shift + enter.
+> Hint: In GPT, if you want to insert a new line without sending the prompt, simultaneously press shift + enter
 
-Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although of course it has some limitations. By using the [ChatGPI API](https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api) you can even integrate your classifier into a webpage or an app.
+Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although it may have some limitation in complex scenarios. By using the [ChatGPI API](https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api) you can even integrate your sentiment classifier into a webpage or an app.
 
-This is a simple example, but making reliable prompts for accurate few-shot learning classifiers is not straighforward. Please, have a look to this paper first:
+This is a simple example, but making reliable prompts for accurate few-shot learning sometimes require additional work. For example, have a look at this paper:
 https://arxiv.org/abs/2102.09690. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.
 
-The goal of this assignment is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT and Gemini[@gemini] models. 
+The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT and Gemini[@gemini] models. 
 
-> [Google Gemini](https://gemini.google.com/app) is a very recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access to the web to search for updated information. 
+> [Google Gemini](https://gemini.google.com/app) is a very recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access the web to search for updated information. 
 
 ## Exercise 2
 
-In this second exercise, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *None* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding label. Then, given a new set of symptoms, it could predict the possible pathology.
+In this second exercise, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *Other pathology* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding labels. Then, given a new set of symptoms, it could predict the possible pathology.
 
-> You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm).
+> You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm). An example prompt could be: "Input: I have fever and a headache. Output: Flu."
 
-Make a comparison between GPT3 and Gemini, discussing how the ordering and balance of the different classes affect the results. 
+Make a comparison between GPT3 and Gemini, discussing how do the prompt, ordering and balance of the different classes affect the results. 
 
 Finally, submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
@@ -73,8 +73,6 @@ Finally, submit a PDF file (via Moodle) with the experiments you made and the co
 - **Prompt Engineering:** Students will be evaluated on their ability to engineer effective prompts that leverage the few-shot examples. This includes the clarity of the prompt, the relevance of the examples to the test case, and the prompt's ability to guide the model towards the desired output.
 - **Model Interaction:** Students may need to iteratively refine their prompts based on the model's responses, demonstrating an understanding of how different prompt structures influence the outcome.
 - **Critical Analysis:** In addition to generating outputs, students should critically analyze the model's performance, identifying any biases, errors, or limitations in the generated responses.
-
-
 
 <!--
 ### Task 1: Scientific text Summarization
