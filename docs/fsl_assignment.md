@@ -2,6 +2,8 @@
 Para otros años, mirar también este código: https://github.com/jakesnell/prototypical-networks/blob/master/protonets/models/few_shot.py
 -->
 
+> Submission of the assignments is due to Feb. 21th
+
 # Prototypical Networks
 
 This assignment is part of the HW2 exercise from the [Stanford CS330 Autumn 2020 Homework 2 Model-Agnostic Meta-Learning and Prototypical Networks](http://cs330.stanford.edu/fall2020/index.html) course.
@@ -56,9 +58,9 @@ The goal of this assignment is assesssing your understanding of how to effective
 
 > [Google Gemini](https://gemini.google.com/app) is another recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access to the web to search for updated information. 
 
-## Exercise 2
+## Exercise 2
 
-In this assignment, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *None* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding label. Then, given a new set of symptoms, it could predict the possible pathology.
+In this second exercise, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *None* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding label. Then, given a new set of symptoms, it could predict the possible pathology.
 
 > You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm).
 
@@ -66,7 +68,7 @@ Make a comparison between GPT3 and Gemini, discussing how the ordering and balan
 
 Finally, submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
-## Assessment criteria
+### Assessment criteria
 
 - **Prompt Engineering:** Students will be evaluated on their ability to engineer effective prompts that leverage the few-shot examples. This includes the clarity of the prompt, the relevance of the examples to the test case, and the prompt's ability to guide the model towards the desired output.
 - **Model Interaction:** Students may need to iteratively refine their prompts based on the model's responses, demonstrating an understanding of how different prompt structures influence the outcome.
