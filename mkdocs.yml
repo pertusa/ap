@@ -8,7 +8,6 @@ nav:
 - Summary: 'index.md'
 - Convolutional Neural Networks: 'cnn.md'
 - Few and Zero Shot Learning: 'fsl.md'
-- &nbsp;&nbsp;&nbsp;&nbsp; Assignment: 'fsl_assignment.md'
 #- Recurrent Neural Networks: 'recurrent.md'
 #- Deep Reinforcement Learning: 'drl.md'
 
