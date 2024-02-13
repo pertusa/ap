@@ -1,9 +1,5 @@
 # Summary
 
-## Homework Assignments
-
-- Assignments **before the class of Feb 07, 2024**: Read in Moodle the materials related.
-
 ## Course Syllabus and Rules
 
 These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa][pertusa_url] and also taught by professors [Juan Antonio Pérez][japerez_url] ([@japer3z][japerez_twitter]), Andrés Fuster, [Jorge Azorín][jazorin_url] ([@JAzorinL][jazorin_twitter]), and [Jorge Calvo][calvo_url].
@@ -41,8 +37,8 @@ The course has the following blocks:
 * Feb. 7: From Shallow to Deep Neural Networks (Andrés Fuster)
 * Feb. 7 + Feb. 14: [Convolutional Neural Networks (Jorge Azorín)](cnn.md)
 * Feb 14: [Few and Zero Shot Learning (Antonio Pertusa)](fsl.md)
-* Feb. 21: [Recurrent architectures (Juan Antonio Pérez)]()
-* Feb. 21: [Fine tuning and knowledge distillation (Juan Antonio Pérez)]()
+* Feb. 21: [Recurrent architectures (Juan Antonio Pérez)](recurrent.md)
+* Feb. 21: [Fine tuning and knowledge distillation (Juan Antonio Pérez)](recurrent.md)
 * Feb. 28: [Deep Reinforcement Learning (Jorge Calvo)](drl.md)
 * Mar. 6: [Self-Supervised Learning (Antonio Pertusa)]()
 
