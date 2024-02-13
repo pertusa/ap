@@ -56,19 +56,35 @@ Run this prompt and check the result. We have just created a sentiment analysis 
 This is a simple example, but making reliable prompts for accurate few-shot learning sometimes require additional work. For example, have a look at this paper:
 https://arxiv.org/abs/2102.09690. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.
 
-The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT and Gemini[@gemini] models. 
+The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT.
 
-> [Google Gemini](https://gemini.google.com/app) is a very recent LLM similar to ChatGPT. One important difference from ChatGPT is that Gemini can also access the web to search for updated information. 
+> We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but one important difference is that Gemini can also access the web to search for updated information. Therefore, since it uses external information, it is not suitable for a few-shot learning assignment.
 
 ### Exercise 2
 
-In this second exercise, we are going to make a few-shot classifier to classify between *flu* (_gripe_), *cold* (_resfriado_), or *Other pathology* based on a description of the symptoms. This classifier can be trained on a few examples of symptoms and their corresponding labels. Then, given a new set of symptoms, it could predict the possible pathology.
+In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *Reggaeton* genres from a short excerpt of song lyrics. For this, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should try to predict the song genre.
 
-> You can find information to help distinguishing between flu and cold in [this link](https://www.cdc.gov/flu/symptoms/coldflu.htm). An example prompt could be: `Input: I have fever and a headache. Diagnosis: Flu`
+An example prompt could be: 
+```
+Input: 
+No pienses que estoy muy triste
+Si no me ves sonreír
+Es símplemente despiste
+Maneras de vivir
+Output: Rock
 
-Make a comparison between GPT3 and Gemini, discussing how do the prompt, ordering and balance of the different classes affect the results. 
+Input: Me acostumbré al sour, ya no patea
+Me llegan a casa, no se capean
+Solo modelos como Barea
+Multiplicar cienes es la tarea
+Output: Reggaeton
+```
 
-Finally, submit a PDF file (via Moodle) with the experiments you made and the conclusions.
+> You can find more lyrics examples [in this link](https://www.letras.com/estilos/reggaeton/)
+
+The goal is to effective prompts, and check how ordering and balance of the different classes affect the results. Try with \(N=6\) labeled samples for each of the 2 classes.
+
+Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
 #### Assessment criteria
 
