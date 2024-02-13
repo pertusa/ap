@@ -8,7 +8,7 @@ nav:
 - Summary: 'index.md'
 - Convolutional Neural Networks: 'cnn.md'
 - Few and Zero Shot Learning: 'fsl.md'
-#- Recurrent Neural Networks: 'recurrent.md'
+- Recurrent Neural Networks: 'recurrent.md'
 #- Deep Reinforcement Learning: 'drl.md'
 
 markdown_extensions:
