@@ -1,9 +1,5 @@
 # Summary
 
-## Homework Assignments
-
-- Assignments **before the class of Feb 07, 2024**: Read in Moodle the materials related.
-
 ## Course Syllabus and Rules
 
 These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa][pertusa_url] and also taught by professors [Juan Antonio Pérez][japerez_url] ([@japer3z][japerez_twitter]), Andrés Fuster, [Jorge Azorín][jazorin_url] ([@JAzorinL][jazorin_twitter]), and [Jorge Calvo][calvo_url].
