@@ -32,7 +32,7 @@ First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os
 
 4. Try with \(K = 4, 6, 8, 10\) at _meta-test_ time. Compare the _meta-test_ performance by analyzing the _meta-test_ accuracies over different choices of \(K\) and discuss the results at the end of the notebook.
 
-## Few-shot learning using OpenAI GPT and Google Gemini
+## Few-shot learning using OpenAI GPT
 
 We know many of you are GPT fans, so we are going to make an assignment using this tool. 
 
