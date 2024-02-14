@@ -1,9 +1,5 @@
 # Fine-tuning and model compression
 
-!!! danger
-
-    This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
-
 ## Fine-tuning
 
 Fine-tuning is the process of taking a pre-trained model and updating its parameters with new data. This is a common practice in deep learning, where vision or language models are trained on large datasets and then fine-tuned on smaller datasets to adapt them to specific tasks. As you may know, the pre-training stage usually follows a self-supervised learning approach (image patching or token masking, for example), where the model is trained to predict some information already present in the data. In this way, the model learns to represent the data in a neutral manner that is useful for a wide range of tasks. Some pre-trained models are additionally fine-tuned on a supervised task, such as text-to-image generation, machine translation or instruction following, to name a few, but even in those cases the models can be further fine-tuned on more specific downstream task, such as generating manga-style images, translating new languages or acting as a conversational chatbot, for example.
