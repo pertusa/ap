@@ -28,7 +28,7 @@ Read a brief description of the RWKV architecture in this [:octicons-book-24: po
 
 Optionally, if you are interested in the mathematical details, you can read the [original paper](https://arxiv.org/abs/2305.13048).
 
-Recent times have also seen the development of other efficient architectures such as the already mentioned retentive networks or the [Mamba](https://arxiv.org/abs/2312.00752) model. The study of these architectures is out of the scope of this course and left as an exercise for the student.
+Recent times have also seen the development of other efficient architectures such as the already mentioned retentive networks or the [Mamba](https://arxiv.org/abs/2312.00752) model. The study of these architectures is out of the scope of this course and left as an exercise for the student. It is also interesting to note that there are some theoretical studies that try to determine to which degree both architectures can be considered equivalent; for example, it has been [shown](https://arxiv.org/abs/2401.06104) that transformers can be conceptualized as a special case of RNNs with unlimited hidden state size.
 
 ### Additional techniques for speeding up neural networks
 
