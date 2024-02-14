@@ -32,6 +32,8 @@ First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os
 
 4. Try with \(K = 4, 6, 8, 10\) at _meta-test_ time. Compare the _meta-test_ performance by analyzing the _meta-test_ accuracies over different choices of \(K\) and discuss the results at the end of the notebook.
 
+> I know that the provided `ipynb` has a complicated code since it was written for Tensorflow. If you really want to train  Prototypical networks for other projects, I recommend to have a look at [this Pytorch](https://colab.research.google.com/github/sicara/easy-few-shot-learning/blob/master/notebooks/my_first_few_shot_classifier.ipynb) notebook.
+
 ## Few-shot learning using OpenAI GPT
 
 We know many of you are GPT fans, so we are going to make an assignment using this tool. 
