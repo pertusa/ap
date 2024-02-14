@@ -8,7 +8,7 @@ Para otros años, mirar también este código: https://github.com/jakesnell/prot
 
 ## Prototypical Networks
 
-The following exercise is part of the HW2 task from the [Stanford CS330 Autumn 2020 Homework 2 Model-Agnostic Meta-Learning and Prototypical Networks](http://cs330.stanford.edu/fall2020/index.html) course.
+The following exercise is (a tiny) part of the HW2 task from the [Stanford CS330 Autumn 2020 Homework 2 Model-Agnostic Meta-Learning and Prototypical Networks](http://cs330.stanford.edu/fall2020/index.html) course.
 
 In this exercise we will experiment with prototypical networks[@snell2017prototypical], training a model for \(K\)-shot, \(N\)-way classification. For this, we will work with the Omniglot dataset[@omniglot], which includes 1623 handwritten characters from 50 different alphabets. You can see some samples of this dataset below:
 
@@ -20,7 +20,7 @@ As discussed in the [theory contents](https://pertusa.github.io/ap/fsl/#metric-b
 
 > If you think that you didn't fully understand prototypical networks after reading the provided materials, please see also [this video](https://www.youtube.com/watch?v=rHGPfl0pvLY), which clearly explains their foundations.
 
-### Exercise 1 (70%)
+### Exercise 1 (60%)
 
 First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os8TAItF42rLtAINNJfaqDJYXRJ7X?usp=sharing) which contains some code to be completed with **TODO** marks. You need to save a copy of this notebook to your Google Drive in order to make edits, and then upload the final `.ipynb` to Moodle.
 
@@ -42,9 +42,9 @@ Let's test an example by promping the following input to [ChatGPT-3.5](https://c
 
 ```
 Input: Subpar acting. 
-Sentiment: Negative 
+Sentiment: Negative
 Input: Beautiful film. 
-Sentiment: Positive 
+Sentiment: Positive
 Input: Amazing. 
 Sentiment:
 ```
@@ -57,9 +57,9 @@ This is a simple example, but making reliable prompts for accurate few-shot lear
 
 The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT.
 
-> We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but one important difference is that Gemini can also access the web to search for updated information. Therefore, since it uses external information, it is not suitable for few-shot learning evaluation.
+> We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but one important difference is that Gemini can also access the web to search for updated information. Therefore, since it uses external information, it is not suitable for our few-shot learning scenario.
 
-### Exercise 2 (30%)
+### Exercise 2 (40%)
 
 In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *Reggaeton* genres from a short excerpt of song lyrics. For this, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should try to predict the song genre.
 
@@ -81,7 +81,7 @@ Output: Reggaeton
 
 > You can find more lyrics examples [in this link](https://www.letras.com/estilos/reggaeton/)
 
-The goal is to effective prompts, and check how ordering and balance of the different classes affect the results. Try with \(N=6\) labeled samples for each of the 2 classes.
+The goal is to effective prompts, and check if ordering and balance of the different classes may affect the results. For our few-shot scenario, try with \(N=6\) labeled samples for each of the 2 classes.
 
 Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
