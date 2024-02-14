@@ -32,13 +32,13 @@ First, open [this Colab notebook](https://colab.research.google.com/drive/1Ah1Os
 
 4. Try with \(K = 4, 6, 8, 10\) at _meta-test_ time. Compare the _meta-test_ performance by analyzing the _meta-test_ accuracies over different choices of \(K\) and discuss the results at the end of the notebook.
 
-> I know that the provided `ipynb` has a complicated code since it was written for Tensorflow. If you really want to train  Prototypical networks for other projects, I recommend to have a look at [this Pytorch](https://colab.research.google.com/github/sicara/easy-few-shot-learning/blob/master/notebooks/my_first_few_shot_classifier.ipynb) notebook.
+> As you have seen, the provided `ipynb` has a complicated code since it was written for Tensorflow. If you really want to train  Prototypical networks for other projects, I recommend to have a look at [this Pytorch](https://colab.research.google.com/github/sicara/easy-few-shot-learning/blob/master/notebooks/my_first_few_shot_classifier.ipynb) notebook.
 
 ## Few-shot learning using OpenAI GPT
 
 We know many of you are GPT fans, so we are going to make an assignment using this tool. 
 
-As we have seen [in the theory](https://pertusa.github.io/ap/fsl/#openai-gpt-3), very Large Language Models (LLM) can perform few-shot learning with minimal steps. 
+As we have seen [in the theory](https://pertusa.github.io/ap/fsl/#openai-gpt-3) contents, very Large Language Models (LLM) can perform few-shot learning with minimal steps. 
 
 Let's test an example by promping the following input to [ChatGPT-3.5](https://chat.openai.com/):
 
@@ -53,22 +53,23 @@ Sentiment:
 
 > Hint: In GPT, if you want to insert a new line without sending the prompt, simultaneously press shift + enter
 
-Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although it may have some limitation in complex scenarios. By using the [ChatGPI API](https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api) you can even integrate your sentiment classifier into a webpage or an app.
+Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although it may have  limitations in more complex scenarios. By using the [ChatGPI API](https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api) you can even integrate your sentiment classifier into a webpage or an app.
 
 This is a simple example, but making reliable prompts for accurate few-shot learning sometimes require additional work. For example, have a look at [this paper](https://arxiv.org/abs/2102.09690)[@calibratellm]. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.
 
+> In the current GPT3.5 version, behaviour is a bit different than in the paper. For example, prompts with N/A are not accepted
+
 The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT.
 
-> We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but one important difference is that Gemini can also access the web to search for updated information. Therefore, since it uses external information, it is not suitable for our few-shot learning scenario.
+> We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but Gemini can also access the web to search for updated information. Therefore, since it uses external data, it is not suitable for our few-shot learning scenario.
 
 ### Exercise 2 (40%)
 
-In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *Reggaeton* genres from a short excerpt of song lyrics. For this, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should try to predict the song genre.
+In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *Reggaeton* genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.
 
 An example prompt could be: 
 ```
-Input: 
-No pienses que estoy muy triste
+Input: No pienses que estoy muy triste
 Si no me ves sonreír
 Es simplemente despiste
 Maneras de vivir.
@@ -81,9 +82,9 @@ Multiplicar cienes es la tarea.
 Output: Reggaeton
 ```
 
-> You can find more lyrics examples [in this link](https://www.letras.com/estilos/reggaeton/)
+> You can find more lyrics examples [in this link](https://www.letras.com/)
 
-The goal is to effective prompts, and check if ordering and balance of the different classes may affect the results. For our few-shot scenario, try with \(N=6\) labeled samples for each of the 2 classes.
+The goal is to effective prompts, and check if ordering of the samples and balance of the classes may affect the results. For our few-shot scenario, try with \(N=6\) labeled samples for each of the 2 classes.
 
 Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
