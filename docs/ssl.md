@@ -29,11 +29,8 @@ For this course, we are following the categorization in [@sslcookbook], in which
 
 A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and VicReg[@vicreg].
 
-## The Deep Metric Learning Family: SimCLR/NNCLR/MeanSHIFT/SCL
+To understand these methods, you should understand the basics of data augmentation.
 
-The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective.
-
-To understand these methods, you should understand the basics of data augmentation and contrastive learning.
 
 ## Data Augmentation
 
@@ -51,7 +48,9 @@ You can also chain the different techniques together:
 
 > 💡 If you want to learn more about data augmentation, please read [this link](https://encord.com/blog/data-augmentation-guide/).
 
-## Contrastive Learning
+## The Deep Metric Learning Family: SimCLR/NNCLR/MeanSHIFT/SCL
+
+The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective.
 
 Contrastive learning leverages the assumption that similar instances should be closer together in a learned embedding space, while dissimilar instances should be farther apart. By framing learning as a discrimination task, contrastive learning allows models to capture relevant features and similarities in the data.
 
@@ -77,8 +76,8 @@ SimCLR learns representations by maximizing agreement between differently augmen
 
 SimCLR results were impressive, showing that  unsupervised learning benefits more from bigger models than its supervised counterpart.
 
-> :octicons-book-24: Homework: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 0,5 hours.
-
+!!! note "Homework"
+    - :octicons-book-24: Homework: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 30 min.
 
 ## The Self-Distillation Family: BYOL/SimSIAM/DINO
 
@@ -98,7 +97,8 @@ BYOL achieves higher performance than state-of-the-art contrastive methods witho
 
 BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beats out the self-supervised baselines.
 
-> :octicons-book-24: Homework: Read [this post](https://www.casualganpapers.com/self-supervised-contrastive-representation-learning/BYOL-explained.html) to understand the basics of BYOL. Estimated time: 🕑 0,5 hours.
+!!! note "Homework"
+    - :octicons-book-24: Read [this post](https://www.casualganpapers.com/self-supervised-contrastive-representation-learning/BYOL-explained.html) to understand the basics of BYOL. Estimated time: 🕑 30 min.
 
 <!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
 
@@ -107,11 +107,20 @@ BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet a
 
 The SSL canonical correlation analysis family originates with the Canonical Correlation Framework[@CCA]. The high-level goal of CCA is to infer the relationship between two variables by analyzing their cross-covariance matrices.
 
-![VicReg](images/ssl/vicreg.png)
+
+
+### VicReg
+
+<!----![VicReg](images/ssl/vicreg.png) --->
+
+![VicReg2](images/ssl/vicreg2.png)
 
 [VICReg](https://arxiv.org/abs/2105.04906)[@vicreg] has the same basic architecture as its predecessors; augmented positive pairs are fed into Siamese encoders that produce representations, which are then passed into Siamese projectors that return projections.
 
 However, unlike previous models, VicReg requires none of the following: negative examples, momentum encoders, asymmetric mechanisms in the architecture, stop-gradients, predictors, or even normalization of the projector outputs. Instead, the heavy lifting is done by VICReg’s objective function, which contains three main terms: a variance term, an invariance term, and a covariance term.
 
-> :octicons-book-24: Homework: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 0,5 hours.
+ VICReg balances three objectives based on co-variance matrices of representations from two views: variance, invariance, co- variance. Regularizing the variance along each dimension of the representation prevents collapse, the invariance ensures two views are encoded similarly, and the co-variance encourages different dimensions of the representation to capture different features.
+
+!!! note "Homework"
+    - :octicons-book-24: Homework: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 30 min.
 
