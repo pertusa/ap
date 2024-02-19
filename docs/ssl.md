@@ -29,7 +29,7 @@ For this course, we are following the categorization in [@sslcookbook], in which
 
 A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and VicReg[@vicreg].
 
-To understand these methods, you should understand the basics of data augmentation.
+To understand these methods, you should first understand the basics of data augmentation.
 
 
 ## Data Augmentation
@@ -38,7 +38,7 @@ Deep Metric Learning methods often begin with data augmentation, which involves 
 
 The goal of data augmentation is to increase the variability of the data and expose the model to different perspectives of the same instance. Common data augmentation techniques include cropping, flipping, rotation, random crop, and color transformations. By generating diverse instances, contrastive learning ensures that the model learns to capture relevant information regardless of variations in the input data.
 
-![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da.jpg)
+<!---![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da.jpg)--->
 
 You can also chain the different techniques together:
 
