@@ -3,6 +3,7 @@ theme:
   name: material
   features:
     - content.code.copy
+    - content.tooltips
 
 nav:
 - Summary: 'index.md'
