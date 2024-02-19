@@ -10,12 +10,16 @@ SSL underpins deep learning’s success in natural language processing leading t
 
 In natural language, a common SSL objective is to mask a word in the text and predict the surrounding words. This objective encourages the model to capture relationships among words in the text without the need for any labels. The same SSL model representations can be used across a range of downstream tasks such as translating text across languages, summarizing, or even generating text, along with many others. 
 
-In computer vision, analogous objectives exist with models such as MAE or BYOL learning to predict masked patches of an image or representation. Other SSL objectives encourage two views of the same image, formed by say adding color or cropping, to be mapped to similar representations.
+In computer vision, analogous pretext tasks exist with models learning to predict masked patches of an image or representation. Other SSL objectives encourage two views of the same image, formed by say adding color or cropping, to be mapped to similar representations.
+
+
+In self-supervised learning, one trains a model to solve a so-called **pretext task** on a dataset without the need for human annotation by creating positive (and sometimes, negative pairs) from unlabeled data.  The pretext tasks must be carefully designed to encourage the model to capture meaningful features and similarities in the data. 
+
+The main objective, however, is to transfer this model to a target (**downstream**) task. The downstream task is the knowledge transfer process of the pretext model to a specific task. For this, one of the most effective transfer strategies is fine-tuning. After training the pretext task, the learned embeddings can easily be used for another task such as image classification or text summarization. 
+
+![Vanilla SSL approach. Source: https://openaccess.thecvf.com/content_cvpr_2018/papers/Noroozi_Boosting_Self-Supervised_Learning_CVPR_2018_paper.pdf](images/ssl/vanillaSSL.png)
 
 With the power to train on vast unlabeled data comes many benefits. While traditional supervised learning methods are trained on a specific task often known a priori based on the available labeled data, SSL learns generic representations useful across many tasks. SSL can be especially useful in domains such as medicine where labels are costly or the specific task can not be known a priori. There’s also evidence SSL models can learn representations that are more robust to adversarial examples, label corruption, and input perturbations—and are more fair—compared to their supervised counterparts. Consequently, SSL is a field garnering growing interest. 
-
-
-Self-Supervised Contrastive Learning leverages the design of **pretext tasks**, which create positive and negative pairs from the unlabeled data. These pretext tasks are carefully designed to encourage the model to capture meaningful features and similarities in the data.
 
 For this course, we are following the categorization in [@sslcookbook], in which methods are divided into three families:
 
@@ -23,7 +27,7 @@ For this course, we are following the categorization in [@sslcookbook], in which
 * **Self-Distillation**
 * **Canonical Correlation Analysis**
 
-A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and VicReg[@vicrec].
+A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and VicReg[@vicreg].
 
 ## The Deep Metric Learning Family: SimCLR/NNCLR/MeanSHIFT/SCL
 
@@ -105,11 +109,9 @@ The SSL canonical correlation analysis family originates with the Canonical Corr
 
 ![VicReg](images/ssl/vicreg.png)
 
-VICReg has the same basic architecture as its predecessors; augmented positive pairs are fed into Siamese encoders that produce representations, which are then passed into Siamese projectors that return projections.
+[VICReg](https://arxiv.org/abs/2105.04906)[@vicreg] has the same basic architecture as its predecessors; augmented positive pairs are fed into Siamese encoders that produce representations, which are then passed into Siamese projectors that return projections.
 
-However, unlike its predecessors, the model requires none of the following: negative examples, momentum encoders, asymmetric mechanisms in the architecture, stop-gradients, predictors, or even normalization of the projector outputs. Instead, the heavy lifting is done by VICReg’s objective function, which contains three main terms: a variance term, an invariance term, and a covariance term.
+However, unlike previous models, VicReg requires none of the following: negative examples, momentum encoders, asymmetric mechanisms in the architecture, stop-gradients, predictors, or even normalization of the projector outputs. Instead, the heavy lifting is done by VICReg’s objective function, which contains three main terms: a variance term, an invariance term, and a covariance term.
 
 > :octicons-book-24: Homework: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 0,5 hours.
-
-
 
