@@ -81,7 +81,7 @@ SimCLR results were impressive, showing that  unsupervised learning benefits mor
 
 Self-distillation methods such as BYOL[@BYOL], SimSIAM, DINO, along with their variants rely on a simple mechanism: feeding two different views to two encoders, and mapping one to the other by means of a predictor. To prevent the encoders from collapsing by predicting a constant for any input, various techniques are employed. A common approach to prevent collapse is to update one of the two encoder weights with a running average of the other encoder’s weights.
 
-### BYOL (Bootstrap Your Own Latent)
+### BYOL
 
 [BYOL (bootstrap your own latent)](https://papers.nips.cc/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf)[@BYOL] introduced self-distillation as a means to avoid collapse. 
 
