@@ -48,27 +48,25 @@ You can also chain the different techniques together:
 
 > 💡 If you want to learn more about data augmentation, please read [this link](https://encord.com/blog/data-augmentation-guide/).
 
-## The Deep Metric Learning Family: SimCLR/NNCLR/MeanSHIFT/SCL
+## The Deep Metric Learning Family
 
-The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective.
+The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. It includes methods such as SimCLR[@simclr], NNCLR, MeanSHIFT or SCL, among others. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective. 
 
 Contrastive learning leverages the assumption that similar instances should be closer together in a learned embedding space, while dissimilar instances should be farther apart. By framing learning as a discrimination task, contrastive learning allows models to capture relevant features and similarities in the data.
 
 ![Contrastive Learning](images/ssl/cl.png)
 
-Contrastive Learning can be used in a Supervised or a Self-Supervised manner.
+Contrastive Learning can be used in a Supervised or a Self-Supervised manner. 
 
 In the [Few-Shot Learning block](https://pertusa.github.io/ap/fsl/), we already used Contrastive Learning methods in a supervised way, using labelled data for training models explicitly to differentiate between similar and dissimilar instances according to their class. Therefore, the loss in this case tries to put together embeddings **from the same class**. The objective is to learn a representation space where instances from the same class are clustered closer together, while instances from other classes are pushed apart.
 
-**Self-supervised contrastive learning**  takes a different approach by learning representations from unlabeled data without relying on explicit labels. 
-
-Since no labels are available, to identify similar inputs, methods often form variants of a single input using known semantic preserving transformations via data augmentation.  The augmented samples are called views. The variants of the inputs are called positive pairs or examples; the samples we wish to make dissimilar are called negatives. So here, the loss tries to put together embeddings **from the same view** since we don't have information of the labels.
+**Self-supervised contrastive learning**  takes a different approach by learning representations from unlabeled data without relying on explicit labels. Since no labels are available, to identify similar inputs, methods often form variants of a single input using known semantic preserving transformations via data augmentation.  The augmented samples are called views. The variants of the inputs are called positive pairs or examples; the samples we wish to make dissimilar are called negatives. So here, the loss tries to put together embeddings **from the same view** since we don't have information of the labels.
 
 ### SimCLR
 
-![SIMCLR](images/ssl/simclrdiag.png)
-
 [SimCLR](http://proceedings.mlr.press/v119/chen20j/chen20j.pdf)[@simclr], a Simple framework for Contrastive Learning of visual Representations, is a technique introduced by Prof. Hinton’s Group.
+
+![SIMCLR](images/ssl/simclrdiag.png)
 
 SimCLR learns representations by maximizing agreement between differently augmented views of the same data example via a contrastive loss in the latent space, as shown below.
 
@@ -77,11 +75,11 @@ SimCLR learns representations by maximizing agreement between differently augmen
 SimCLR results were impressive, showing that  unsupervised learning benefits more from bigger models than its supervised counterpart.
 
 !!! note "Homework"
-    - :octicons-book-24: Homework: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 30 min.
+    - :octicons-book-24: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 30 min.
 
-## The Self-Distillation Family: BYOL/SimSIAM/DINO
+## The Self-Distillation Family
 
-Self-distillation methods such as BYOL, SimSIAM, DINO, along with their variants rely on a simple mechanism: feeding two different views to two encoders, and mapping one to the other by means of a predictor. To prevent the encoders from collapsing by predicting a constant for any input, various techniques are employed. A common approach to prevent collapse is to update one of the two encoder weights with a running average of the other encoder’s weights.
+Self-distillation methods such as BYOL[@BYOL], SimSIAM, DINO, along with their variants rely on a simple mechanism: feeding two different views to two encoders, and mapping one to the other by means of a predictor. To prevent the encoders from collapsing by predicting a constant for any input, various techniques are employed. A common approach to prevent collapse is to update one of the two encoder weights with a running average of the other encoder’s weights.
 
 ### BYOL (Bootstrap Your Own Latent)
 
@@ -103,11 +101,9 @@ BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet a
 <!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
 
 
-## The Canonical Correlation Analysis Family: VICReg/BarlowTwins/SWAV/W-MSE
+## The Canonical Correlation Analysis Family
 
-The SSL canonical correlation analysis family originates with the Canonical Correlation Framework[@CCA]. The high-level goal of CCA is to infer the relationship between two variables by analyzing their cross-covariance matrices.
-
-
+The SSL canonical correlation analysis family originates with the Canonical Correlation Framework[@CCA]. The high-level goal of CCA is to infer the relationship between two variables by analyzing their cross-covariance matrices. It includes methods such as VicReg[@vicreg], BarlowTwins, SWAV or W-MSE, among others. 
 
 ### VicReg
 
@@ -122,5 +118,5 @@ However, unlike previous models, VicReg requires none of the following: negative
  VICReg balances three objectives based on co-variance matrices of representations from two views: variance, invariance, co- variance. Regularizing the variance along each dimension of the representation prevents collapse, the invariance ensures two views are encoded similarly, and the co-variance encourages different dimensions of the representation to capture different features.
 
 !!! note "Homework"
-    - :octicons-book-24: Homework: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 30 min.
+    - :octicons-book-24: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 30 min.
 
