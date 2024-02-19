@@ -27,19 +27,19 @@ A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and Vic
 
 ## The Deep Metric Learning Family: SimCLR/NNCLR/MeanSHIFT/SCL
 
-The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. DML originated with the idea of a contrastive loss, which transforms this principle into a learning objective.
+The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective.
 
-To understand these methods, you should know the foundations of  data augmentation and contrastive learning.
+To understand these methods, you should understand the basics of data augmentation and contrastive learning.
 
 ## Data Augmentation
 
-SSL-DML methods often begin with data augmentation, which involves applying various transformations or perturbations to unlabeled data to create diverse instances (also called augmented views).
+Deep Metric Learning methods often begin with data augmentation, which involves applying various transformations or perturbations to unlabeled data to create diverse instances (also called augmented views).
 
 The goal of data augmentation is to increase the variability of the data and expose the model to different perspectives of the same instance. Common data augmentation techniques include cropping, flipping, rotation, random crop, and color transformations. By generating diverse instances, contrastive learning ensures that the model learns to capture relevant information regardless of variations in the input data.
 
 ![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da.jpg)
 
-You can chain the different techniques together like so:
+You can also chain the different techniques together:
 
 ![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da2.jpg)
 
@@ -51,25 +51,21 @@ You can chain the different techniques together like so:
 
 Contrastive learning leverages the assumption that similar instances should be closer together in a learned embedding space, while dissimilar instances should be farther apart. By framing learning as a discrimination task, contrastive learning allows models to capture relevant features and similarities in the data.
 
-![](images/ssl/cl.png)
+![Contrastive Learning](images/ssl/cl.png)
 
 Contrastive Learning can be used in a Supervised or a Self-Supervised manner.
 
-In the [Few-Shot Learning block](https://pertusa.github.io/ap/fsl/), we already used Contrastive Learning methods in a supervised way, using labelled data for training models explicitly to differentiate between similar and dissimilar instances according to their class. Therefore, the loss in this case tries to put together embeddings **from the same class**.
-
-The objective is to learn a representation space where instances from the same class are clustered closer together, while instances from other classes are pushed apart.
+In the [Few-Shot Learning block](https://pertusa.github.io/ap/fsl/), we already used Contrastive Learning methods in a supervised way, using labelled data for training models explicitly to differentiate between similar and dissimilar instances according to their class. Therefore, the loss in this case tries to put together embeddings **from the same class**. The objective is to learn a representation space where instances from the same class are clustered closer together, while instances from other classes are pushed apart.
 
 **Self-supervised contrastive learning**  takes a different approach by learning representations from unlabeled data without relying on explicit labels. 
 
-Since no labels are available, to identify similar inputs, methods often form variants of a single input using known semantic preserving transformations via data augmentation.  The augmented samples are called views. The variants of the inputs are called positive pairs or examples; the samples we wish to make dissimilar are called negatives.
-
-So here, the loss tries to put together embeddings **from the same view**.
+Since no labels are available, to identify similar inputs, methods often form variants of a single input using known semantic preserving transformations via data augmentation.  The augmented samples are called views. The variants of the inputs are called positive pairs or examples; the samples we wish to make dissimilar are called negatives. So here, the loss tries to put together embeddings **from the same view** since we don't have information of the labels.
 
 ### SimCLR
 
-![SIMCLR](images/ssl/simclrea.jpg)
+![SIMCLR](images/ssl/simclrdiag.png)
 
-[SimCLR](http://proceedings.mlr.press/v119/chen20j/chen20j.pdf)[@simclr], a Simple framework for Contrastive Learning of visual Representations, is a work from Prof. Hinton’s Group.
+[SimCLR](http://proceedings.mlr.press/v119/chen20j/chen20j.pdf)[@simclr], a Simple framework for Contrastive Learning of visual Representations, is a technique introduced by Prof. Hinton’s Group.
 
 SimCLR learns representations by maximizing agreement between differently augmented views of the same data example via a contrastive loss in the latent space, as shown below.
 
@@ -77,7 +73,7 @@ SimCLR learns representations by maximizing agreement between differently augmen
 
 SimCLR results were impressive, showing that  unsupervised learning benefits more from bigger models than its supervised counterpart.
 
-> :octicons-book-24: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 0,5 hours.
+> :octicons-book-24: Homework: Read [this post](https://amitness.com/2020/03/illustrated-simclr/#simclr-framework) to understand the basics of SimCLR. Estimated time: 🕑 0,5 hours.
 
 
 ## The Self-Distillation Family: BYOL/SimSIAM/DINO
@@ -86,7 +82,7 @@ Self-distillation methods such as BYOL, SimSIAM, DINO, along with their variants
 
 ### BYOL (Bootstrap Your Own Latent)
 
-BYOL (bootstrap your own latent) first introduced self-distillation as a means to avoid collapse. 
+[BYOL (bootstrap your own latent)](https://papers.nips.cc/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf)[@BYOL] introduced self-distillation as a means to avoid collapse. 
 
 ![BYOL](images/ssl/byol.jpg)
 
@@ -96,9 +92,11 @@ The online (student) network is updated throughout training using gradient desce
 
 BYOL achieves higher performance than state-of-the-art contrastive methods without using negative pairs at all. Instead, it uses two networks that learn from each other to iteratively bootstrap the representations, by forcing one network to use an augmented view of an image to predict the output of the other network for a different augmented view of the same image. 
 
-BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beasts out the self-supervised baselines.
+BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beats out the self-supervised baselines.
 
-> :octicons-book-24: Read [this post](https://www.casualganpapers.com/self-supervised-contrastive-representation-learning/BYOL-explained.html) to understand the basics of BYOL. Estimated time: 🕑 0,5 hours.
+> :octicons-book-24: Homework: Read [this post](https://www.casualganpapers.com/self-supervised-contrastive-representation-learning/BYOL-explained.html) to understand the basics of BYOL. Estimated time: 🕑 0,5 hours.
+
+<!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
 
 
 ## The Canonical Correlation Analysis Family: VICReg/BarlowTwins/SWAV/W-MSE
@@ -111,7 +109,7 @@ VICReg has the same basic architecture as its predecessors; augmented positive p
 
 However, unlike its predecessors, the model requires none of the following: negative examples, momentum encoders, asymmetric mechanisms in the architecture, stop-gradients, predictors, or even normalization of the projector outputs. Instead, the heavy lifting is done by VICReg’s objective function, which contains three main terms: a variance term, an invariance term, and a covariance term.
 
-> :octicons-book-24: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 0,5 hours.
+> :octicons-book-24: Homework: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 0,5 hours.
 
 
 
