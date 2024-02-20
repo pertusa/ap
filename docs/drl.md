@@ -1,16 +1,8 @@
 # Deep Reinforcement Learning
-!!! danger
-    - This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
-
 
 > Read this page and follow the instructions before **February, 28th**.
 
-!!! info "Table of contents"
-    - [Introduction](#introduction)
-    - [Self-study](#self-study)
-    - [Materials for coding practice](#materials-for-coding-practice)
-
-# Introduction
+## Introduction
 
 Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives feedback in the form of rewards, which it uses to improve its decision-making over time.
 
