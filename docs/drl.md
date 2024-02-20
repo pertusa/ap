@@ -64,16 +64,15 @@ Actor-Critic methods combine aspects of both value-based and policy-based approa
 
 Now is the time to delve into certain aspects of DRL before the in-person class. You must ensure a clear understanding of:
 
-- The **RL paradigm** and **its fundamental elements** (state, action, policy, reward, value...).
-- **DQN** and **REINFORCE** algorithms, and their differences.
-- The **concept** behind **actor-critic** approaches.
-
+1. The **RL paradigm** and **its fundamental elements** (state, action, policy, reward, value...).
+2. **DQN** and **REINFORCE** algorithms, and their differences.
+3. The **concept** behind **actor-critic** approaches.
 
 :octicons-book-24: The recommended lecture is the book [**Understanding Deep Learning**](https://udlbook.github.io/udlbook/) by Simon J.D. Prince, specifically the parts concerning DRL:
 
 - Introduction at Section 1.3 *(Book pp. 11-12; PDF pp. 25-26)*
 - Chapter 19: Reinforcement Learning *(Book pp. 373-412; PDF pp. 387-398)*
-    - *You can skip sections 19.3.1, 19.4.2, 19.5.1, 19.5.4, 19.7, and 19.8*.
+    - *You can skip sections 19.3.1, 19.5.1, 19.7*
 
 !!! note "You are encouraged to consult any other materials. These might include, but are not limited to:"
     - **Online resources**:
