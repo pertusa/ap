@@ -11,7 +11,7 @@ nav:
 - Few and Zero Shot Learning: 'fsl.md'
 - Recurrent Networks: 'recurrent.md'
 - Fine-tuning and model compression: 'ftkd.md'
-#- Deep Reinforcement Learning: 'drl.md'
+- Deep Reinforcement Learning: 'drl.md'
 
 markdown_extensions:
   - toc:
