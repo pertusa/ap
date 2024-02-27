@@ -34,7 +34,7 @@ To understand these methods, you should first understand the basics of data augm
 
 ## Data Augmentation
 
-Deep Metric Learning methods often begin with data augmentation, which involves applying various transformations or perturbations to unlabeled data to create diverse instances (also called augmented views).
+SSL methods often begin with data augmentation, which involves applying various transformations or perturbations to unlabeled data to create diverse instances (also called augmented views).
 
 The goal of data augmentation is to increase the variability of the data and expose the model to different perspectives of the same instance. Common data augmentation techniques include cropping, flipping, rotation, random crop, and color transformations. By generating diverse instances, contrastive learning ensures that the model learns to capture relevant information regardless of variations in the input data.
 
@@ -47,6 +47,18 @@ You can also chain the different techniques together:
 ![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da3.jpg)
 
 > 💡 If you want to learn more about data augmentation, please read [this link](https://encord.com/blog/data-augmentation-guide/).
+
+## Origins of SSL
+
+Contemporary SSL methods build upon the knowledge from early experiments, which form the foundation for many of the modern methods.
+
+Learning spatial context methods such as RotNet[@rotnet] train a model to understand the relative positions and orientations of objects within a scene. In particular, RotNet applies a random rotation and then asks the model to predict the rotation.
+
+The RotNet model is trained with random augmentations of images at 0, 90, 180 and 270 degrees. A standard  classification network is trained to predict the rotation (in this task, there are 4 classes). Despite the simplicity of this self-supervised formulation, as can be seen in the experimental section of the paper, the features learned achieve dramatic improvements on the unsupervised feature learning benchmarks.
+
+<!-- No tengo claro si se hace con todas. As in the CIFAR experiments, during training we feed the RotNet model all four rotated copies of an image simultaneously (in the same mini-batch). -->
+
+<!---Github code: https://github.com/gidariss/FeatureLearningRotNet--->
 
 ## The Deep Metric Learning Family
 
@@ -96,10 +108,9 @@ BYOL achieves higher performance than state-of-the-art contrastive methods witho
 BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beats out the self-supervised baselines.
 
 !!! note "Homework"
-    - :octicons-book-24: Read [this post](https://www.casualganpapers.com/self-supervised-contrastive-representation-learning/BYOL-explained.html) to understand the basics of BYOL. Estimated time: 🕑 30 min.
+    - :octicons-book-24: Read [this post](https://towardsdatascience.com/byol-the-alternative-to-contrastive-self-supervised-learning-5d0a26983d7c) to understand the basics of BYOL. Estimated time: 🕑 45 min.
 
 <!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
-
 
 ## The Canonical Correlation Analysis Family
 
@@ -120,3 +131,4 @@ However, unlike previous models, VicReg requires none of the following: negative
 !!! note "Homework"
     - :octicons-book-24: Read [this post](https://imbue.com/open-source/2022-04-21-vicreg/#vicreg) to understand the basics of VicReg. Estimated time: 🕑 30 min.
 
+> Using [this code](https://github.com/imbue-ai/self_supervised) you can train SimCLR, BYOL or VicReg on ImageNet, STL-10, and CIFAR-10 and compare their results.
