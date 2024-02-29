@@ -40,4 +40,4 @@ The course has the following blocks:
 * Feb. 21: [Recurrent architectures (Juan Antonio Pérez)](recurrent.md)
 * Feb. 21: [Fine tuning and knowledge distillation (Juan Antonio Pérez)](ftkd.md)
 * Feb. 28: [Deep Reinforcement Learning (Jorge Calvo)](drl.md)
-* Mar. 6: [Self-Supervised Learning (Antonio Pertusa)]()
+* Mar. 6: [Self-Supervised Learning (Antonio Pertusa)](ssl.md)

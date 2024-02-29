@@ -54,7 +54,9 @@ Contemporary SSL methods build upon the knowledge from early experiments, which 
 
 Learning spatial context methods such as RotNet[@rotnet] train a model to understand the relative positions and orientations of objects within a scene. In particular, RotNet applies a random rotation and then asks the model to predict the rotation.
 
-The RotNet model is trained with random augmentations of images at 0, 90, 180 and 270 degrees. A standard  classification network is trained to predict the rotation (in this task, there are 4 classes). Despite the simplicity of this self-supervised formulation, as can be seen in the experimental section of the paper, the features learned achieve dramatic improvements on the unsupervised feature learning benchmarks.
+The RotNet model is trained with random augmentations of images at 0, 90, 180 and 270 degrees. A standard  classification network is trained to predict the rotation. Then, the learned features can be used to initialize the weights of a network for another downstream task. 
+
+Despite the simplicity of this self-supervised formulation, as can be seen in the experimental section of the paper, the features learned achieve dramatic improvements on the unsupervised feature learning benchmarks.
 
 <!-- No tengo claro si se hace con todas. As in the CIFAR experiments, during training we feed the RotNet model all four rotated copies of an image simultaneously (in the same mini-batch). -->
 

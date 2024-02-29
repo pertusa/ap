@@ -12,6 +12,7 @@ nav:
 - Recurrent Networks: 'recurrent.md'
 - Fine-tuning and model compression: 'ftkd.md'
 - Deep Reinforcement Learning: 'drl.md'
+- Self-Supervised Learning: 'ssl.md'
 
 markdown_extensions:
   - toc:
