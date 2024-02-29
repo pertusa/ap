@@ -29,8 +29,7 @@ For this course, we are following the categorization in [@sslcookbook], in which
 
 A single model of each family is selected: SimCLR[@simclr], BYOL[@byol], and VicReg[@vicreg].
 
-To understand these methods, you should first understand the basics of data augmentation.
-
+To understand these recent methods, you should first know the basics of data augmentation and the origins of SSL.
 
 ## Data Augmentation
 
