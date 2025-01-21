@@ -101,6 +101,7 @@ For the practical part of the course, **two notebooks** have been prepared to ex
   - Gradient Descent and Learning Rate
   - We will work with a single-layer network with d input nodes and a single output node
   - Shallow Networks / Multilayer Perceptron (MLP)
+  - (https://colab.research.google.com/drive/122IssQ-f4AerVSiQHq8BnQcqouQB2T-D?usp=sharing)
 
 - **Notebook 2**: (90 minutes) (60 minutes in class + 30 minutes at home)
   - In this practice we will work with deep neural networks, i.e. with more than two hidden layers. 
@@ -109,6 +110,7 @@ For the practical part of the course, **two notebooks** have been prepared to ex
   - Parameter Initialization
   - Early Stopping
   - Dropout
+  - (https://colab.research.google.com/drive/1cy8uvdx8aIIj86Z3X11HmVWogTUqLe3P?usp=sharing)
 
 - To work with the practice you will need to make a local copy of the notebook and answer all the questions that are posed. 
 - For the delivery you will have to send a copy of the notebook with the answers. You will have to use the delivery control of "UACloud -> Evaluación" called "FROM SHALLOW TO DEEP NN. NoteBook X".
