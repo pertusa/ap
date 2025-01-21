@@ -56,8 +56,7 @@ To understand the proposed theoretical contents, the following bibliographic res
 **References**
 
 - **Dive into Deep Learning**. Interactive deep learning book with code, math, and discussions Implemented with PyTorch, NumPy/MXNet, JAX, and TensorFlow <https://d2l.ai/> 
-- [Brief Introduction to Artificial Neural Networks. Culture Sciences del’ Ingénieur.](https://eduscol.education.fr/sti/sites/eduscol.education.fr.sti/files/ressources/pedagogiques/14500/14500-brief-introduction-to-artificial-neural-networks-ensps.pdf) 
-**
+- [Brief Introduction to Artificial Neural Networks. Culture Sciences del’ Ingénieur.](https://eduscol.education.fr/sti/sites/eduscol.education.fr.sti/files/ressources/pedagogiques/14500/14500-brief-introduction-to-artificial-neural-networks-ensps.pdf)
 
 
 **Moodle Test**
@@ -89,7 +88,6 @@ To understand the proposed theoretical contents, the following bibliographic res
   - About early stopping
 
 - **To start the Moodle test** go to "UACloud" -> "Moodle" -> "Aprendizaje Profundo" -> Test - FROM SHALLOW TO DEEP Neural Networks
-**
 
 
 **Workbooks**
