@@ -1,4 +1,4 @@
-**FROM SHALLOW TO DEEP NEURAL NETWORKS**
+# From Shallow to Deep Neural Networks
 
 **Objectives**
 
