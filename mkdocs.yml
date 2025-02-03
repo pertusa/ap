@@ -3,13 +3,17 @@ theme:
   name: material
   features:
     - content.code.copy
+    - content.tooltips
 
 nav:
 - Summary: 'index.md'
+- From Shallow to Deep Neural Networks: 'dnn.md'
 - Convolutional Neural Networks: 'cnn.md'
 - Few and Zero Shot Learning: 'fsl.md'
-#- Recurrent Neural Networks: 'rnn.md'
-#- Deep Reinforcement Learning: 'drl.md'
+- Recurrent Networks: 'recurrent.md'
+- Fine-tuning and model compression: 'ftkd.md'
+- Deep Reinforcement Learning: 'drl.md'
+- Self-Supervised Learning: 'ssl.md'
 
 markdown_extensions:
   - toc:
@@ -25,6 +29,10 @@ markdown_extensions:
   - meta
   - sane_lists
   - pymdownx.superfences
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - search
