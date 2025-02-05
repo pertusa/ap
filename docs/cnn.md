@@ -93,7 +93,7 @@ A more detailed explanation could be found in the [Pooling section](https://d2l.
 
 
 ### Contents for the presential class
-In the laboratory class (2 hours 🕒️ duration), we will see how certain components of a convolutional neural network are implemented <a href="https://colab.research.google.com/drive/1RT9lqTnTgkv_STXHk4k97wgKMTYSPWHw?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
+In the laboratory class (2 hours 🕒️ duration), we will see how certain components of a convolutional neural network are implemented <a href="https://drive.google.com/file/d/1WlGBOKq3LVNDCpRiT7hMgcA815ns75L8/view?usp=share_link"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
 
 The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.
 
