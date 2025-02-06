@@ -1,4 +1,4 @@
-# Few and Zero Shot Learning (14th February 2024). Contents to prepare before (online)
+# Few and Zero Shot Learning (12th February 2024). Contents to prepare before (online)
 
 <!---
 !!! danger
@@ -114,10 +114,10 @@ During episodic training, our model will see a completely new \(N\)-shot, \(K\)-
 
 Practically, this means that for each episode, we have to choose a subset of \(K\) classes from our training dataset and then sample \(N\) labeled examples (for the support set) and \(q\) examples (for the query set) for each class that we randomly sampled. 
 
-
+<!---
 ### Evaluating a Few-Shot Model
 
-Validation and Evaluation during episodic training can be done in a similar fashion to training. We can build a series of episodes from our validation and evaluation datasets, and then evaluate the model on each episode using standard classification metrics, like [precision, accuracy, F-score,](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall) and [AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc). 
+Validation and Evaluation during episodic training can be done in a similar fashion to training. We can build a series of episodes from our validation and evaluation datasets, and then evaluate the model on each episode using standard classification metrics. 
 
 <!---We've now covered the basic foundations of few-shot learning. Next, we'll look at some of the most common approaches to few-shot learning, namely **metric**-based, **optimization**-based, and **memory**-based approaches. 
 --->
@@ -140,9 +140,9 @@ Here are the few-shot learning approaches covered in this document:
 2. **Optimization-based few-shot learning**
 
 
-### Metric-Based Few-Shot Learning
+### 1- Metric-Based Few-Shot Learning
 
-Metric-based approaches to few-shot learning are able to learn an embedding space where examples that belong to the same class are close together according to some **metric**, even if the examples belong to classes that were not seen during training. 
+Metric-based approaches to few-shot learning are able to **learn an embedding space** where examples that belong to the same class are close together according to some metric, even if the examples belong to classes that were not seen during training. 
 
 ![Metric-based learning](images/fsl/foundations/metric-based-learning.png)
 
@@ -151,13 +151,13 @@ Metric-based approaches to few-shot learning are able to learn an embedding spac
 
 At the center of metric-based few-shot learning approches is a similarity _metric_, which we will refer to as \(g_{sim}\). We use this similarity metric to compare how similar examples in the query set are to examples in the support set. After knowing how similar a query example is to each example in the support set, we can infer to which class in the support set the query example belongs to. Note that this is conceptually the same as performing a [nearest neighbor search](https://en.wikipedia.org/wiki/Nearest_neighbor_search). 
 
-This similarity comparison is typically done in the embedding space of some neural net model, which we will refer to as \(f_\theta\). Thus, during episodic training, we train \(f_\theta\) to learn an embedding space where examples that belong to the same class are close together, and examples that belong to different classes are far apart. This embedding model is sometimes also referred to as a _backbone_ model.
+This similarity comparison is typically done in the embedding space of some neural net model, which we will refer to as \(f_\theta\). Thus, during episodic training, we train \(f_\theta\) to **learn an embedding space where examples that belong to the same class are close together, and examples that belong to different classes are far apart**. This embedding model is sometimes also referred to as a _backbone_ model.
 
 There are many different metric-based approaches to few-shot learning, and they all differ in how they define the similarity metric \(g_{sim}\), and how they use it to compare query examples to support examples as well as formulate a training objective.
 
 Among the most popular metric-based approaches are Prototypical Networks[@snell2017prototypical], Matching Networks[@vinyals2016matching], and Relation Networks[@sung2018relation].
 
-##### Example: Prototypical networks
+##### Prototypical networks
 
 ![Prototypical net](images/fsl/foundations/prototypical-net.png)
 
@@ -165,7 +165,7 @@ The figure above illustrates a 5-shot, 3-way classification task between tambour
 
 > Prototypical networks[@snell2017prototypical] work by creating a single embedding vector  for each class in the support set, called the **prototype**. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. 
 
-> Although not mentioned explicitly in the paper, [Siamese Neural Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is a kind of metric learning predecessor for prototypical networks as well. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.
+> [Siamese Neural Networks](https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf) is a kind of metric learning predecessor for prototypical networks. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.
 
 The prototype (denoted as \(c_k\)) for a class \(k\) is defined as: 
 
@@ -196,7 +196,7 @@ In this zero-shot learning scenario, we are mapping from two different domains: 
 This means that we are learning two different backbone models that map to the **same embedding space**: \(f_\theta\) for the input query and \(g_\theta\) for the class metadata vectors.
 --->
 
-### Optimization-Based Few-Shot Learning 
+### 2- Optimization-Based Few-Shot Learning 
 
 Optimization-based approaches focus on learning model parameters \(\theta\) that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML[@finn2017model]),
 and it's successors[@li2017meta; @sun2019mtl]. 
@@ -218,12 +218,12 @@ Note that MAML makes no assumption of the model architecture, thus the "model-ag
 
 ![MAML](images/fsl/foundations/maml.png)
 
-> The MAML[@finn2017model] algorithm. The starting model parameters are depcted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
+> The MAML[@finn2017model] algorithm. The starting model parameters are depicted as \(\theta\), while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as \(\theta_1^*\), \(\theta_2^*\), and \(\theta_3^*\), respectively. 
 
-Suppose we are given a meta-training set composed of many few-shot episodes \(D_{train} = \{E_1, E_2, ..., E_n\}\), where each episode contains a support set and train set \(E_i = (S_i, Q_i)\). We can follow the MAML algorithm to learn parameters \(\theta\) that can be adapted to new tasks using only a few examples and a few gradient steps. 
+Suppose we are given a meta-training set composed of many few-shot episodes \(D_{train} = \{E_1, E_2, ..., E_n\}\), where each episode contains a support set and a train set \(E_i = (S_i, Q_i)\). We can follow the MAML algorithm to learn parameters \(\theta\) that can be adapted to new tasks using only a few examples and a few gradient steps. 
 
 
-Overview of the MAML[@finn2017model] algorithm:
+Overview of the MAML[@finn2017model] **training** algorithm:
 
 -------
 
@@ -240,7 +240,7 @@ Overview of the MAML[@finn2017model] algorithm:
 
 -------
 
-At inference time, we are given a few-shot learning task with support and query set \(E_{test} = (S_{test}, Q_{test})\). We can use the learned parameters \(\theta\) as a starting point, and follow a process similar to the one above to make a prediction for the query set \(Q_{test}\):  
+At **inference** time, we are given a few-shot learning task with support and query set \(E_{test} = (S_{test}, Q_{test})\). We can use the learned parameters \(\theta\) as a starting point, and follow a process similar to the one above to make a prediction for the query set \(Q_{test}\):  
 
 -------
 
