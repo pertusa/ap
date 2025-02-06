@@ -298,7 +298,9 @@ The core of zero-shot learning paradigm is to learn the compatibility function b
 
 ![Zero-shot process 4](images/fsl/zsl/zsl_process_04.svg)
 
+<!--
 ### Learning a mapping function
+--->
 
 A typical approach is to train a mapping function between the two.
 By unveiling relationship between the side information space and our input feature space, it is possible to map vectors from one space to the other.
@@ -322,6 +324,7 @@ In this case, the inputs and the classes are projected onto another zero-shot em
 
 This space-aligning technique is one of the main branches of zero-shot learning framework. Next, we'll go over another branch or research direction, the generative approach.  
 
+<!---
 ### Generative approach
 
 One example of the generative approach is to employ a conditional Generative Adversarial Network (GAN) to generate samples related to the unseen classes. Its training process  consists of two parts. 
@@ -350,7 +353,7 @@ After training, we are now ready with the audio encoder and the classifier. The 
 
 ![ZSL Generative 6](images/fsl/zsl/zsl_generative_06.svg)
 
-
+--->
 
 ## Popular Few/Zero Shot learning models
 
@@ -384,7 +387,7 @@ To answer this, they use in-context learning. Below is a demonstrative diagram o
 
 ![Figure 1.1 of the paper](images/fsl/gpt31.png)
 
-The outer loop refers to the unsupervised pre-training where the model acquires language skills. On the other hand, the inner loop occurs when we feed forward a sequence of examples to the model, which learns the context from the sequence to predict what comes next. It is like a human reading a sequence of examples and thinking about the next instance. As the model uses the language skills learned during the pre-training phase to learn the context given in the sequence, no neural network parameter updates are involved in this learning phase. They call it in-context learning.
+The outer loop refers to the unsupervised pre-training where the model acquires language skills. On the other hand, the inner loop occurs when we feed forward a sequence of examples to the model, which learns the context from the sequence to predict what comes next. It is like a human reading a sequence of examples and thinking about the next instance. As the model uses the language skills learned during the pre-training phase to learn the context given in the sequence, no neural network parameter updates are involved in this learning phase. They call it **in-context learning**.
 
 The diagram’s first (left-most) example provides a context for performing arithmetic addition. Then, the second (middle) demonstrates how to correct spelling mistakes. The last (right-most) provides examples of English-to-French word translations. Given the respective context, the model must learn how to perform the intended task. They tried this approach with GPT-2, but the result wasn’t good enough to be a practical method of solving language tasks.
 
