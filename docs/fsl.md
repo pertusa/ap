@@ -322,9 +322,12 @@ In this case, the inputs and the classes are projected onto another zero-shot em
 
 ![Zero-shot process 8](images/fsl/zsl/zsl_process_08.svg)
 
-This space-aligning technique is one of the main branches of zero-shot learning framework. Next, we'll go over another branch or research direction, the generative approach.  
+This space-aligning technique is one of the main branches of zero-shot learning framework. 
 
 <!---
+Next, we'll go over another branch or research direction, the generative approach.  
+
+
 ### Generative approach
 
 One example of the generative approach is to employ a conditional Generative Adversarial Network (GAN) to generate samples related to the unseen classes. Its training process  consists of two parts. 
