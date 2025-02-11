@@ -1,6 +1,6 @@
 # Deep Reinforcement Learning
 
-> Read this page and follow the instructions before **February, 28th**.
+> Read this page and follow the instructions before the lecture.
 
 ## Introduction
 
@@ -69,8 +69,6 @@ Now is the time to delve into certain aspects of DRL before the in-person class.
 !!! note "You are encouraged to consult any other materials. These might include, but are not limited to:"
     - **Online resources**:
         - **RL/DRL**: [OpenAI Spinning Up: Part 1: Key Concepts in RL](https://spinningup.openai.com/en/latest/spinningup/rl_intro.html)
-        - **DQN**: [CS234 Notes - Lecture 6: CNNs and Deep Q Learning](https://web.stanford.edu/class/cs234/CS234Win2019/slides/lnotes6.pdf)
-        - **REINFORCE**: [REINFORCE – A Quick Introduction (with Code)](https://blog-80b.pages.dev/reinforce-a-quick-introduction-with-code) 
 
     - **Courses**:
         - [RL Course](https://www.youtube.com/playlist?list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) by David Silver (Google DeepMind) on Youtube
