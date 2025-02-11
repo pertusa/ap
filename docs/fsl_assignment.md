@@ -22,15 +22,15 @@ First, open [this Colab notebook](https://colab.research.google.com/drive/1WBUPA
 
 1. Review and understand the code in the class `OmniglotEpisodicDataset`. The sampled batch is partitioned into support, i.e. the per-task training data, and query, i.e. the per-task test datapoints. The support will be used to calculate the prototype of each class and query will be used to compute the distance to each prototype. 
 
-2. Complete the code with **TODO** marks in the `train` function. For implementing \(p_\theta\) you can use the Pytorch function `CrossEntropyLoss`, since it is a combination of softmax and cross-entropy. Specifically, `CrossEntropyLoss(x, y) := H(one_hot(y), softmax(x))`, where `one_hot` is a function that takes an index \(y\), and expands it into a one-hot vector.
+2. Complete the code with **TODO** marks in the `train` function. For implementing \(p_\theta\) you can use directly the Pytorch function `CrossEntropyLoss`, since it is a combination of softmax and cross-entropy. Specifically, `CrossEntropyLoss(x, y) := H(one_hot(y), softmax(x))`, where `one_hot` is a function that takes an index \(y\) and expands it into a one-hot vector.
 
 3. Run the training cell. After 20 epochs, the average loss when running in Google colab should be similar to 0.017.
 
-4. Complete the code with **TODO** marks in the `evaluate` function. As this is for inference, instead of the loss function you should use `argmax` to obtain the predicted labels.
+4. Complete the code with **TODO** marks in the `evaluate` function. For inference, instead of the loss function you should use `argmax` to obtain the predicted labels.
 
-5. Run the evaluation code. In Colab, the  accuracy should be close to 98.66%.
+5. Run the evaluation code. In Colab, the accuracy should be close to 98.66%.
 
-6. Answer the questions at the end of the notebook and discuss the results. 
+6. Answer the questions at the end of the notebook and discuss the results.
 
 ## Few-shot learning using OpenAI GPT
 
@@ -38,7 +38,7 @@ We know many of you are GPT fans, so we are going to make an assignment using th
 
 As we have seen [in the theory](https://pertusa.github.io/ap/fsl/#openai-gpt-3) contents, very Large Language Models (LLM) can perform few-shot learning with minimal steps. 
 
-Let's test an example by promping the following input to [ChatGPT-3.5](https://chat.openai.com/):
+Let's test an example by promping the following input to [ChatGPT-4](https://chat.openai.com/):
 
 ```
 Input: Subpar acting. 
@@ -49,40 +49,48 @@ Input: Amazing.
 Sentiment:
 ```
 
-> Hint: In GPT, if you want to insert a new line without sending the prompt, simultaneously press shift + enter
+> Hint: In the GPT interface, if you want to insert a new line without sending the prompt, simultaneously press shift + enter
 
 Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although it may have  limitations in more complex scenarios. By using the [ChatGPI API](https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api) you can even integrate your sentiment classifier into a webpage or an app.
 
 This is a simple example, but making reliable prompts for accurate few-shot learning sometimes require additional work. For example, have a look at [this paper](https://arxiv.org/abs/2102.09690)[@calibratellm]. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.
 
-> In the current GPT3.5 version, behaviour is a bit different than in the paper. For example, prompts with N/A are not accepted
+> In recent GPT versions, the behaviour is a bit different than in the paper. For example, prompts with N/A are not accepted.
 
 The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT.
 
+<!---
 > We could also have used [Google Gemini](https://gemini.google.com/app)[@gemini]. This is a very recent LLM similar to ChatGPT, but Gemini can also access the web to search for updated information. Therefore, since it uses external data, it is not suitable for our few-shot learning scenario.
+--->
 
 ### Exercise 2 (40%)
 
-In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *Reggaeton* genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.
+In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *hip-hop* genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.
 
 An example prompt could be: 
 ```
-Input: No pienses que estoy muy triste
-Si no me ves sonreír
-Es simplemente despiste
-Maneras de vivir.
+Input: Bitterness and burden
+Curses rest on thee
+Solitaire and sorrow
+All eternity
+Save the Earth and claim perfection
+Deem the mass and blame rejection.
 Output: Rock
 
-Input: Me acostumbré al sour, ya no patea
-Me llegan a casa, no se capean
-Solo modelos como Barea
-Multiplicar cienes es la tarea.
-Output: Reggaeton
+Input: Tell me who you loyal to
+Is it money? Is it fame? Is it weed? Is it drink?
+Is it comin' down with the loud pipes and the rain?
+Big chillin', only for the power in your name.
+Output: Hip-hop
 ```
 
-> You can find more lyrics examples [in this link](https://www.letras.com/)
+> You can find more examples [in this link](https://www.songlyrics.com), where you can search lyrics by genre or artist.
 
 The goal is to effective prompts, and check if ordering of the samples and balance of the classes may affect the results. For our few-shot scenario, try with \(N=6\) labeled samples for each of the 2 classes.
+
+For this exercise, you should use [ChatGPT](https://chatgpt.com) on a browser and **select the GPT-4 legacy model**. 
+
+> When using GPT‑4 through a prompt (for example, via the ChatGPT web interface), the model operates entirely based on its pre‑trained internal knowledge and does not perform live lookups or access external databases in real time.
 
 Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 
@@ -113,8 +121,6 @@ Once done, please submit a PDF file (via Moodle) with the experiments you made a
 **Objective:** Train a GPT model to answer domain-specific questions with few-shot examples.
 - **Few-Shot Examples:** Provide 5 question-answer pairs in a specialized field (e.g., biology, computer science).
 - **Test:** Present a new, complex question in the same domain and have the student create a prompt that would enable the GPT model to use the few-shot examples to answer accurately.
-
-
 
 ### Task 3: Ethical Judgment
 **Objective:** Guide a GPT model to make ethical judgments in hypothetical scenarios using few-shot learning.
