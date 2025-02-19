@@ -12,6 +12,61 @@ Firstly, study :octicons-book-24: sections 9.1 to 9.3 (estimated time: 🕑 2 ho
 
 Skip section 9.4 and jump next to :octicons-book-24: section 9.5, which introduces the LSTM units, and lastly to section  :octicons-book-24: 9.6 (estimated time: 🕑 1 hour). Now, skim through the rest of the chapter for a couple of minutes only: you will see that encoder-decoder architectures are also viable with RNNs and that an attention mechanism (not exactly the same as the one used in transformers) can be used to determine which parts of the representations (states) learned by the encoder are more relevant to the decoder at each time step.
 
+## Key-value memories in neural networks
+
+RNNs' state is a form of memory that is updated at each time step. In principle, specially when using LSTM cells, the states should be able to indefinitely store information from the past. However, in practice, the information stored in the state is limited by constraints in the architecture and the training process. This has led to the development of architectures that incorporate more explicit forms of memory, for example by using key-value memories. In this context, the key-value memory is a data structure that stores a set of key-value pairs, both represented as vectors; another vector known as the query is used to retrieve the value associated with a given key by computing the similarity between the query and the keys. In our settings, usually the query is not used to only retrieve one single key, but a combination of a number of keys weighted by their similarity to the query.
+
+A lot of proposals exist on how to augment recurrent networks or transformers with more explicit memories in order to overcome some of the challenges they face when dealing with long-context reasoning, factual recall, and efficient storage of associative knowledge. The idea of incorporating memory into neural networks is not new and dates back to associative memories such as the *Hopfield networks* in the seventies and eighties, and, more recently, to the *neural Turing machines* and the [differentiable neural computers][dnc] (DNC) in the last decade. Here, we discuss a series of more recent approaches. 
+
+[dnc]: https://jaspock.github.io/funicular/dnc.html
+
+### Learned memory during training
+
+In this [approach][metascale], memory contents are learned and fixed during training, and then used as-is during inference. The memory layer consists of learnable key-value pairs, which are stored as model parameters. These key-value pairs are optimized during training and remain unchanged during inference. Some of the feed-forward layers in the transformer blocks are replaced with memory layers, which retrieve relevant knowledge from the memory bank and incorporate it into the residual stream. It seems to be crucial to replace only some feed-forward layers with memory layers, as replacing all layers with memory-based mechanisms leads to suboptimal performance. Note that feed-forward networks already act as implicit associative memories by mapping inputs to outputs, but explicit memory layers perform a more direct selection of relevant knowledge from a structured key-value store with potentially millions of entries.
+
+[metascale]: https://ai.meta.com/research/publications/memory-layers-at-scale/
+
+A memory lookup operation follows the following steps. First, the input embedding is transformed into a query vector \(q\). Then, the top-$k$ keys are selected from the memory bank by efficiently computing the dot-product similarity between the query and the keys. After this, the softmax function is applied to the dot products to obtain the relevance of each memory slot. Finally, the output is computed as a weighted sum of the values associated with the top-$k$ keys.
+
+### Read-write memory during inference
+
+Unlike the previous approach, this method does not pre-train the memory values. Instead, it learns matrices that control what to store and retrieve dynamically during inference. The memory contents are updated as the model processes input sequences. DNCs are a well-known example of this. A more recent approach is the [LM2][lm2] model. Interestingly, the LM2 model works as an adaptation of the LSTM principles to memory-based models in the sense that it uses an input gate to control the amount of new information that is stored in the memory, a forget gate to control the amount of information that is kept from the previous memory state, and an output gate to control the amount of information that is read from the memory and used to update the output of the model.
+
+[lm2]: https://arxiv.org/abs/2502.06049v1
+
+In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, trainable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module \(E_{\text{mem}}\). Optionally, only the top-$k$ memory slots may be considered when computing the output of the memory module.
+
+The final output of the transformer block is computed by combining \(E_{\text{mem}}\) with the output of the standard self-attention mechanism:
+
+\[
+E_{\text{out}} = E_{\text{attn}} + E_{\text{gated}}
+\]
+
+where \(E_{\text{gated}}\) is the memory-modulated contribution, scaled by a learned scalar gate \( g_{\text{out}} \), which is obtained through another trainable projection:
+
+\[
+E_{\text{gated}} = g_{\text{out}} \cdot E_{\text{mem}}
+\]
+
+At each step, the memory state is updated dynamically based on the current input. The update mechanism follows:
+
+\[
+M_{t+1} = g_{\text{in}} \cdot \tanh(E_{\text{mem}}) + g_{\text{forget}} \cdot M_t
+\]
+
+where:
+- \( g_{\text{in}} \) and \( g_{\text{forget}} \) are learned gating functions obtained via trainable projection matrices,
+- \( E_{\text{mem}} \) represents the retrieved memory content,
+- \( M_t \) is the memory state at step \( t \).
+
+This update rule determines how much of the retrieved memory content is incorporated into the new memory state and how much of the existing memory is retained.
+
+### Recurrent memory transformer
+
+Additionally, recent developments in memory-augmented transformers have introduced new architectures that further enhance long-context processing. The *recurrent memory transformer* (RMT) introduces a segment-level recurrent memory mechanism, allowing the model to store and transfer information across long sequences without modifying the core transformer structure. It achieves this by adding special memory tokens that persist across segments, effectively extending the model's context length. Building upon this, the [associative recurrent memory transformer][armt] (ARMT) enhances RMT by incorporating associative memory, enabling more efficient information storage and retrieval. This approach combines self-attention with memory updates, improving long-term reasoning and factual recall in extremely long-context tasks.
+
+[armt]: https://arxiv.org/abs/2407.04841
+
 ## Other recurrent or hybrid architectures
 
 As already mentioned, a renaissance (or a [RNNaissance](https://people.idsia.ch/~juergen/rnnaissance.html) as some people called it when LSTM units were proposed in the late 1990s) of interest in RNNs has taken place recently motivated by the development of new architectures and training techniques that surpass some limitations of the transformer model. One of these limitations is the quadratic complexity of the self-attention mechanism, which makes it difficult to scale to very long sequences (context length) of thousands of tokens given the current memory capacity of GPUs. This quadratic complexity may be observed by considering that, given a sequence of length \(n\), the self-attention mechanism at each transformer head has to store \(n^2\) dot products. When used as generators of sequences at inference time, both architectures, RNN and transformers, have to process the sequence one token at a time, but at training time, the transformer can process the whole sequence at once in a parallel manner, while the RNN has to process it one token at a time to incrementally update its internal state. In addition to this, the softmax operation in the self-attention mechanism is also a bottleneck in terms of computational complexity; actually, different approaches have been proposed to mitigate (linearize) the impact of the softmax, thereby allowing for context lengths of up to one million tokens.
