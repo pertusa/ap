@@ -55,6 +55,7 @@ M_{t+1} = g_{\text{in}} \cdot \tanh(E_{\text{mem}}) + g_{\text{forget}} \cdot M_
 \]
 
 where:
+
 - \( g_{\text{in}} \) and \( g_{\text{forget}} \) are learned gating functions obtained via trainable projection matrices,
 - \( E_{\text{mem}} \) represents the retrieved memory content,
 - \( M_t \) is the memory state at step \( t \).
