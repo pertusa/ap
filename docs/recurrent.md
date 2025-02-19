@@ -26,7 +26,7 @@ In this [approach][metascale], memory contents are learned and fixed during trai
 
 [metascale]: https://ai.meta.com/research/publications/memory-layers-at-scale/
 
-A memory lookup operation follows the following steps. First, the input embedding is transformed into a query vector \(q\). Then, the top-$k$ keys are selected from the memory bank by efficiently computing the dot-product similarity between the query and the keys. After this, the softmax function is applied to the dot products to obtain the relevance of each memory slot. Finally, the output is computed as a weighted sum of the values associated with the top-$k$ keys.
+A memory lookup operation follows the following steps. First, the input embedding is transformed into a query vector \(q\). Then, the top-\(k\) keys are selected from the memory bank by efficiently computing the dot-product similarity between the query and the keys. After this, the softmax function is applied to the dot products to obtain the relevance of each memory slot. Finally, the output is computed as a weighted sum of the values associated with the top-\(k\) keys.
 
 ### Read-write memory during inference
 
@@ -34,7 +34,7 @@ Unlike the previous approach, this method does not pre-train the memory values. 
 
 [lm2]: https://arxiv.org/abs/2502.06049v1
 
-In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, trainable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module \(E_{\text{mem}}\). Optionally, only the top-$k$ memory slots may be considered when computing the output of the memory module.
+In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, trainable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module \(E_{\text{mem}}\). Optionally, only the top-\(k\) memory slots may be considered when computing the output of the memory module.
 
 The final output of the transformer block is computed by combining \(E_{\text{mem}}\) with the output of the standard self-attention mechanism:
 
