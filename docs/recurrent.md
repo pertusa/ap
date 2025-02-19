@@ -30,13 +30,14 @@ A memory lookup operation follows the following steps. First, the input embeddin
 
 ### Read-write memory during inference
 
-Unlike the previous approach, this method does not pre-train the memory values. Instead, it learns matrices that control what to store and retrieve dynamically during inference. The memory contents are updated as the model processes input sequences. DNCs are a well-known example of this. A more recent approach is the [LM2][lm2] model. Interestingly, the LM2 model works as an adaptation of the LSTM principles to memory-based models in the sense that it uses an input gate to control the amount of new information that is stored in the memory, a forget gate to control the amount of information that is kept from the previous memory state, and an output gate to control the amount of information that is read from the memory and used to update the output of the model.
+Unlike the previous approach, this method does not pre-train the memory values. Instead, it learns parameters that control what to store and retrieve dynamically during inference. The memory contents are updated as the model processes input sequences. DNCs are a well-known example of this. A more recent approach is the [LM2][lm2] model. Interestingly, the LM2 model works as an adaptation of the LSTM principles to memory-based models in the sense that it uses an input gate to control the amount of new information that is stored in the memory, a forget gate to control the amount of information that is kept from the previous memory state, and an output gate to control the amount of information that is read from the memory and used to update the output of the model.
 
 [lm2]: https://arxiv.org/abs/2502.06049v1
 
-In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, trainable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module \(E_{\text{mem}}\). Optionally, only the top-\(k\) memory slots may be considered when computing the output of the memory module.
+In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, learnable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module \(E_{\text{mem}}\). Optionally, only the top-\(k\) memory slots may be considered when computing the output of the memory module. Note that \(E_{\text{mem}}\) integrates information from the
+input and the memory.
 
-The final output of the transformer block is computed by combining \(E_{\text{mem}}\) with the output of the standard self-attention mechanism:
+The final output of the transformer block, \(E_{\text{out}}\), is computed by combining \(E_{\text{mem}}\) with the output of the standard self-attention mechanism:
 
 \[
 E_{\text{out}} = E_{\text{attn}} + E_{\text{gated}}
@@ -48,7 +49,7 @@ where \(E_{\text{gated}}\) is the memory-modulated contribution, scaled by a lea
 E_{\text{gated}} = g_{\text{out}} \cdot E_{\text{mem}}
 \]
 
-At each step, the memory state is updated dynamically based on the current input. The update mechanism follows:
+At each step, the memory state is updated dynamically as follows:
 
 \[
 M_{t+1} = g_{\text{in}} \cdot \tanh(E_{\text{mem}}) + g_{\text{forget}} \cdot M_t
@@ -57,8 +58,7 @@ M_{t+1} = g_{\text{in}} \cdot \tanh(E_{\text{mem}}) + g_{\text{forget}} \cdot M_
 where:
 
 - \( g_{\text{in}} \) and \( g_{\text{forget}} \) are learned gating functions obtained via trainable projection matrices,
-- \( E_{\text{mem}} \) represents the retrieved memory content,
-- \( M_t \) is the memory state at step \( t \).
+- and \( M_t \) is the memory state at step \( t \).
 
 This update rule determines how much of the retrieved memory content is incorporated into the new memory state and how much of the existing memory is retained.
 
