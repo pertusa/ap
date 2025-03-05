@@ -109,7 +109,7 @@ BYOL achieves higher performance than state-of-the-art contrastive methods witho
 BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beats out the self-supervised baselines.
 
 !!! note "Homework"
-    - :octicons-book-24: Read [this post](https://towardsdatascience.com/byol-the-alternative-to-contrastive-self-supervised-learning-5d0a26983d7c) to understand the basics of BYOL. Estimated time: 🕑 45 min.
+    - :octicons-book-24: Read [this post](https://towardsdatascience.com/byol-the-alternative-to-contrastive-self-supervised-learning-5d0a26983d7c-2/) to understand the basics of BYOL. Estimated time: 🕑 45 min.
 
 <!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
 
