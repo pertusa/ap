@@ -61,7 +61,7 @@ To understand the proposed theoretical contents, the following bibliographic res
 
 **Moodle Test**
 
-- The moodle test must be taken **in advance of the practice session** on February 5. 
+- The moodle test must be taken **in advance of the practice session** on February 6. 
 - The test will be open between **February 1st at 9:00 am and February 4th at 11:59 pm**. 
 - The test has a **maximum duration of 75 minutes** from the start.
 - The test consists of **24 triple choice questions**. 
