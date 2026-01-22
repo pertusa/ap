@@ -62,7 +62,7 @@ To understand the proposed theoretical contents, the following bibliographic res
 **Moodle Test**
 
 - The moodle test must be taken **in advance of the practice session** on February 6. 
-- The test will be open between **February 1st at 9:00 am and February 4th at 11:59 pm**. 
+- The test will be open between **February 2 at 9:00 am and February 5 at 11:59 pm**. 
 - The test has a **maximum duration of 75 minutes** from the start.
 - The test consists of **24 triple choice questions**. 
 - **Each wrong answer subtracts 1/3** of the value of a correct answer.
@@ -112,4 +112,4 @@ For the practical part of the course, **two notebooks** have been prepared to ex
 
 - To work with the practice you will need to make a local copy of the notebook and answer all the questions that are posed. 
 - For the delivery you will have to send a copy of the notebook with the answers. You will have to use the delivery control of "UACloud -> Evaluación" called "FROM SHALLOW TO DEEP NN. NoteBook X".
-- The **deadline** for delivery of **notebooks 1 and 2** will be on Wednesday, February 12.
+- The **deadline** for delivery of **notebooks 1 and 2** will be on February 13.
