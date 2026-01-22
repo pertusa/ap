@@ -19,13 +19,13 @@ The theory tests represent 30% of the final grade.  The assignments represent 70
 
 The course has the following blocks:
 
-* Feb. 5: [From Shallow to Deep Neural Networks](dnn.md) (Andrés Fuster)
-* Feb. 5 & Feb. 12: [Convolutional Neural Networks](cnn.md) (Jorge Azorín)
-* Feb 12: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
-* Feb. 19: [Deep Reinforcement Learning](drl.md) (Jorge Calvo)
-* Feb. 26: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
-* Feb. 26: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
-* Mar. 5: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
+* Feb. 6: [From Shallow to Deep Neural Networks](dnn.md) (Andrés Fuster)
+* Feb. 6 & Feb. 13: [Convolutional Neural Networks](cnn.md) (Jorge Azorín)
+* Feb 13: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
+* Feb. 20: [Deep Reinforcement Learning](drl.md) (Jorge Calvo)
+* Feb. 27: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
+* Feb. 27: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
+* Mar. 6: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
 
 
 ## More information
