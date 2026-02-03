@@ -21,12 +21,12 @@ The course has the following blocks:
 
 * Feb. 6: [From Shallow to Deep Neural Networks](dnn.md) (Andrés Fuster)
 * Feb. 6 & Feb. 13: [Convolutional Neural Networks](cnn.md) (Jorge Azorín)
-* Feb 13: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
-* Feb. 20: [Deep Reinforcement Learning](drl.md) (Jorge Calvo)
-* Feb. 27: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
-* Feb. 27: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
-* Mar. 6: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
-
+* Feb. 13: [Deep Reinforcement Learning (1/2)](drl.md) (Jorge Calvo)
+* Feb. 20: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
+* Feb. 20: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
+* Feb. 27: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
+* Feb. 27: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
+* Mar. 6: [Deep Reinforcement Learning (2/2)](drl.md) (Jorge Calvo)
 
 ## More information
 
