@@ -76,9 +76,3 @@ Now is the time to delve into certain aspects of DRL before the in-person class.
 
     - **Books**:
         - "[Reinforcement Learning: An Introduction](https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf)" by Richard S. Sutton and Andrew G. Barto
-
-## Materials for coding practice
-
-During the in-person practice session we will solve a classic control problem called *CartPole* using DRL. To simulate the scenario, we will work with the framework **Gymnasium**. Below you will find a Google Colaboratory notebook that introduces this working environment. You must read and understand this notebook before the session.
-
-- Introduction to Gymnasium framework [[link to colab]](https://colab.research.google.com/drive/1ETiv5bo6db5F0xa3QkH9q_m01jLL0Rkm?usp=sharing)
