@@ -270,7 +270,7 @@ The benefits are:
 	* Improved Robustnes: Models become more robust to variations in input data, such as different angles, lighting conditions, and occlusions.
 
 ### Contents for the presential class
-In the laboratory class (2 hours 🕒️ duration), we will implement a convolutional neural network <a href="https://colab.research.google.com/drive/1RT9lqTnTgkv_STXHk4k97wgKMTYSPWHw?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
+In the laboratory class (2 hours 🕒️ duration), we will implement a convolutional neural network <a href="https://colab.research.google.com/drive/1g8nchgUHo-pMCqNXpwn-7nNQWxTyXkAE?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.
 
 The aim is for the notebook to be modified.
 
