@@ -12,7 +12,7 @@ Today, the [results](https://paperswithcode.com/sota/image-classification-on-ima
 * O2. Learn about modern convolutional networks that have set milestones in design aspects and how to train them
 
 
-## 1.  First session of this block (5th February 2025)
+## 1.  First session of this block (6th February 2026)
 
 ### Contents to prepare before (online)
 
@@ -97,7 +97,7 @@ In the laboratory class (2 hours 🕒️ duration), we will see how certain comp
 
 The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.
 
-## 2.  Second session of this block (12th February 2025)
+## 2.  Second session of this block (13th February 2026)
 
 ### Contents to prepare before (online)
 
