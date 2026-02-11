@@ -38,7 +38,7 @@ We know many of you are GPT fans, so we are going to make an assignment using th
 
 As we have seen [in the theory](https://pertusa.github.io/ap/fsl/#openai-gpt-3) contents, very Large Language Models (LLM) can perform few-shot learning with minimal steps. 
 
-Let's test an example by promping the following input to [ChatGPT-4](https://chat.openai.com/):
+Let's test an example by promping the following input to [ChatGPT-5](https://chat.openai.com/):
 
 ```
 Input: Subpar acting. 
@@ -65,9 +65,25 @@ The goal of the following exercise is assesssing your understanding of how to ef
 
 ### Exercise 2
 
-In this second exercise, we are going to make a few-shot classifier to classify between *Rock* and *hip-hop* genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.
+In this second exercise, we are going to make a few-shot classifier to classify between *rock* and *hip-hop* genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.
 
-An example prompt could be: 
+For this exercise, you should use [ChatGPT](https://chatgpt.com) on a browser. 
+
+
+Before starting the experiments, please check first the model version:
+
+```
+Which model version are you?
+```
+
+Then you must ensure that the model operates entirely based on its pre‑trained internal knowledge and does not perform live lookups or access external databases in real time. For this, the first prompt should be:
+
+```
+For the following prompts, do not use internet access and use only your internal knowledge
+```
+
+Then, create sample prompts like in this example: 
+
 ```
 Input: Bitterness and burden
 Curses rest on thee
@@ -87,10 +103,6 @@ Output: Hip-hop
 > You can find more examples [in this link](https://www.songlyrics.com), where you can search lyrics by genre or artist.
 
 The goal is to effective prompts, and check if ordering of the samples and balance of the classes may affect the results. For our few-shot scenario, try with \(N=6\) labeled samples for each of the 2 classes.
-
-For this exercise, you should use [ChatGPT](https://chatgpt.com) on a browser and **select the GPT-4 legacy model**. 
-
-> When using GPT‑4 through a prompt (for example, via the ChatGPT web interface), the model operates entirely based on its pre‑trained internal knowledge and does not perform live lookups or access external databases in real time.
 
 Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.
 

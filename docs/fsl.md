@@ -1,4 +1,4 @@
-# Few and Zero Shot Learning (12th February 2024). Contents to prepare before (online)
+# Few and Zero Shot Learning (Feb. 27 2026). Contents to prepare before (online)
 
 <!---
 !!! danger
@@ -43,7 +43,7 @@ To have a better idea of how FSL and ZSL differ from standard supervised learnin
 
 ## Few-Shot Learning Foundations
 
-It should come with no surprise that data is at the core of few-shot learning problems. This chapter covers the foundations of few-shot learning – namely how we think about and structure our data – when trying to learn novel, unseen classes with very little labeled data.
+Data is at the core of few-shot learning problems. This chapter covers the foundations of few-shot learning – namely how we think about and structure our data – when trying to learn novel, unseen classes with very little labeled data.
 
 When solving traditional classification problems, we typically consider a closed set of classes. That is, we expect to see the same set of classes during inference as we did during training. Few-shot learning breaks that assumption and instead expects that the classification model will encounter novel classes during inference. There is one caveat: there are a **few labeled examples** for each novel class at inference time. 
 
