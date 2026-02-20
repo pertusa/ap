@@ -10,7 +10,11 @@ Firstly, study :octicons-book-24: sections 9.1 to 9.3 (estimated time: 🕑 2 ho
 
 ## Long short-term memory
 
-Skip section 9.4 and jump next to :octicons-book-24: section 9.5, which introduces the LSTM units, and lastly to section  :octicons-book-24: 9.6 (estimated time: 🕑 1 hour). Now, skim through the rest of the chapter for a couple of minutes only: you will see that encoder-decoder architectures are also viable with RNNs and that an attention mechanism (not exactly the same as the one used in transformers) can be used to determine which parts of the representations (states) learned by the encoder are more relevant to the decoder at each time step.
+Skip section 9.4 and jump next to :octicons-book-24: section 9.5, which introduces the Hochreiter and Schmidhuber's LSTM units (first proposed in 1997), and lastly to section  :octicons-book-24: 9.6 (estimated time: 🕑 1 hour). Now, skim through the rest of the chapter for a couple of minutes only: you will see that encoder-decoder architectures are also viable with RNNs and that an attention mechanism (not exactly the same as the one used in transformers) can be used to determine which parts of the representations (states) learned by the encoder are more relevant to the decoder at each time step.
+
+Although we will not delve into its details, the [xLSTM](https://arxiv.org/abs/2405.04517) architecture is a development proposed in 2024 that extends the LSTM architecture by introducing a new form of (exponential) gating mechanism and larger memory cells. The resulting model is able to capture longer-term dependencies and may even surpass transformers in some tasks while being more efficient in terms of computational resources.
+
+![xLSMT](images/recurrent/xlstm.png)
 
 ## Key-value memories in neural networks
 
@@ -27,6 +31,8 @@ In this [approach][metascale], memory contents are learned and fixed during trai
 [metascale]: https://ai.meta.com/research/publications/memory-layers-at-scale/
 
 A memory lookup operation follows the following steps. First, the input embedding is transformed into a query vector \(q\). Then, the top-\(k\) keys are selected from the memory bank by efficiently computing the dot-product similarity between the query and the keys. After this, the softmax function is applied to the dot products to obtain the relevance of each memory slot. Finally, the output is computed as a weighted sum of the values associated with the top-\(k\) keys.
+
+![Memory layers at scale](images/recurrent/metascale.png)
 
 ### Read-write memory during inference
 
@@ -62,13 +68,17 @@ where:
 
 This update rule determines how much of the retrieved memory content is incorporated into the new memory state and how much of the existing memory is retained.
 
+![LM2](images/recurrent/lm2.png)
+
 ### Recurrent memory transformer
 
 Additionally, recent developments in memory-augmented transformers have introduced new architectures that further enhance long-context processing. The *recurrent memory transformer* (RMT) introduces a segment-level recurrent memory mechanism, allowing the model to store and transfer information across long sequences without modifying the core transformer structure. It achieves this by adding special memory tokens that persist across segments, effectively extending the model's context length. Building upon this, the [associative recurrent memory transformer][armt] (ARMT) enhances RMT by incorporating associative memory, enabling more efficient information storage and retrieval. This approach combines self-attention with memory updates, improving long-term reasoning and factual recall in extremely long-context tasks.
 
 [armt]: https://arxiv.org/abs/2407.04841
 
-### Titans: long-term memory in neural networks
+![ARMT](images/recurrent/armt.png)
+
+### Titans: test-time long-term memory in neural networks
 
 [Titans][titans] architecture, published in 2025, integrates a *hierarchical memory system* into a transformer framework, enabling efficient long-term storage and retrieval of past information. It introduces three interconnected memory components: *short-term attention-based memory*, which processes immediate dependencies; *long-term neural memory*, which retains historical context beyond the local window; and *persistent memory*, which stores task-specific knowledge. This layered memory design allows Titans to surpass conventional transformers in handling extensive sequences while maintaining fast inference and scalability.
 
@@ -78,9 +88,11 @@ Titans employ a *surprise-based learning approach* to prioritize memory updates.
 
 [titans]: https://arxiv.org/abs/2501.00663
 
+![Titans](images/recurrent/titans.png)
+
 ## Other recurrent or hybrid architectures
 
-As already mentioned, a renaissance (or a [RNNaissance](https://people.idsia.ch/~juergen/rnnaissance.html) as some people called it when LSTM units were proposed in the late 1990s) of interest in RNNs has taken place recently motivated by the development of new architectures and training techniques that surpass some limitations of the transformer model. One of these limitations is the quadratic complexity of the self-attention mechanism, which makes it difficult to scale to very long sequences (context length) of thousands of tokens given the current memory capacity of GPUs. This quadratic complexity may be observed by considering that, given a sequence of length \(n\), the self-attention mechanism at each transformer head has to store \(n^2\) dot products. When used as generators of sequences at inference time, both architectures, RNN and transformers, have to process the sequence one token at a time, but at training time, the transformer can process the whole sequence at once in a parallel manner, while the RNN has to process it one token at a time to incrementally update its internal state. In addition to this, the softmax operation in the self-attention mechanism is also a bottleneck in terms of computational complexity; actually, different approaches have been proposed to mitigate (linearize) the impact of the softmax, thereby allowing for context lengths of up to one million tokens.
+As already mentioned, a renaissance (or a [RNNaissance](https://people.idsia.ch/~juergen/rnnaissance.html) as some people called it when LSTM units were proposed in the late 1990s) of interest in RNNs has taken place recently motivated by the development of new architectures and training techniques that surpass some limitations of the transformer model. One of these limitations is the quadratic complexity of the self-attention mechanism, which makes it difficult to scale to very long sequences (context length) of thousands of tokens given the current memory capacity of GPUs. This quadratic complexity may be observed by considering that, given a sequence of length \(n\), the self-attention mechanism at each transformer head has to compute and store \(n^2\) dot products. This means that the computation of every new next-token prediction is slower than the computation of the previous one. On the other hand, RNNs have a linear time complexity with respect to the sequence length and the memory requirements are constant, as they only need to store the current state. When used as generators of sequences at inference time, both architectures, RNN and transformers, have to process the sequence one token at a time, but at training time, the transformer can process the whole sequence at once in a parallel manner, while the RNN has to process it one token at a time to incrementally update its internal state. In addition to this, the softmax operation in the self-attention mechanism is also a bottleneck in terms of computational complexity; actually, different approaches have been proposed to mitigate (linearize) the impact of the softmax, thereby allowing for context lengths of up to one million tokens.
 
 All the aforementioned issues have motivated the search for the holy grail of a model that combines the best performance with parallelizable training and efficient inference, as represented by the following image taken from the [retentive network](https://arxiv.org/abs/2307.08621) (RetNet) paper:
 
@@ -94,7 +106,9 @@ Read a brief description of the RWKV architecture in this [:octicons-book-24: po
 
 Optionally, if you are interested in the mathematical details, you can read the [original paper](https://arxiv.org/abs/2305.13048).
 
-Recent times have also seen the development of other efficient architectures such as the already mentioned retentive networks or the [Mamba](https://arxiv.org/abs/2312.00752) model. The study of these architectures is out of the scope of this course and left as an exercise for the student. It is also interesting to note that there are some theoretical studies that try to determine to which degree both architectures can be considered equivalent; for example, it has been [shown](https://arxiv.org/abs/2401.06104) that transformers can be conceptualized as a special case of RNNs with unlimited hidden state size.
+Recent times have also seen the development of other efficient architectures such as the already mentioned retentive networks or the *state-space* [Mamba](https://arxiv.org/abs/2312.00752)-like models (SSMs). Hybrid architectures will probably be the most common in the near future, as they can combine the best of different words. For example, the Griffin architecture combines recurrent and state space models (RecurrentGemma is a well known example of this architecture), whereas Jamba, Granite or Nemotron's combine Mamba-like SSMs with transformers. 
+
+The study of these architectures is out of the scope of this course and left as an exercise for the student. It is also interesting to note that there are some theoretical studies that try to determine to which degree both architectures can be considered equivalent; for example, it has been [shown](https://arxiv.org/abs/2401.06104) that transformers can be conceptualized as a special case of RNNs with unlimited hidden state size.
 
 ### Additional techniques for speeding up neural networks
 
@@ -103,3 +117,5 @@ In parallel to the development of new architectures to overcome the limitations 
 # Time-series prediction
 
 Traditionally, one of the most common applications of RNNs has been time-series prediction. In this context, RNNs are used to predict the next value of a time series given the previous values or to classify the time series into different categories. With the advent of transformers, the use of RNNs for time-series prediction has decreased, but they are still used in many cases, especially when transformer's complexity bottlenecks become a problem. In order to make the use of transformers practical for time-series prediction, some techniques have been developed to make the self-attention mechanism more efficient; they are complemented with the addition of more elaborated task-oriented positional embeddings (see, for example, the Informer model) that explicitly encode the time information (day, month, season, etc.) of the data. Nevertheless, traditional, non-neural and considerably simpler techniques such as ARIMA can never be discarded, at least as a baseline to compare the performance of more complex models with.
+
+Starting from 2024, a number of pre-trained transformer models specifically designed for time-series prediction have been released, such as TimesFM, Chronos-2 or MOMENT. These models have been extensively trained on a wide variety of time-series datasets and exhibit strong zero-shot performance. 
