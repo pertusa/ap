@@ -1,6 +1,6 @@
 # Few and Zero-Shot Learning assignment
 
-> This assigment must be submitted by **February 19th** using Moodle
+> This assigment must be submitted by **March 6th** using Moodle
 
 ## Prototypical Networks
 
