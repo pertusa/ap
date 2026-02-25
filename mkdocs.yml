@@ -9,11 +9,11 @@ nav:
 - Summary: 'index.md'
 - From Shallow to Deep Neural Networks: 'dnn.md'
 - Convolutional Neural Networks: 'cnn.md'
-- Few and Zero Shot Learning: 'fsl.md'
 - Recurrent Networks: 'recurrent.md'
 - Fine-tuning and model compression: 'ftkd.md'
-- Deep Reinforcement Learning: 'drl.md'
+- Few and Zero Shot Learning: 'fsl.md'
 - Self-Supervised Learning: 'ssl.md'
+- Deep Reinforcement Learning: 'drl.md'
 
 markdown_extensions:
   - toc:
