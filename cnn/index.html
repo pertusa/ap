@@ -1,0 +1,1138 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../dnn/">
+      
+      
+        <link rel="next" href="../recurrent/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Convolutional Neural Networks - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#convolutional-neural-networks-cnn" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Convolutional Neural Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-first-session-of-this-block-6th-february-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. First session of this block (6th February 2026)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. First session of this block (6th February 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contents-to-prepare-before-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents to prepare before (online)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contents-for-the-presential-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents for the presential class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-second-session-of-this-block-13th-february-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Second session of this block (13th February 2026)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Second session of this block (13th February 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contents-to-prepare-before-online_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents to prepare before (online)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contents-for-the-presential-class_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents for the presential class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biblography" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biblography
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Biblography">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Textbooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webpages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Others
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-first-session-of-this-block-6th-february-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. First session of this block (6th February 2026)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. First session of this block (6th February 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contents-to-prepare-before-online" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents to prepare before (online)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contents-for-the-presential-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents for the presential class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-second-session-of-this-block-13th-february-2026" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Second session of this block (13th February 2026)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Second session of this block (13th February 2026)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contents-to-prepare-before-online_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents to prepare before (online)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contents-for-the-presential-class_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contents for the presential class
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#biblography" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Biblography
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Biblography">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#textbooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Textbooks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webpages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webpages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Others
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="convolutional-neural-networks-cnn">Convolutional Neural Networks (CNN)<a class="headerlink" href="#convolutional-neural-networks-cnn" title="Permanent link">&para;</a></h1>
+<p>Convolutional Neural Networks (CNNs) are specifically tailored for computer vision tasks (classification, detection, segmentation, synthesis, etc.) (See Chapter 10.1 <a href="https://www.bishopbook.com">[FDL2023]</a>). In 1989, LeCun proposed LeNet, a CNN for recognizing handwritten digits in images that was trained by backpropagation. It was widely recognised as the first CNN model achievieng outstanding results matching the performance of support vector machines, then a dominant approach in supervised learning. It laid the foundation for modern CNN architectures and demonstrated the power of convolutional layers and their ability to learn spatial hierarchies of features in an image, a principle that remains central in modern CNNs used for more complex tasks in computer vision.  </p>
+<p>However, CNNs got popular in 2012 when outperformed other models at ImageNet Challenge Competition in object classification/detection (here you can see a visualization hierarchy of <a href="https://observablehq.com/@mbostock/imagenet-hierarchy">1000 classes</a> from ImageNet). Specifically, the first CNN to achieve a breakthrough in the ImageNet Challenge was AlexNet (designed by Alex Krizhevsky, Ilya Sutskever, and Geoffrey Hinton). It significantly outperformed the other competitors in the 2012 challenge, reducing the error rate by a large margin compared to traditional image classification methods (see here the <a href="https://image-net.org/challenges/LSVRC/2012/results.html">results</a>. </p>
+<p>Today, the <a href="https://paperswithcode.com/sota/image-classification-on-imagenet">results</a> of the DNN (including CNNs and others as Visual Transformers) in ImageNet Challege Competion are achieving amazing results (more than 95% Top-1 accuracy).  </p>
+<h2 id="objectives">Objectives<a class="headerlink" href="#objectives" title="Permanent link">&para;</a></h2>
+<ul>
+<li>O1. Know and implement the fundamental components that conform a CNN.</li>
+<li>O2. Learn about modern convolutional networks that have set milestones in design aspects and how to train them</li>
+</ul>
+<h2 id="1-first-session-of-this-block-6th-february-2026">1.  First session of this block (6th February 2026)<a class="headerlink" href="#1-first-session-of-this-block-6th-february-2026" title="Permanent link">&para;</a></h2>
+<h3 id="contents-to-prepare-before-online">Contents to prepare before (online)<a class="headerlink" href="#contents-to-prepare-before-online" title="Permanent link">&para;</a></h3>
+<p>The contents of this first session are related to the objetive 1, being the following:</p>
+<h4 id="11-introduction">1.1 Introduction<a class="headerlink" href="#11-introduction" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 1 hour 🕒️ of personal working.]
+</code></pre></div>
+
+<ul>
+<li>
+<p>Convolutions </p>
+<ul>
+<li>Convolution (or cross-correlation operation): <a href="https://d2l.ai/chapter_convolutional-neural-networks/why-conv.html#convolutions">[DDL23, Section 7.1.3]</a></li>
+<li>Examples of kernels: <a href="https://setosa.io/ev/image-kernels/">image kernels</a></li>
+</ul>
+</li>
+<li>
+<p>Why CNN? <a href="https://udlbook.github.io/udlbook/">[UDL2023, Section 10 at beginning]</a>,<a href="https://d2l.ai/chapter_convolutional-neural-networks/why-conv.html#from-fully-connected-layers-to-convolutions">[DDL23, Section 7.1]</a>, <a href="https://d2l.ai/chapter_convolutional-neural-networks/why-conv.html#constraining-the-mlp">[DDL23, Section 7.1.2]</a>.</p>
+<ul>
+<li>Reduction of learning parameters </li>
+<li>Invariance: <a href="https://udlbook.github.io/udlbook/">[UDL2023, Section 10.1]</a>, <a href="https://d2l.ai/chapter_convolutional-neural-networks/why-conv.html#invariance">[DDL23, Section 7.1.2.1]</a></li>
+<li>Locality principle: <a href="https://d2l.ai/chapter_convolutional-neural-networks/why-conv.html#locality">[DDL23, Section 7.1.2.2]</a></li>
+</ul>
+<p><strong><em>NOTE</em>:</strong> 
+<strong>You don't need to go deeper into the mathematical formulation</strong></p>
+</li>
+<li>
+<p>Architecture of a CNN: a typical CNN has 4 layers: Input layer, Convolution layer, Pooling layer and Fully connected layer. </p>
+</li>
+</ul>
+<h4 id="12-convolutional-layer">1.2 Convolutional layer<a class="headerlink" href="#12-convolutional-layer" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 2 hours 🕒️ of personal working.]
+</code></pre></div>
+
+<p>A convolutional layer is the fundamental building block of a CNN. It is able to detect features such as edges, textures, or more complex patterns in higher layers from the input images, extracting characteristics from the previous layers (input layer, previous convolutions,…). A very interesting description of these layers could be found in this <a href="https://towardsdatascience.com/intuitively-understanding-convolutions-for-deep-learning-1f6f42faee1">web</a>. It includes the following concepts:</p>
+<ul>
+<li>Padding: Image (n,m), filter (f,f), padding p -&gt; Out (n+2<em>p-f+1, m+2</em>p-f+1)</li>
+<li>Strides: Image (n,m), filter (f,f), padding p, stride s -&gt; floor((n+2<em>p-f)/s+1), floor((m+2</em>p-f)/s+1)</li>
+<li>Convolutions over volumes</li>
+<li>Multiple filters</li>
+</ul>
+<p>After the convolution operation, the non-linearity is introduced by an <strong>activation function</strong> (Sigmoid, ReLU, etc.). It allows to learn more complex patterns.</p>
+<p>Some of the contents are extracted from this paper. A summarized version of the concepts can be found in the section 10.2 (except 10.2.6 and 10.2.8) from <a href="https://www.bishopbook.com">[FDL2023]</a>. Finally, to go in depth with these concepts, I recomnend you to read the section <a href="https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html#convolutions-for-images">Convolutions for images</a>, <a href="https://d2l.ai/chapter_convolutional-neural-networks/padding-and-strides.html#padding-and-stride">Padding and Stride</a> and <a href="https://d2l.ai/chapter_convolutional-neural-networks/channels.html#multiple-input-and-multiple-output-channels">Multiple Input and Multiple Output</a> from the Chapter 7 of the <a href="https://D2L.ai">[DDL2023]</a> book.</p>
+<p><strong>Notes:</strong> </p>
+<ul>
+<li>The result of a convolution filter with size <script type="math/tex">(f \cdot f</script>) to an image of <script type="math/tex">(h,w)</script> size with a padding <script type="math/tex">p</script> is:
+    <script type="math/tex">\left((h+2p-f)+1, (w+2p-f)+1)\right)</script>
+</li>
+<li>The result of a convolution filter with size <script type="math/tex">(f \cdot f</script> to an image of <script type="math/tex">(h,w)</script> size with a padding <script type="math/tex">p</script> and a stride of <script type="math/tex">s</script> is: <script type="math/tex"> \lfloor \frac{h+2p-f}{s}+1 \rfloor, \lfloor \frac{w+2p-f}{s}+1 \rfloor </script>
+</li>
+<li>Let <script type="math/tex">c_{l-1}</script> the number of channels of the previous layer <script type="math/tex">l</script> of a convolutonal layer, <script type="math/tex">f</script> the filter height and widht and <script type="math/tex">c</script> the number of filters in the layer. The number of parameters of the convulational layer is: <script type="math/tex">(f \cdot f \cdot c_{l-1} + 1) \cdot c_l</script>
+</li>
+</ul>
+<h5 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h5>
+<ol>
+<li>Calculate the size of the filters of the different layers (a,b,c), (d,e,f) and (g,h,i) of the following image:</li>
+</ol>
+<p><img alt="Alt text" src="../images/cnn/exercise1.svg" /></p>
+<h4 id="13-pooling-layer">1.3 Pooling layer<a class="headerlink" href="#13-pooling-layer" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 1 hour 🕒️ of personal working.]
+</code></pre></div>
+
+<p>The main function of the pooling layer is to reduce the spatial dimensions (i.e., width and height) of the input volume for the next convolutional layer. This reduction is achieved without affecting the number of filters in the layer. The pooling operation provides several benefits:</p>
+<ol>
+<li><strong>Reduction of computation</strong>: By reducing the dimensions of the feature maps, pooling layers decrease the number of parameters and computations in the network, leading to improved computational efficiency.</li>
+<li><strong>Reduction of Overfitting</strong>: Smaller input sizes mean fewer parameters, which can help reduce the overfitting in the network.</li>
+<li><strong>Invariance to Transformations</strong>: Pooling helps the network to become invariant to small transformations, distortions, and translations in the input image. This means that the network can recognize the object even if it's slightly modified in different input images.</li>
+</ol>
+<p>There are several types of pooling, but the most common are:</p>
+<ul>
+<li>Max Pooling</li>
+<li>Average Pooling</li>
+</ul>
+<p>A more detailed explanation could be found in the <a href="https://d2l.ai/chapter_convolutional-neural-networks/pooling.html#pooling">Pooling section</a> from the Chapter 7 of the <a href="https://D2L.ai">[DDL2023]</a> book.</p>
+<p><strong>Notes:</strong> </p>
+<ul>
+<li>There is not parameters to learn!</li>
+</ul>
+<h3 id="contents-for-the-presential-class">Contents for the presential class<a class="headerlink" href="#contents-for-the-presential-class" title="Permanent link">&para;</a></h3>
+<p>In the laboratory class (2 hours 🕒️ duration), we will see how certain components of a convolutional neural network are implemented <a href="https://drive.google.com/file/d/1WlGBOKq3LVNDCpRiT7hMgcA815ns75L8/view?usp=share_link"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.</p>
+<p>The aim is for the notebooks to be studied and modified. A later class will present a more advanced practice that will involve modifying and implementing CNN code.</p>
+<h2 id="2-second-session-of-this-block-13th-february-2026">2.  Second session of this block (13th February 2026)<a class="headerlink" href="#2-second-session-of-this-block-13th-february-2026" title="Permanent link">&para;</a></h2>
+<h3 id="contents-to-prepare-before-online_1">Contents to prepare before (online)<a class="headerlink" href="#contents-to-prepare-before-online_1" title="Permanent link">&para;</a></h3>
+<p>The contents of this first session are related to the objetive 2, being the following:</p>
+<h4 id="21-introduction">2.1 Introduction<a class="headerlink" href="#21-introduction" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 0,5 hours 🕒️ of personal working.]
+</code></pre></div>
+
+<p>A typical CNN has several convolution plus pooling layers, each responsible for feature extraction at different levels of abstraction: filters in first layer detect horizontal, vertical, and diagonal edge; filters in the next layer detect shapes; filters in the following layers detect collection of shapes, etc.</p>
+<p>A good starting point to understand the architecture of a simple CNN is to study the <a href="https://d2l.ai/chapter_convolutional-neural-networks/lenet.html#convolutional-neural-networks-lenet">LeNet model</a> designed in the 90s. LeNet, one of the earliest convolutional neural networks, was designed by Yann LeCun et al. for handwritten and machine-printed character recognition. It laid the groundwork for many of the CNN architectures that followed. LeNet is relatively small by today's standards, with approximately 60K parameters. This makes it computationally efficient and easy to understand. LeNet's architecture reduces width and height dimensions through its layers, while increasing the depth (number of filters). This reduction is achieved through the use of convolutional layers with strides and pooling layers, which also help in achieving spatial invariance to input distortions and shifts. The composition of layers is:</p>
+<ul>
+<li><code>Input Layer</code>: The original LeNet was designed for 32x32 pixel input images.</li>
+<li><code>Convolutional Layer</code>: The first convolutional layer uses a set of learnable filters. Each filter produces one feature map, capturing basic features like edges or corners. </li>
+<li><code>Pooling Layer</code>: Follows the first convolutional layer, reducing the spatial size (width and height) of the input volume for the next convolutional layer, reducing the number of parameters and computation in the network, and hence also controlling overfitting.</li>
+<li><code>Convolutional Layer</code>: A second convolutional layer that further processes the features from the previous pooling layer, detecting higher-level features.</li>
+<li><code>Pooling Layer</code>: this layer further reduces the dimensionality of the feature maps.</li>
+<li><code>Fully Connected Layer</code>: The flattened output from the previous layer is fed into a fully connected layer that begins the high-level reasoning process in the network.</li>
+<li><code>Fully Connected Layer</code>: An additional fully connected layer to continue the pattern analysis from the previous layer, leading to the final classification.</li>
+<li><code>Output Layer</code>: The final layer uses a softmax to output the probabilities for each class.</li>
+</ul>
+<p><strong>Notes</strong>
+* In some versions of LeNet, the sigmoid function and the hyperbolic tangent (tanh) function were used as the activation function in the convolutional and fully connected layers. </p>
+<h5 id="exercise_1">Exercise<a class="headerlink" href="#exercise_1" title="Permanent link">&para;</a></h5>
+<ol>
+<li>Calculate the number of the learning parameters of LeNet architecture</li>
+</ol>
+<h4 id="22-classic-networks">2.2. Classic networks<a class="headerlink" href="#22-classic-networks" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 1 hour 🕒️ of personal working.]
+</code></pre></div>
+
+<ul>
+<li>
+<p>Alexnet: <a href="https://d2l.ai/chapter_convolutional-modern/alexnet.html#alexnet">[DDL23, Section 8.1]</a></p>
+<ul>
+<li>AlexNet represents a significant milestone in the development of convolutional neural networks and played a pivotal role in demonstrating the power of deep learning for image recognition tasks.</li>
+<li>It was significantly larger and deeper than its predecessors like LeNet (with about 60M parameters).  This increase in scale allowed AlexNet to capture more complex and abstract features from images, contributing to its superior performance.</li>
+<li>It was one of the first CNNs to successfully use ReLU activation functions instead of the sigmoid or tanh functions that were common at the time. ReLUs help to alleviate the vanishing gradient problem, allowing deeper networks to be trained more effectively.</li>
+<li>It introduced overlapping pooling, where the pooling windows overlap with each other, as opposed to the non-overlapping pooling used in earlier architectures like LeNet. This was found to reduce overfitting and improve the network's performance.</li>
+<li>It introduced data augmentation techniques such as image translations, horizontal reflections, and alterations to the intensities of the RGB channels.</li>
+<li>Layers:<ul>
+<li><code>Input Layer</code>: The network accepts an input image size of 227x227 pixels with 3 color channels (RGB).</li>
+<li><code>First Convolutional Layer (Conv1)</code>: It uses 96 kernels of size 11x11 with a stride of 4 and applies ReLU activation. This large kernel size is chosen for the first convolutional layer to capture the low-level features from the larger input image.</li>
+<li><code>Max Pooling Layer</code>: kernel size of 3x3 and a stride of 2.</li>
+<li><code>Second Convolutional Layer (Conv2)</code>: It has 256 kernels of size 5x5, with padding applied to preserve the spatial dimensions. ReLU activation is used.</li>
+<li><code>Max Pooling Layer</code>: kernel size of 3x3 and a stride of 2.</li>
+<li><code>Third Convolutional Layer (Conv3)</code>: It has 384 kernels of size 3x3, with padding and ReLU activation.</li>
+<li><code>Fourth Convolutional Layer (Conv4)</code>: Similar to Conv3, it has 384 kernels of size 3x3 with padding and ReLU activation.</li>
+<li><code>Fifth Convolutional Layer (Conv5)</code>: It has 256 kernels of size 3x3, again with padding and ReLU activation.</li>
+<li><code>Max Pooling Layer</code>: kernel size of 3x3 and a stride of 2.</li>
+<li><code>Fully Connected Layer (FC6)</code>: This dense layer has 4096 neurons and includes ReLU activation and dropout with a dropout rate of 0.5 to prevent overfitting.</li>
+<li><code>Fully Connected Layer (FC7)</code>: Also consists of 4096 neurons with ReLU activation and dropout.</li>
+<li><code>Fully Connected Layer (FC8)</code>: / The final FC layer has 1000 neurons (corresponding to the 1000 classes in the ImageNet challenge) </li>
+<li><code>Output layer</code>: Softmax activation function to output the probability distribution over the classes.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>VGG-16 <a href="https://d2l.ai/chapter_convolutional-modern/vgg.html">[DDL23, Section 8.2]</a></p>
+<ul>
+<li>VGG-16, developed by the Visual Graphics Group (VGG) at Oxford, is known for its simplicity and depth. It was a runner-up in the 2014 ImageNet competition.</li>
+<li>The architecture's significant number of parameters (138M) makes it prone to overfitting, which is mitigated by using dropout and data augmentation techniques.</li>
+<li>The model is characterized by its use of 3x3 convolutional layers stacked on top of each other in increasing depth.</li>
+<li>It has an uniform architecture consistent of using 3x3 convolutional filters and 2x2 max-pooling layers throughout the network</li>
+<li>It duplicate filters, starting at 64, doubles after each max-pooling layer, following the sequence 64, 128, 256, 512, 512</li>
+<li>Layers:<ul>
+<li><code>Input Layer</code>: size 224x224 pixels with 3 channels (RGB)</li>
+<li><code>Conv1</code>: 2x [Conv3x3-64] + MaxPool (2x2, stride 2)</li>
+<li><code>Conv2</code>: 2x [Conv3x3-128] + MaxPool (2x2, stride 2)</li>
+<li><code>Conv3</code>: 3x [Conv3x3-256] + MaxPool (2x2, stride 2)</li>
+<li><code>Conv4</code>: 3x [Conv3x3-512] + MaxPool (2x2, stride 2)</li>
+<li><code>Conv5</code>: 3x [Conv3x3-512] + MaxPool (2x2, stride 2)</li>
+<li><code>FC1</code>: 4096 neurons, ReLU activation</li>
+<li><code>FC2</code>: 4096 neurons, ReLU activation</li>
+<li><code>FC3</code>: 1000 neurons (for 1000 ImageNet classes), Softmax activation</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="22-residual-networks">2.2. Residual networks<a class="headerlink" href="#22-residual-networks" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 0,5 hours 🕒️ of personal working.]
+</code></pre></div>
+
+<ul>
+<li>ResNet <a href="https://www.bishopbook.com">[FDL2023, Section 9.5]</a>, <a href="https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a">[TDS]</a>,<a href="https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-networks-resnet-and-resnext">[DDL2023, Section 8.6]</a><ul>
+<li>ResNet (Residual Network) was introduced by He et al. in 2015 and won the ImageNet competition by a significant margin.</li>
+<li>It addresses the vanishing gradient problem in deep neural networks through the use of residual blocks, enabling the training of networks that are much deeper than previous architectures. This is by using shortcut connections that allow gradients to flow through the network more effectively. his approach allows for the construction of very deep networks (ResNet variants come in depths of 50, 101, 152 layers, and more) without degradation in performance due to vanishing gradients.</li>
+<li>The core building block of ResNet that enables the network to learn identity functions, ensuring that deeper layers can at least perform as well as shallower ones.</li>
+<li>A <strong>residual block</strong> allows the input to a series of layers to be added to their output, facilitating the learning process by allowing the network to learn modifications to the identity mapping rather than the entire transformation from scratch. It is composed by:<ul>
+<li>Shortcut Connection that skips one or more layers.</li>
+<li>Two or three convolutional layers, each followed by batch normalization and a ReLU activation function.</li>
+<li>The output of the weighted layers is added to the shortcut connection's output. If the input and output dimensions are the same, the shortcut connection directly adds the input <script type="math/tex">x</script> to the output of the convolutional layers <script type="math/tex">F(x)</script>, resulting in <script type="math/tex">F(x) + x</script>. If the dimensions of <script type="math/tex">x</script> and <script type="math/tex">F(x)</script> do not match, a linear projection <script type="math/tex">W_s</script> is applied to <script type="math/tex">x</script> through a convolutional operation to match the dimensions. The resulting output is <script type="math/tex">F(x) + W_s x</script>.</li>
+</ul>
+</li>
+<li>Layers of ResNet-34:<ul>
+<li><code>Input Layer</code>: size 224x224 pixels with 3 channels (RGB) </li>
+<li><code>Convolutional Layer</code>: 7x7 convolutions, 64 filters, stride of 2, ReLU Activation</li>
+<li><code>Max Pooling</code>: 3x3, stride of 2</li>
+<li><code>Residual blocks</code>: The blocks in each stage have the same number of filters, but the number of filters increases as the network deepens.<ul>
+<li>3 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 64 filters each. Shortcut connections add the input of the block to its output without any modification since the dimensions match.</li>
+<li>4 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 128 filters each. The first block uses a stride of 2 for down-sampling and a 1x1 convolution in the shortcut connection to match the increased depth.</li>
+<li>6 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 256 filters each. Similar to the previous stage 2, the first block uses a stride of 2 for down-sampling, and the shortcut connection includes a 1x1 convolution to match the depth.</li>
+<li>3 Basic Residual Blocks: Each block has two 3x3 convolutional layers with 512 filters each. Again, the first block in this stage applies a stride of 2 for down-sampling, and the shortcut connection includes a 1x1 convolution to match the depth.</li>
+</ul>
+</li>
+<li><code>Global Average Pooling</code>: Applied after the last convolutional block to reduce spatial dimensions to 1x1.</li>
+<li><code>Fully Connected Layer</code>: Ends with a fully connected layer with 1000 neurons (for the 1000 classes of the ImageNet dataset), followed by a softmax activation for classification.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="alt text" src="../images/cnn/resnet34.jpg" />[From He et al. 2015]</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li><a href="https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578">1x1 convolution</a>: 1X1 Conv are used to increase/reduce the number of channels while introducing non-linearity.</li>
+</ul>
+<h4 id="23-inception">2.3. Inception<a class="headerlink" href="#23-inception" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 0,5 hours 🕒️ of personal working.]
+</code></pre></div>
+
+<p>The Inception architecture <a href="https://d2l.ai/chapter_convolutional-modern/googlenet.html#multi-branch-networks-googlenet">[DDL 2023, Section 8.4]</a>, particularly known from the GoogLeNet (Inception v1) model introduced in the 2014 ImageNet competition, is notable for its novel approach to convolutional network design. It introduced the "Inception module," a building block that allows the network to choose from different filter sizes and operations within the same layer. Some important notes:</p>
+<ul>
+<li>The Inception architecture revolutionizes the design of convolutional layers by incorporating multiple filter sizes within the same module, allowing the network to adapt to various spatial hierarchies of features in images.</li>
+<li>The Inception module:<ul>
+<li>1x1 Convolutions: To perform dimensionality reduction or increase, reducing the computational cost and the number of parameters in the network and to increase the network's ability to capture nonlinearities without a significant increase in computational complexity.</li>
+<li>Multiple Filter Sizes: Within each Inception module, convolutional operations with different filter sizes (e.g., 1x1, 3x3, and 5x5) are performed in parallel to capture information from various spatial extents. The outputs of these parallel paths are concatenated along the channel dimension, allowing the network to decide which filters to emphasize for each new input.</li>
+<li>Pooling: Inception modules also include a parallel pooling path, typically max pooling, followed by 1x1 convolutions to reduce dimensionality before concatenation.</li>
+<li>Dimensionality Reduction: Before applying larger convolutions (e.g., 3x3 and 5x5), 1x1 convolutions are used for dimensionality reduction, decreasing the computational burden.</li>
+</ul>
+</li>
+<li>The Inception modules' combination of parallel convolutional paths with different filter sizes and 1x1 convolutions for dimensionality management allows the network to be both wide (in terms of capturing a broad range of features) and deep (in terms of layers), while maintaining computational efficiency. This design philosophy has been extended and refined in subsequent versions of the Inception architecture, such as Inception v2, v3, and v4, each introducing further optimizations and improvements.</li>
+</ul>
+<p><img alt="Inception module" src="../images/cnn/inceptionModule.jpg" /></p>
+<p><img alt="GoogleNet" src="../images/cnn/googleNet.jpg" /> [From Szegedy et al. 2014]</p>
+<h4 id="24-computational-efficient-networks">2.4. Computational efficient networks<a class="headerlink" href="#24-computational-efficient-networks" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 1 hour 🕒️ of personal working.]
+</code></pre></div>
+
+<ul>
+<li>
+<p>MobileNet <a href="https://medium.com/@godeep48/an-overview-on-mobilenet-an-efficient-mobile-vision-cnn-f301141db94d">[Medium]</a></p>
+<ul>
+<li>The key innovation is in their efficient architectural design, aimed at <strong>reducing computational cost while maintaining high performance</strong>, especially on mobile and embedded devices.</li>
+<li>
+<p>The core innovation is the use of <strong><a href="https://machinelearningmastery.com/using-depthwise-separable-convolutions-in-tensorflow/">depthwise separable convolutions</a></strong>.</p>
+<ul>
+<li>Instead of using standard convolutions, it employs depthwise separable convolutions, which use a standard convolution into a depthwise convolution and a 1x1 pointwise convolution.
+*The input is first processed by a depthwise convolution <script type="math/tex">(n_w \cdot n_h \cdot n_c)</script>, applying a single filter per input channel. This is followed by a pointwise convolution <script type="math/tex">(1 \cdot 1 \cdot n_c')</script> convolutions that combines the outputs of the depthwise convolution, adjusting the depth as necessary.</li>
+<li>The computational cost is significantly reduced compared to standard convolutions.</li>
+</ul>
+</li>
+<li>
+<p>Example: </p>
+</li>
+</ul>
+</li>
+</ul>
+<p>For the following convolution, the number of calculations is <code>filter parameters</code> x <code>filter positions</code> x <code>humber of filters</code>. This is (3 x 3 x 3) x (10 x 10) x 5 = 13.500 operations.</p>
+<p><img alt="alt text" src="../images/cnn/normalConvolution.png" /></p>
+<p>In case, we would use depthwise separable convolutions, as in the following figure:</p>
+<p><img alt="alt text" src="../images/cnn/depthwiseConvolution-1.png" /></p>
+<p>The number of calculations will be reduced. First, the depthwise convolutions are applied for each channel obtaining that the number of calculations is again <code>filter parameters</code> x <code>filter positions</code> x <code>humber of filters</code>. This is (3 x 3) x (10 x 10) x 3 = 2.700 operations. Moreover, the pointwise (1x1) convolution, would be: (1 x 1 x 3) x (10 x 10) x 5 = 1.500 operations. Added to the previous calculations, we have a total of 4.200 operations, about a 30% of the previous operations.</p>
+<p><img alt="alt text" src="../images/cnn/depthwiseConvolution-2.png" /></p>
+<ul>
+<li>
+<p>MobileNetV2:</p>
+<ul>
+<li>It introduces residual connections similar to those in ResNet, but within the framework of inverted residual blocks. These connections allow the input to bypass one or more layers, facilitating the flow of gradients during training and mitigating the vanishing gradient problem.</li>
+<li>Inverted Residual Blocks<ul>
+<li><code>Pointwise convolution</code>: Each block starts with a 1x1 convolution that expands the input's depth, increasing the representation capacity and allowing the network to learn more complex functions.</li>
+<li><code>Depthwise Convolution</code>: Follows the expansion layer, applying spatial filtering within each channel.</li>
+<li><code>Projection Layer</code>: A 1x1 convolution that projects the expanded feature map back to a lower dimension, reducing the size and computational cost of the feature map.</li>
+</ul>
+</li>
+<li>This expansion-projection strategy increases the network's expressiveness while keeping the computational cost low by expanding the feature space only temporarily within the block.</li>
+</ul>
+</li>
+<li>
+<p>EfficientNet <a href="https://medium.com/mlearning-ai/understanding-efficientnet-the-most-powerful-cnn-architecture-eaeb40386fad">[Medium]</a>:  </p>
+<ul>
+<li>These architectures systematically scale up CNNs in a more structured manner to achieve better efficiency and accuracy. The key innovation of EfficientNet is the use of a compound scaling method that uniformly scales network <strong>width</strong>, <strong>depth</strong>, and <strong>resolution</strong> with a set of fixed scaling coefficients.</li>
+<li>It is able to achieve state-of-the-art accuracy with significantly fewer parameters and FLOPs (floating-point operations per second) compared to previous architectures.</li>
+</ul>
+</li>
+</ul>
+<h4 id="25-image-augmentation">2.5. Image augmentation<a class="headerlink" href="#25-image-augmentation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code>[This part can take about 0,25 hours 🕒️ of personal working.]
+</code></pre></div>
+
+<p>Finally, <a href="https://d2l.ai/chapter_computer-vision/image-augmentation.html#image-augmentation">image augmentation</a> is a technique used to enhance the diversity of a training dataset without actually collecting new images. This is achieved by applying a series of random transformations to the existing images in the dataset, such as rotations, translations, flips, scaling, shearing, and color variations. These transformations produce altered versions of the images, which help the model generalize better from the training data, making it more robust to variations it might encounter in real-world data.</p>
+<p>The benefits are:
+    * Enhanced Generalization: Augmentation increases the diversity of the training set, helping the model generalize better to unseen data.
+    * Reduced Overfitting: By providing varied examples, it prevents the model from memorizing specific images.
+    * Improved Robustnes: Models become more robust to variations in input data, such as different angles, lighting conditions, and occlusions.</p>
+<h3 id="contents-for-the-presential-class_1">Contents for the presential class<a class="headerlink" href="#contents-for-the-presential-class_1" title="Permanent link">&para;</a></h3>
+<p>In the laboratory class (2 hours 🕒️ duration), we will implement a convolutional neural network <a href="https://colab.research.google.com/drive/1g8nchgUHo-pMCqNXpwn-7nNQWxTyXkAE?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab\"></a>.</p>
+<p>The aim is for the notebook to be modified.</p>
+<h2 id="biblography">Biblography<a class="headerlink" href="#biblography" title="Permanent link">&para;</a></h2>
+<h3 id="textbooks">Textbooks<a class="headerlink" href="#textbooks" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="https://D2L.ai">[DDL2023]</a> Zhang, Aston and Lipton, Zachary C. and Li, Mu and Smola, Alexander J. Dive into Deep Learning. Cambridge University Press (2023)</li>
+<li><a href="https://udlbook.github.io/udlbook/">[UDL2023]</a> Simon J.D. Prince. Understandig Deep Learning. MIT Press (2023).</li>
+<li><a href="https://www.bishopbook.com">[FDL2023]</a> Bishop, C.M., Bishop, H. (2024). Convolutional Networks. In: Deep Learning. Springer, Cham. https://doi.org/10.1007/978-3-031-45468-4_10 (2023)</li>
+</ol>
+<h3 id="webpages">Webpages<a class="headerlink" href="#webpages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://cs231n.github.io/convolutional-networks/">https://cs231n.github.io/convolutional-networks/</a>: CNN fundamentals</li>
+<li><a href="https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a">https://towardsdatascience.com/residual-networks-resnets-cb474c7c834a</a>: ResNet</li>
+<li><a href="https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578">https://medium.com/analytics-vidhya/talented-mr-1x1-comprehensive-look-at-1x1-convolution-in-deep-learning-f6b355825578</a>:1x1 convolution</li>
+</ul>
+<h3 id="others">Others<a class="headerlink" href="#others" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://arxiv.org/pdf/1603.07285.pdf">https://arxiv.org/pdf/1603.07285.pdf</a>: Extra information for Convolutional parameters</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

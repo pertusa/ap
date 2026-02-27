@@ -1,0 +1,847 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../cnn/">
+      
+      
+        <link rel="next" href="../ftkd/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Recurrent Networks - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#recurrent-neural-networks" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Recurrent Networks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recurrent-neural-networks_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recurrent neural networks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-short-term-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Long short-term memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-value-memories-in-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key-value memories in neural networks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key-value memories in neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#learned-memory-during-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learned memory during training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-write-memory-during-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read-write memory during inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recurrent-memory-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recurrent memory transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titans-test-time-long-term-memory-in-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Titans: test-time long-term memory in neural networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-recurrent-or-hybrid-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other recurrent or hybrid architectures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other recurrent or hybrid architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-techniques-for-speeding-up-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional techniques for speeding up neural networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recurrent-neural-networks_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recurrent neural networks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-short-term-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Long short-term memory
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-value-memories-in-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key-value memories in neural networks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key-value memories in neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#learned-memory-during-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learned memory during training
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#read-write-memory-during-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read-write memory during inference
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recurrent-memory-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recurrent memory transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titans-test-time-long-term-memory-in-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Titans: test-time long-term memory in neural networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-recurrent-or-hybrid-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Other recurrent or hybrid architectures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Other recurrent or hybrid architectures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additional-techniques-for-speeding-up-neural-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional techniques for speeding up neural networks
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="recurrent-neural-networks">Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks" title="Permanent link">&para;</a></h1>
+<p>Recurrent neural networks (RNNs) are a class of neural networks that are designed to work with sequences of data, such as time series, text or audio. Unlike transformers, which process the entire input sequence at once, RNNs process the input sequence one element at a time, while maintaining an internal state that encodes information about the elements processed so far. This internal state is updated at each step of the sequence, and used to inform the next layer (in the case of middle layers) or the output of the network in the case of the last layer. The first uses of RNNs can be traced back to the 1980s, but soon it was discovered that they were difficult to train due to the vanishing gradient problem, which made them unable to learn the long-term dependencies that happen in many sequences when the output at a given time step depends on the input at a much earlier time step. This problem was partially solved with the introduction of the <em>long short-term memory</em> (LSTM) units that were designed to replace conventional neurons in previous RNNs. However, the arrival of transformers in 2017 made RNNs less popular, although not completely obsolete. Recently, RNNs have experienced a resurgence of interest due to the development of new architectures and training techniques, such as the <em>receptance weighted key value</em> (RWKV) model, that have made them more efficient and easier to train.</p>
+<h2 id="recurrent-neural-networks_1">Recurrent neural networks<a class="headerlink" href="#recurrent-neural-networks_1" title="Permanent link">&para;</a></h2>
+<p>To learn more about RNNs, proceed to read chapter 9 of the book "Speech and Language Processing" by Daniel Jurafsky and James H. Martin following <a href="https://web.archive.org/web/20240125024201/https://web.stanford.edu/~jurafsky/slp3/9.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> this link</a>. Note that the link points to an archived version of the book, as the book is not finished yet and chapter contents change frequently. Althoug RNNs can be applied to multiple types of sequences, the book focuses on their application to text. Nevertheless, you will not find it difficult to apply the concepts to other types of non-symbolic sequences such as numerical time series.</p>
+<p>Firstly, study <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> sections 9.1 to 9.3 (estimated time: 🕑 2 hours). Mind some obsolete statements in the text, such as the claim at the end of section 9.3.3 that "this simple architecture underlies state-of-the-art approaches to applications such as machine translation, summarization, and question answering" which is no longer true. Except for the introduction of the recurrence in the architecture, most of the ideas (matrix multiplications to move from one vector space to another, activation functions, softmax predictors at the output, cross-entropy loss, representation of inputs as word embeddings, etc.) will not be new to you if you are already familiar with the basics of neural networks for natural language processing.  </p>
+<h2 id="long-short-term-memory">Long short-term memory<a class="headerlink" href="#long-short-term-memory" title="Permanent link">&para;</a></h2>
+<p>Skip section 9.4 and jump next to <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> section 9.5, which introduces the Hochreiter and Schmidhuber's LSTM units (first proposed in 1997), and lastly to section  <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> 9.6 (estimated time: 🕑 1 hour). Now, skim through the rest of the chapter for a couple of minutes only: you will see that encoder-decoder architectures are also viable with RNNs and that an attention mechanism (not exactly the same as the one used in transformers) can be used to determine which parts of the representations (states) learned by the encoder are more relevant to the decoder at each time step.</p>
+<p>Although we will not delve into its details, the <a href="https://arxiv.org/abs/2405.04517">xLSTM</a> architecture is a development proposed in 2024 that extends the LSTM architecture by introducing a new form of (exponential) gating mechanism and larger memory cells. The resulting model is able to capture longer-term dependencies and may even surpass transformers in some tasks while being more efficient in terms of computational resources.</p>
+<p><img alt="xLSMT" src="../images/recurrent/xlstm.png" /></p>
+<h2 id="key-value-memories-in-neural-networks">Key-value memories in neural networks<a class="headerlink" href="#key-value-memories-in-neural-networks" title="Permanent link">&para;</a></h2>
+<p>RNNs' state is a form of memory that is updated at each time step. In principle, specially when using LSTM cells, the states should be able to indefinitely store information from the past. However, in practice, the information stored in the state is limited by constraints in the architecture and the training process. This has led to the development of architectures that incorporate more explicit forms of memory, for example by using key-value memories. In this context, the key-value memory is a data structure that stores a set of key-value pairs, both represented as vectors; another vector known as the query is used to retrieve the value associated with a given key by computing the similarity between the query and the keys. In our settings, usually the query is not used to only retrieve one single key, but a combination of a number of keys weighted by their similarity to the query.</p>
+<p>A lot of proposals exist on how to augment recurrent networks or transformers with more explicit memories in order to overcome some of the challenges they face when dealing with long-context reasoning, factual recall, and efficient storage of associative knowledge. The idea of incorporating memory into neural networks is not new and dates back to associative memories such as the <em>Hopfield networks</em> in the seventies and eighties, and, more recently, to the <em>neural Turing machines</em> and the <a href="https://jaspock.github.io/funicular/dnc.html">differentiable neural computers</a> (DNC) in the last decade. Here, we discuss a series of more recent approaches. </p>
+<h3 id="learned-memory-during-training">Learned memory during training<a class="headerlink" href="#learned-memory-during-training" title="Permanent link">&para;</a></h3>
+<p>In this <a href="https://ai.meta.com/research/publications/memory-layers-at-scale/">approach</a>, memory contents are learned and fixed during training, and then used as-is during inference. The memory layer consists of learnable key-value pairs, which are stored as model parameters. These key-value pairs are optimized during training and remain unchanged during inference. Some of the feed-forward layers in the transformer blocks are replaced with memory layers, which retrieve relevant knowledge from the memory bank and incorporate it into the residual stream. It seems to be crucial to replace only some feed-forward layers with memory layers, as replacing all layers with memory-based mechanisms leads to suboptimal performance. Note that feed-forward networks already act as implicit associative memories by mapping inputs to outputs, but explicit memory layers perform a more direct selection of relevant knowledge from a structured key-value store with potentially millions of entries.</p>
+<p>A memory lookup operation follows the following steps. First, the input embedding is transformed into a query vector <script type="math/tex">q</script>. Then, the top-<script type="math/tex">k</script> keys are selected from the memory bank by efficiently computing the dot-product similarity between the query and the keys. After this, the softmax function is applied to the dot products to obtain the relevance of each memory slot. Finally, the output is computed as a weighted sum of the values associated with the top-<script type="math/tex">k</script> keys.</p>
+<p><img alt="Memory layers at scale" src="../images/recurrent/metascale.png" /></p>
+<h3 id="read-write-memory-during-inference">Read-write memory during inference<a class="headerlink" href="#read-write-memory-during-inference" title="Permanent link">&para;</a></h3>
+<p>Unlike the previous approach, this method does not pre-train the memory values. Instead, it learns parameters that control what to store and retrieve dynamically during inference. The memory contents are updated as the model processes input sequences. DNCs are a well-known example of this. A more recent approach is the <a href="https://arxiv.org/abs/2502.06049v1">LM2</a> model. Interestingly, the LM2 model works as an adaptation of the LSTM principles to memory-based models in the sense that it uses an input gate to control the amount of new information that is stored in the memory, a forget gate to control the amount of information that is kept from the previous memory state, and an output gate to control the amount of information that is read from the memory and used to update the output of the model.</p>
+<p>In the LM2 model, the memory module consists of a bank of vector slots, each of which stores a simple vector rather than explicit key-value pairs. For each slot in the memory bank, learnable projection matrices are used to generate both keys and values. Similarly, input token embeddings are projected into query vectors via another learned linear transformation. Using the standard attention mechanism, queries are matched against keys to compute attention scores, which then weight the corresponding memory values to produce the output of the memory module <script type="math/tex">E_{\text{mem}}</script>. Optionally, only the top-<script type="math/tex">k</script> memory slots may be considered when computing the output of the memory module. Note that <script type="math/tex">E_{\text{mem}}</script> integrates information from the
+input and the memory.</p>
+<p>The final output of the transformer block, <script type="math/tex">E_{\text{out}}</script>, is computed by combining <script type="math/tex">E_{\text{mem}}</script> with the output of the standard self-attention mechanism:</p>
+<p>
+<script type="math/tex; mode=display">
+E_{\text{out}} = E_{\text{attn}} + E_{\text{gated}}
+</script>
+</p>
+<p>where <script type="math/tex">E_{\text{gated}}</script> is the memory-modulated contribution, scaled by a learned scalar gate <script type="math/tex"> g_{\text{out}} </script>, which is obtained through another trainable projection:</p>
+<p>
+<script type="math/tex; mode=display">
+E_{\text{gated}} = g_{\text{out}} \cdot E_{\text{mem}}
+</script>
+</p>
+<p>At each step, the memory state is updated dynamically as follows:</p>
+<p>
+<script type="math/tex; mode=display">
+M_{t+1} = g_{\text{in}} \cdot \tanh(E_{\text{mem}}) + g_{\text{forget}} \cdot M_t
+</script>
+</p>
+<p>where:</p>
+<ul>
+<li>
+<script type="math/tex"> g_{\text{in}} </script> and <script type="math/tex"> g_{\text{forget}} </script> are learned gating functions obtained via trainable projection matrices,</li>
+<li>and <script type="math/tex"> M_t </script> is the memory state at step <script type="math/tex"> t </script>.</li>
+</ul>
+<p>This update rule determines how much of the retrieved memory content is incorporated into the new memory state and how much of the existing memory is retained.</p>
+<p><img alt="LM2" src="../images/recurrent/lm2.png" /></p>
+<h3 id="recurrent-memory-transformer">Recurrent memory transformer<a class="headerlink" href="#recurrent-memory-transformer" title="Permanent link">&para;</a></h3>
+<p>Additionally, recent developments in memory-augmented transformers have introduced new architectures that further enhance long-context processing. The <em>recurrent memory transformer</em> (RMT) introduces a segment-level recurrent memory mechanism, allowing the model to store and transfer information across long sequences without modifying the core transformer structure. It achieves this by adding special memory tokens that persist across segments, effectively extending the model's context length. Building upon this, the <a href="https://arxiv.org/abs/2407.04841">associative recurrent memory transformer</a> (ARMT) enhances RMT by incorporating associative memory, enabling more efficient information storage and retrieval. This approach combines self-attention with memory updates, improving long-term reasoning and factual recall in extremely long-context tasks.</p>
+<p><img alt="ARMT" src="../images/recurrent/armt.png" /></p>
+<h3 id="titans-test-time-long-term-memory-in-neural-networks">Titans: test-time long-term memory in neural networks<a class="headerlink" href="#titans-test-time-long-term-memory-in-neural-networks" title="Permanent link">&para;</a></h3>
+<p><a href="https://arxiv.org/abs/2501.00663">Titans</a> architecture, published in 2025, integrates a <em>hierarchical memory system</em> into a transformer framework, enabling efficient long-term storage and retrieval of past information. It introduces three interconnected memory components: <em>short-term attention-based memory</em>, which processes immediate dependencies; <em>long-term neural memory</em>, which retains historical context beyond the local window; and <em>persistent memory</em>, which stores task-specific knowledge. This layered memory design allows Titans to surpass conventional transformers in handling extensive sequences while maintaining fast inference and scalability.</p>
+<p>A core innovation in Titans is its <em>memory decay mechanism</em>, which functions similarly to a forget gate in recurrent models. This decay selectively removes outdated information while preserving relevant past data, dynamically adapting based on the sequence. Unlike fixed-size memory compression methods in standard transformers, Titans utilize <em>adaptive decay functions</em> that regulate memory retention over time. This ensures that memory is continuously updated while preventing overflow, addressing a key limitation of long-context processing in transformers.</p>
+<p>Titans employ a <em>surprise-based learning approach</em> to prioritize memory updates. When encountering new input, the model evaluates its divergence from expected patterns, using a gradient-based surprise metric to determine its relevance. Information that significantly deviates from learned patterns is reinforced in memory, while predictable or redundant data is gradually phased out. By incorporating this mechanism into transformer layers, Titans effectively balance memory utilization, allowing for both <em>dynamic adaptation and efficient long-term recall</em> within a scalable attention-based framework.</p>
+<p><img alt="Titans" src="../images/recurrent/titans.png" /></p>
+<h2 id="other-recurrent-or-hybrid-architectures">Other recurrent or hybrid architectures<a class="headerlink" href="#other-recurrent-or-hybrid-architectures" title="Permanent link">&para;</a></h2>
+<p>As already mentioned, a renaissance (or a <a href="https://people.idsia.ch/~juergen/rnnaissance.html">RNNaissance</a> as some people called it when LSTM units were proposed in the late 1990s) of interest in RNNs has taken place recently motivated by the development of new architectures and training techniques that surpass some limitations of the transformer model. One of these limitations is the quadratic complexity of the self-attention mechanism, which makes it difficult to scale to very long sequences (context length) of thousands of tokens given the current memory capacity of GPUs. This quadratic complexity may be observed by considering that, given a sequence of length <script type="math/tex">n</script>, the self-attention mechanism at each transformer head has to compute and store <script type="math/tex">n^2</script> dot products. This means that the computation of every new next-token prediction is slower than the computation of the previous one. On the other hand, RNNs have a linear time complexity with respect to the sequence length and the memory requirements are constant, as they only need to store the current state. When used as generators of sequences at inference time, both architectures, RNN and transformers, have to process the sequence one token at a time, but at training time, the transformer can process the whole sequence at once in a parallel manner, while the RNN has to process it one token at a time to incrementally update its internal state. In addition to this, the softmax operation in the self-attention mechanism is also a bottleneck in terms of computational complexity; actually, different approaches have been proposed to mitigate (linearize) the impact of the softmax, thereby allowing for context lengths of up to one million tokens.</p>
+<p>All the aforementioned issues have motivated the search for the holy grail of a model that combines the best performance with parallelizable training and efficient inference, as represented by the following image taken from the <a href="https://arxiv.org/abs/2307.08621">retentive network</a> (RetNet) paper:</p>
+<p><img alt="Retentive Network" src="../images/recurrent/retnet.png" /></p>
+<p>As an example, the RWKV (for <em>receptance weighted key value</em>, pronounced as <em>RaWKuV</em>) architecture combines efficient parallelizable training with the efficient inference capabilities of RNNs. This architecture employs a linear attention mechanism, enabling the model to be formulated as either a transformer or an RNN. This dual formulation allows for parallelized computations during training while maintaining constant computational and memory complexity during inference. Models based on RWKV with billions of parameters have been trained, resulting in the largest RNNs to date. In preliminary experiments, the RWKV architecture has been shown to be competitive with similarly sized transformers. </p>
+<p>Read a brief description of the RWKV architecture in this <a href="https://johanwind.github.io/2023/03/23/rwkv_overview.html"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> post</a> by Johan Sokrates Wind (estimated time: 🕑 30 minutes). We will not delve into the mathematical details of the RWKV architecture in this course, but see in the next figure a schematic representation of its underlying architecture which proves that it is not so different from the transformer architecture, at least at bird's eye view:</p>
+<p><img alt="RWKV architecture" src="../images/recurrent/rwkv.png" /></p>
+<p>Optionally, if you are interested in the mathematical details, you can read the <a href="https://arxiv.org/abs/2305.13048">original paper</a>.</p>
+<p>Recent times have also seen the development of other efficient architectures such as the already mentioned retentive networks or the <em>state-space</em> <a href="https://arxiv.org/abs/2312.00752">Mamba</a>-like models (SSMs). Hybrid architectures will probably be the most common in the near future, as they can combine the best of different words. For example, the Griffin architecture combines recurrent and state space models (RecurrentGemma is a well known example of this architecture), whereas Jamba, Granite or Nemotron's combine Mamba-like SSMs with transformers. </p>
+<p>The study of these architectures is out of the scope of this course and left as an exercise for the student. It is also interesting to note that there are some theoretical studies that try to determine to which degree both architectures can be considered equivalent; for example, it has been <a href="https://arxiv.org/abs/2401.06104">shown</a> that transformers can be conceptualized as a special case of RNNs with unlimited hidden state size.</p>
+<h3 id="additional-techniques-for-speeding-up-neural-networks">Additional techniques for speeding up neural networks<a class="headerlink" href="#additional-techniques-for-speeding-up-neural-networks" title="Permanent link">&para;</a></h3>
+<p>In parallel to the development of new architectures to overcome the limitations of transformers, scaling transformers to longer sequences is one of the most active research areas. Once the attention mechanism is identified as the primary bottleneck, techniques like FlashAttention exploit specific GPU memory characteristics to achieve significant memory savings and runtime acceleration without resorting to approximations, thereby preserving the integrity of the attention's calculations. Two notable techniques, FlashAttention and its more advanced successor FlashAttention-2, further leverage GPU properties to significantly enhance processing speeds, potentially increasing the speed of the models by factors of 4 to 8 times compared to models without these optimizations. These mechanisms are now integrated into many deep learning libraries.</p>
+<h1 id="time-series-prediction">Time-series prediction<a class="headerlink" href="#time-series-prediction" title="Permanent link">&para;</a></h1>
+<p>Traditionally, one of the most common applications of RNNs has been time-series prediction. In this context, RNNs are used to predict the next value of a time series given the previous values or to classify the time series into different categories. With the advent of transformers, the use of RNNs for time-series prediction has decreased, but they are still used in many cases, especially when transformer's complexity bottlenecks become a problem. In order to make the use of transformers practical for time-series prediction, some techniques have been developed to make the self-attention mechanism more efficient; they are complemented with the addition of more elaborated task-oriented positional embeddings (see, for example, the Informer model) that explicitly encode the time information (day, month, season, etc.) of the data. Nevertheless, traditional, non-neural and considerably simpler techniques such as ARIMA can never be discarded, at least as a baseline to compare the performance of more complex models with.</p>
+<p>Starting from 2024, a number of pre-trained transformer models specifically designed for time-series prediction have been released, such as TimesFM, Chronos-2 or MOMENT. These models have been extensively trained on a wide variety of time-series datasets and exhibit strong zero-shot performance. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

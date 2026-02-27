@@ -1,0 +1,794 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ssl/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Deep Reinforcement Learning - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deep-reinforcement-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deep Reinforcement Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals-of-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamentals of Reinforcement Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fundamentals of Reinforcement Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Players
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-decision-making-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Decision-Making Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paradigms-in-deep-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paradigms in Deep Reinforcement Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-study
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamentals-of-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamentals of Reinforcement Learning
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fundamentals of Reinforcement Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#understanding-the-players" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the Players
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-decision-making-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Decision-Making Process
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Concepts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paradigms-in-deep-reinforcement-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paradigms in Deep Reinforcement Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-study" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-study
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="deep-reinforcement-learning">Deep Reinforcement Learning<a class="headerlink" href="#deep-reinforcement-learning" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Read this page and follow the instructions before the lecture.</p>
+</blockquote>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Reinforcement Learning (RL) is a type of machine learning where an agent learns to make decisions by interacting with an environment. The agent receives feedback in the form of rewards, which it uses to improve its decision-making over time.</p>
+<p>Deep Reinforcement Learning (DRL) is an extension of RL that incorporates deep learning techniques. Instead of relying on handcrafted features or representations of the environment, DRL algorithms use deep neural networks to directly learn from raw sensory input, enabling them to tackle more complex tasks and achieve superior performance.</p>
+<p>DRL adds more advantages by enabling high-dimensional or infinite state and action spaces through the use of universal function approximators such as neural networks. This allows DRL algorithms to handle a wide range of tasks that were previously infeasible with traditional RL methods.</p>
+<h2 id="fundamentals-of-reinforcement-learning">Fundamentals of Reinforcement Learning<a class="headerlink" href="#fundamentals-of-reinforcement-learning" title="Permanent link">&para;</a></h2>
+<p>RL is a paradigm in machine learning where an agent learns to make decisions by interacting with an environment. Unlike supervised learning, where the model learns from labeled data, or unsupervised learning, where the model identifies patterns in unlabeled data, RL takes a very different approach. Instead of learning from explicit examples, here the agent learns through a process of <em>trial and error</em>, receiving feedback in the form of rewards based on its actions.</p>
+<h3 id="understanding-the-players">Understanding the Players<a class="headerlink" href="#understanding-the-players" title="Permanent link">&para;</a></h3>
+<p>In this setup, we have two main players: the <strong>agent</strong> and the <strong>environment</strong>. The agent is the learner, the one making decisions, while the environment is everything the agent interacts with. Together, they create a dynamic system where actions lead to consequences.</p>
+<h3 id="the-decision-making-process">The Decision-Making Process<a class="headerlink" href="#the-decision-making-process" title="Permanent link">&para;</a></h3>
+<p>At each step of the process, the agent observes the current <strong>state</strong> of the environment, selects an <strong>action</strong> based on its strategy or policy, executes that action, and receives a <strong>reward</strong> or penalty from the environment. This feedback loop is fundamental to the learning process.</p>
+<h3 id="key-concepts">Key Concepts<a class="headerlink" href="#key-concepts" title="Permanent link">&para;</a></h3>
+<h4 id="states-actions-and-rewards">States, Actions, and Rewards<a class="headerlink" href="#states-actions-and-rewards" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>State (S)</strong>: The representation of the environment at a given moment.</li>
+<li><strong>Action (A)</strong>: The decision made by the agent based on the current state.</li>
+<li><strong>Reward (R)</strong>: The feedback received from the environment after taking an action.</li>
+</ul>
+<h4 id="policies-and-value-functions">Policies and Value Functions<a class="headerlink" href="#policies-and-value-functions" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Policy (π)</strong>: The strategy or rule the agent uses to select actions in different states.</li>
+<li><strong>Value Function (V)</strong>: The expected cumulative reward an agent can achieve from a particular state.</li>
+<li><strong>Q-Value Function (Q)</strong>: The expected cumulative reward an agent can achieve by taking a particular action in a given state.</li>
+</ul>
+<h3 id="paradigms-in-deep-reinforcement-learning">Paradigms in Deep Reinforcement Learning<a class="headerlink" href="#paradigms-in-deep-reinforcement-learning" title="Permanent link">&para;</a></h3>
+<p>The ultimate goal of reinforcement learning is to find an optimal strategy or policy that maximizes the cumulative rewards over time. To attain this goal, there are different types of methods.</p>
+<h4 id="value-based-methods">Value-Based Methods<a class="headerlink" href="#value-based-methods" title="Permanent link">&para;</a></h4>
+<p>Value-based methods aim to learn the optimal value function, which estimates the expected gain of taking an action in a given state and following a specific policy thereafter. Deep Q-Networks (DQN) is a prominent example of a value-based method, where a deep neural network is trained to approximate the Q-function.</p>
+<h4 id="policy-based-methods">Policy-Based Methods<a class="headerlink" href="#policy-based-methods" title="Permanent link">&para;</a></h4>
+<p>Policy-based methods directly learn the policy, i.e., the mapping from states to actions, without explicitly estimating the value function. This approach can be more effective in high-dimensional or continuous action spaces. Examples include the REINFORCE algorithm and its variants, which optimize the neural network parameters to maximize expected rewards from a given state.</p>
+<h4 id="actor-critic-methods">Actor-Critic Methods<a class="headerlink" href="#actor-critic-methods" title="Permanent link">&para;</a></h4>
+<p>Actor-Critic methods combine aspects of both value-based and policy-based approaches. They maintain two neural networks: one (the actor) learns the policy, while the other (the critic) learns the value function. The critic provides feedback to the actor by evaluating the chosen actions, helping to guide the policy towards better decisions.</p>
+<h2 id="self-study">Self-study<a class="headerlink" href="#self-study" title="Permanent link">&para;</a></h2>
+<p>Now is the time to delve into certain aspects of DRL before the in-person class. You must ensure a clear understanding of:</p>
+<ol>
+<li>The <strong>RL paradigm</strong> and <strong>its fundamental elements</strong> (state, action, policy, reward, value...).</li>
+<li><strong>DQN</strong> and <strong>REINFORCE</strong> algorithms, and their differences.</li>
+<li>The <strong>concept</strong> behind <strong>actor-critic</strong> approaches.</li>
+</ol>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> The recommended lecture is the book <a href="https://udlbook.github.io/udlbook/"><strong>Understanding Deep Learning</strong></a> by Simon J.D. Prince, specifically the parts concerning DRL:</p>
+<ul>
+<li>Introduction at Section 1.3 <em>(Book pp. 11-12; PDF pp. 25-26)</em></li>
+<li>Chapter 19: Reinforcement Learning <em>(Book pp. 373-412; PDF pp. 387-398)</em><ul>
+<li><em>You can skip sections 19.3.1, 19.5.1, 19.7</em></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">You are encouraged to consult any other materials. These might include, but are not limited to:</p>
+<ul>
+<li>
+<p><strong>Online resources</strong>:</p>
+<ul>
+<li><strong>RL/DRL</strong>: <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html">OpenAI Spinning Up: Part 1: Key Concepts in RL</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Courses</strong>:</p>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-">RL Course</a> by David Silver (Google DeepMind) on Youtube</li>
+<li><a href="http://rail.eecs.berkeley.edu/deeprlcourse/">CS 285: Deep Reinforcement Learning</a> (Berkeley)</li>
+</ul>
+</li>
+<li>
+<p><strong>Books</strong>:</p>
+<ul>
+<li>"<a href="https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf">Reinforcement Learning: An Introduction</a>" by Richard S. Sutton and Andrew G. Barto</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

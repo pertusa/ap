@@ -1,0 +1,700 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Few and Zero-Shot Learning assignment - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#few-and-zero-shot-learning-assignment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Few and Zero-Shot Learning assignment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prototypical-networks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prototypical Networks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prototypical Networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#few-shot-learning-using-openai-gpt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-shot learning using OpenAI GPT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Few-shot learning using OpenAI GPT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercise-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="few-and-zero-shot-learning-assignment">Few and Zero-Shot Learning assignment<a class="headerlink" href="#few-and-zero-shot-learning-assignment" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>This assigment must be submitted by <strong>March 6th</strong> using Moodle</p>
+</blockquote>
+<h2 id="prototypical-networks">Prototypical Networks<a class="headerlink" href="#prototypical-networks" title="Permanent link">&para;</a></h2>
+<p>In this exercise we will experiment with prototypical networks<sup id="fnref:snell2017prototypical"><a class="footnote-ref" href="#fn:snell2017prototypical">1</a></sup>, training a model for <script type="math/tex">K</script>-shot, <script type="math/tex">N</script>-way classification. For this, we will work with the Omniglot dataset<sup id="fnref:omniglot"><a class="footnote-ref" href="#fn:omniglot">2</a></sup>, which includes 1623 handwritten characters from 50 different alphabets. You can see some samples of this dataset below:</p>
+<p><img alt="Omniglot" src="../images/fsl/omniglot.jpg" /></p>
+<p>As discussed in the <a href="https://pertusa.github.io/ap/fsl/#metric-based-few-shot-learning">theory contents</a>, the basic idea of prototypical networks resembles nearest neighbors to class prototypes. They compute the prototype of each class using a set of support examples and then calculate the distance between the query example and each the prototypes. The query example is classified based on the label of the prototype it’s closest to, as can be seen in the following figure:</p>
+<p><img alt="Prototypical" src="../images/fsl/prototypical.jpg" /></p>
+<p>In summary, <script type="math/tex">p_\theta</script> is a <strong>softmax</strong> function to the negated distances between a given query example and each prototype.</p>
+<blockquote>
+<p>If you think that you didn't fully understand prototypical networks after reading the provided materials, please see also <a href="https://www.youtube.com/watch?v=rHGPfl0pvLY">this video</a>, which clearly explains their foundations.</p>
+</blockquote>
+<h3 id="exercise-1">Exercise 1<a class="headerlink" href="#exercise-1" title="Permanent link">&para;</a></h3>
+<p>First, open <a href="https://colab.research.google.com/drive/1WBUPAWITEABlVskTlFD9FPRXprZvixGX?usp=sharing">this Colab notebook</a> which contains some code to be completed with <strong>TODO</strong> marks. You need to save a copy of this notebook to your Google Drive in order to make edits, and then upload the final <code>.ipynb</code> to Moodle.</p>
+<ol>
+<li>
+<p>Review and understand the code in the class <code>OmniglotEpisodicDataset</code>. The sampled batch is partitioned into support, i.e. the per-task training data, and query, i.e. the per-task test datapoints. The support will be used to calculate the prototype of each class and query will be used to compute the distance to each prototype. </p>
+</li>
+<li>
+<p>Complete the code with <strong>TODO</strong> marks in the <code>train</code> function. For implementing <script type="math/tex">p_\theta</script> you can use directly the Pytorch function <code>CrossEntropyLoss</code>, since it is a combination of softmax and cross-entropy. Specifically, <code>CrossEntropyLoss(x, y) := H(one_hot(y), softmax(x))</code>, where <code>one_hot</code> is a function that takes an index <script type="math/tex">y</script> and expands it into a one-hot vector.</p>
+</li>
+<li>
+<p>Run the training cell. After 20 epochs, the average loss when running in Google colab should be similar to 0.017.</p>
+</li>
+<li>
+<p>Complete the code with <strong>TODO</strong> marks in the <code>evaluate</code> function. For inference, instead of the loss function you should use <code>argmax</code> to obtain the predicted labels.</p>
+</li>
+<li>
+<p>Run the evaluation code. In Colab, the accuracy should be close to 98.66%.</p>
+</li>
+<li>
+<p>Answer the questions at the end of the notebook and discuss the results.</p>
+</li>
+</ol>
+<h2 id="few-shot-learning-using-openai-gpt">Few-shot learning using OpenAI GPT<a class="headerlink" href="#few-shot-learning-using-openai-gpt" title="Permanent link">&para;</a></h2>
+<p>We know many of you are GPT fans, so we are going to make an assignment using this tool. </p>
+<p>As we have seen <a href="https://pertusa.github.io/ap/fsl/#openai-gpt-3">in the theory</a> contents, very Large Language Models (LLM) can perform few-shot learning with minimal steps. </p>
+<p>Let's test an example by promping the following input to <a href="https://chat.openai.com/">ChatGPT-5</a>:</p>
+<div class="highlight"><pre><span></span><code>Input: Subpar acting. 
+Sentiment: Negative
+Input: Beautiful film. 
+Sentiment: Positive
+Input: Amazing. 
+Sentiment:
+</code></pre></div>
+<blockquote>
+<p>Hint: In the GPT interface, if you want to insert a new line without sending the prompt, simultaneously press shift + enter</p>
+</blockquote>
+<p>Run this prompt and check the result. We have just created a sentiment analysis classifier without any line of code, although it may have  limitations in more complex scenarios. By using the <a href="https://help.openai.com/en/articles/7039783-how-can-i-access-the-chatgpt-api">ChatGPI API</a> you can even integrate your sentiment classifier into a webpage or an app.</p>
+<p>This is a simple example, but making reliable prompts for accurate few-shot learning sometimes require additional work. For example, have a look at <a href="https://arxiv.org/abs/2102.09690">this paper</a><sup id="fnref:calibratellm"><a class="footnote-ref" href="#fn:calibratellm">3</a></sup>. You can see in Fig. 4 how the order and balance of the positive/negative examples can affect the results.</p>
+<blockquote>
+<p>In recent GPT versions, the behaviour is a bit different than in the paper. For example, prompts with N/A are not accepted.</p>
+</blockquote>
+<p>The goal of the following exercise is assesssing your understanding of how to effectively employ few-shot learning techniques on GPT.</p>
+<!---
+> We could also have used [Google Gemini](https://gemini.google.com/app)[^gemini]. This is a very recent LLM similar to ChatGPT, but Gemini can also access the web to search for updated information. Therefore, since it uses external data, it is not suitable for our few-shot learning scenario.
+--->
+
+<h3 id="exercise-2">Exercise 2<a class="headerlink" href="#exercise-2" title="Permanent link">&para;</a></h3>
+<p>In this second exercise, we are going to make a few-shot classifier to classify between <em>rock</em> and <em>hip-hop</em> genres from a short part of song lyrics. To achieve this goal, the classifier must be trained on a few examples of lyrics and their corresponding labels. Then, given new lyrics, it should ideally predict the song genre.</p>
+<p>For this exercise, you should use <a href="https://chatgpt.com">ChatGPT</a> on a browser. </p>
+<p>Before starting the experiments, please check first the model version:</p>
+<div class="highlight"><pre><span></span><code>Which model version are you?
+</code></pre></div>
+<p>Then you must ensure that the model operates entirely based on its pre‑trained internal knowledge and does not perform live lookups or access external databases in real time. For this, the first prompt should be:</p>
+<div class="highlight"><pre><span></span><code>For the following prompts, do not use internet access and use only your internal knowledge
+</code></pre></div>
+<p>Then, create sample prompts like in this example: </p>
+<div class="highlight"><pre><span></span><code>Input: Bitterness and burden
+Curses rest on thee
+Solitaire and sorrow
+All eternity
+Save the Earth and claim perfection
+Deem the mass and blame rejection.
+Output: Rock
+
+Input: Tell me who you loyal to
+Is it money? Is it fame? Is it weed? Is it drink?
+Is it comin&#39; down with the loud pipes and the rain?
+Big chillin&#39;, only for the power in your name.
+Output: Hip-hop
+</code></pre></div>
+<blockquote>
+<p>You can find more examples <a href="https://www.songlyrics.com">in this link</a>, where you can search lyrics by genre or artist.</p>
+</blockquote>
+<p>The goal is to effective prompts, and check if ordering of the samples and balance of the classes may affect the results. For our few-shot scenario, try with <script type="math/tex">N=6</script> labeled samples for each of the 2 classes.</p>
+<p>Once done, please submit a PDF file (via Moodle) with the experiments you made and the conclusions.</p>
+<h4 id="assessment-criteria">Assessment criteria<a class="headerlink" href="#assessment-criteria" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Prompt Engineering:</strong> Students will be evaluated on their ability to engineer effective prompts that leverage the few-shot examples. This includes the clarity of the prompt, the relevance of the examples to the test case, and the prompt's ability to guide the model towards the desired output.</li>
+<li><strong>Model Interaction:</strong> Students may need to iteratively refine their prompts based on the model's responses, demonstrating an understanding of how different prompt structures influence the outcome.</li>
+<li><strong>Critical Analysis:</strong> In addition to generating outputs, students should critically analyze the model's performance, identifying any biases, errors, or limitations in the generated responses.</li>
+</ul>
+<!--
+### Task 1: Scientific text Summarization
+**Objective:** Employ few-shot learning to enable a GPT model to summarize academic (scientific paper) abstracts.
+- **Few-Shot Examples:** Provide 3 examples of academic abstracts along with their concise summaries.
+- **Test:** Given an academic abstract not seen by the model, generate a prompt that leads the model to produce a coherent and concise summary.
+
+### Task 2: Code Generation from Descriptions
+**Objective:** Use few-shot learning to teach a GPT model to generate Python code snippets from natural language descriptions.
+- **Few-Shot Examples:** Supply 4 examples of natural language descriptions of programming tasks alongside their corresponding Python code snippets.
+- **Test:** Provide a new, detailed description of a programming task, and devise a prompt that will guide the model to generate the appropriate Python code.
+
+<!--
+### Task 4: Translation
+**Objective:** Adapt a GPT model for language translation tasks using a few-shot approach.
+- **Few-Shot Examples:** Offer 5 pairs of sentences, each in English and its translation in Spanish.
+- **Test:** Give a sentence in English and ask the student to construct a prompt that encourages the GPT model to translate it into Spanish accurately, leveraging the few-shot examples.
+
+### Task 5: Question Answering
+**Objective:** Train a GPT model to answer domain-specific questions with few-shot examples.
+- **Few-Shot Examples:** Provide 5 question-answer pairs in a specialized field (e.g., biology, computer science).
+- **Test:** Present a new, complex question in the same domain and have the student create a prompt that would enable the GPT model to use the few-shot examples to answer accurately.
+
+### Task 3: Ethical Judgment
+**Objective:** Guide a GPT model to make ethical judgments in hypothetical scenarios using few-shot learning.
+- **Few-Shot Examples:** Share 3-4 scenarios involving ethical dilemmas, each with a reasoned judgment on why a particular action is ethically sound or unsound.
+- **Test:** Describe a new ethical scenario and instruct the student to formulate a prompt that aids the model in providing an ethical judgment, drawing on the reasoning from the examples.
+-->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:snell2017prototypical">
+<p>Jake Snell, Kevin Swersky, and Richard Zemel. Prototypical networks for few-shot learning. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017.&#160;<a class="footnote-backref" href="#fnref:snell2017prototypical" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:omniglot">
+<p>Brenden M. Lake, Ruslan Salakhutdinov, and Joshua B. Tenenbaum. Human-level concept learning through probabilistic program induction. <em>Science</em>, 350(6266):1332&ndash;1338, 2015. URL: <a href="https://www.science.org/doi/abs/10.1126/science.aab3050">https://www.science.org/doi/abs/10.1126/science.aab3050</a>, <a href="https://arxiv.org/abs/https://www.science.org/doi/pdf/10.1126/science.aab3050">arXiv:https://www.science.org/doi/pdf/10.1126/science.aab3050</a>, <a href="https://doi.org/10.1126/science.aab3050">doi:10.1126/science.aab3050</a>.&#160;<a class="footnote-backref" href="#fnref:omniglot" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:calibratellm">
+<p>Tony Z. Zhao, Eric Wallace, Shi Feng, Dan Klein, and Sameer Singh. Calibrate before use: improving few-shot performance of language models. <em>CoRR</em>, 2021. URL: <a href="https://arxiv.org/abs/2102.09690">https://arxiv.org/abs/2102.09690</a>, <a href="https://arxiv.org/abs/2102.09690">arXiv:2102.09690</a>.&#160;<a class="footnote-backref" href="#fnref:calibratellm" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:gemini">
+<p>Gemini Team et al. Gemini: a family of highly capable multimodal models. 2023. <a href="https://arxiv.org/abs/2312.11805">arXiv:2312.11805</a>.&#160;<a class="footnote-backref" href="#fnref:gemini" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

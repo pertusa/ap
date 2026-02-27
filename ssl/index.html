@@ -1,0 +1,891 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../fsl/">
+      
+      
+        <link rel="next" href="../drl/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Self-Supervised Learning - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#self-supervised-learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Self-Supervised Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fsl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Augmentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#origins-of-ssl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Origins of SSL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-deep-metric-learning-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Deep Metric Learning Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Deep Metric Learning Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simclr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimCLR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-self-distillation-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Self-Distillation Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Self-Distillation Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#byol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BYOL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-canonical-correlation-analysis-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Canonical Correlation Analysis Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Canonical Correlation Analysis Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vicreg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VicReg
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Augmentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#origins-of-ssl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Origins of SSL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-deep-metric-learning-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Deep Metric Learning Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Deep Metric Learning Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simclr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SimCLR
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-self-distillation-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Self-Distillation Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Self-Distillation Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#byol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BYOL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-canonical-correlation-analysis-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Canonical Correlation Analysis Family
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Canonical Correlation Analysis Family">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vicreg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VicReg
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="self-supervised-learning">Self-Supervised Learning<a class="headerlink" href="#self-supervised-learning" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Some of the following contents are adapted from the paper entitled <em>A Cookbook of Self-Supervised Learning</em><sup id="fnref2:sslcookbook"><a class="footnote-ref" href="#fn:sslcookbook">1</a></sup>. </p>
+</blockquote>
+<p>Self-Supervised Learning (SSL), dubbed “the dark matter of intelligence”, is a promising path to advance machine learning. As opposed to supervised learning, which is limited by the availability of labeled data, self-supervised approaches can learn from vast unlabeled data. </p>
+<p>SSL underpins deep learning’s success in natural language processing leading to advances from automated machine translation to large language models trained on web-scale corpora of unlabeled text. SSL methods for computer vision have been able to match or in some cases surpass models trained on labeled data, even on highly competitive benchmarks like ImageNet. SSL has also been successfully applied across other modalities such as video, audio, and time series.</p>
+<blockquote>
+<p>Self-supervised learning defines a pretext task based on unlabeled inputs to produce descriptive and intelligible representations. No labelled data is required for SSL, although the models used are actually supervised.</p>
+</blockquote>
+<p>In natural language, a common SSL objective is to mask a word in the text and predict the surrounding words. This objective encourages the model to capture relationships among words in the text without the need for any labels. The same SSL model representations can be used across a range of downstream tasks such as translating text across languages, summarizing, or even generating text, along with many others. </p>
+<p>In computer vision, analogous pretext tasks exist with models learning to predict masked patches of an image or representation. Other SSL objectives encourage two views of the same image, formed by say adding color or cropping, to be mapped to similar representations.</p>
+<p>In self-supervised learning, one trains a model to solve a so-called <strong>pretext task</strong> on a dataset without the need for human annotation by creating positive (and sometimes, negative pairs) from unlabeled data.  The pretext tasks must be carefully designed to encourage the model to capture meaningful features and similarities in the data. </p>
+<p>The main objective, however, is to transfer this model to a target (<strong>downstream</strong>) task. The downstream task is the knowledge transfer process of the pretext model to a specific task. For this, one of the most effective transfer strategies is fine-tuning. After training the pretext task, the learned embeddings can easily be used for another task such as image classification or text summarization. </p>
+<p><img alt="Vanilla SSL approach. Source: https://openaccess.thecvf.com/content_cvpr_2018/papers/Noroozi_Boosting_Self-Supervised_Learning_CVPR_2018_paper.pdf" src="../images/ssl/vanillaSSL.png" /></p>
+<p>With the power to train on vast unlabeled data comes many benefits. While traditional supervised learning methods are trained on a specific task often known a priori based on the available labeled data, SSL learns generic representations useful across many tasks. SSL can be especially useful in domains such as medicine where labels are costly or the specific task can not be known a priori. There’s also evidence SSL models can learn representations that are more robust to adversarial examples, label corruption, and input perturbations—and are more fair—compared to their supervised counterparts. Consequently, SSL is a field garnering growing interest. </p>
+<p>For this course, we are following the categorization in <sup id="fnref:sslcookbook"><a class="footnote-ref" href="#fn:sslcookbook">1</a></sup>, in which methods are divided into three families:</p>
+<ul>
+<li><strong>Deep Metric Learning</strong></li>
+<li><strong>Self-Distillation</strong></li>
+<li><strong>Canonical Correlation Analysis</strong></li>
+</ul>
+<p>A single model of each family is selected: SimCLR<sup id="fnref:simclr"><a class="footnote-ref" href="#fn:simclr">2</a></sup>, BYOL<sup id="fnref:byol"><a class="footnote-ref" href="#fn:byol">3</a></sup>, and VicReg<sup id="fnref:vicreg"><a class="footnote-ref" href="#fn:vicreg">4</a></sup>.</p>
+<p>To understand these recent methods, you should first know the basics of data augmentation and the origins of SSL.</p>
+<h2 id="data-augmentation">Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permanent link">&para;</a></h2>
+<p>SSL methods often begin with data augmentation, which involves applying various transformations or perturbations to unlabeled data to create diverse instances (also called augmented views).</p>
+<p>The goal of data augmentation is to increase the variability of the data and expose the model to different perspectives of the same instance. Common data augmentation techniques include cropping, flipping, rotation, random crop, and color transformations. By generating diverse instances, contrastive learning ensures that the model learns to capture relevant information regardless of variations in the input data.</p>
+<!---![Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/](images/ssl/da.jpg)--->
+
+<p>You can also chain the different techniques together:</p>
+<p><img alt="Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/" src="../images/ssl/da2.jpg" /></p>
+<p><img alt="Data augmentation examples. Source: https://encord.com/blog/guide-to-contrastive-learning/" src="../images/ssl/da3.jpg" /></p>
+<blockquote>
+<p>💡 If you want to learn more about data augmentation, please read <a href="https://encord.com/blog/data-augmentation-guide/">this link</a>.</p>
+</blockquote>
+<h2 id="origins-of-ssl">Origins of SSL<a class="headerlink" href="#origins-of-ssl" title="Permanent link">&para;</a></h2>
+<p>Contemporary SSL methods build upon the knowledge from early experiments, which form the foundation for many of the modern methods.</p>
+<p>Learning spatial context methods such as RotNet<sup id="fnref:rotnet"><a class="footnote-ref" href="#fn:rotnet">5</a></sup> train a model to understand the relative positions and orientations of objects within a scene. In particular, RotNet applies a random rotation and then asks the model to predict the rotation.</p>
+<p>The RotNet model is trained with random augmentations of images at 0, 90, 180 and 270 degrees. A standard  classification network is trained to predict the rotation. Then, the learned features can be used to initialize the weights of a network for another downstream task. </p>
+<p>Despite the simplicity of this self-supervised formulation, as can be seen in the experimental section of the paper, the features learned achieve dramatic improvements on the unsupervised feature learning benchmarks.</p>
+<!-- No tengo claro si se hace con todas. As in the CIFAR experiments, during training we feed the RotNet model all four rotated copies of an image simultaneously (in the same mini-batch). -->
+
+<!---Github code: https://github.com/gidariss/FeatureLearningRotNet--->
+
+<h2 id="the-deep-metric-learning-family">The Deep Metric Learning Family<a class="headerlink" href="#the-deep-metric-learning-family" title="Permanent link">&para;</a></h2>
+<p>The Deep Metric Learning (DML) family of methods is based on the principle of encouraging similarity between semantically transformed versions of an input. It includes methods such as SimCLR<sup id="fnref2:simclr"><a class="footnote-ref" href="#fn:simclr">2</a></sup>, NNCLR, MeanSHIFT or SCL, among others. DML originated with the idea of contrastive loss, which transforms this principle into a learning objective. </p>
+<p>Contrastive learning leverages the assumption that similar instances should be closer together in a learned embedding space, while dissimilar instances should be farther apart. By framing learning as a discrimination task, contrastive learning allows models to capture relevant features and similarities in the data.</p>
+<p><img alt="Contrastive Learning" src="../images/ssl/cl.png" /></p>
+<p>Contrastive Learning can be used in a Supervised or a Self-Supervised manner. </p>
+<p>In the <a href="https://pertusa.github.io/ap/fsl/">Few-Shot Learning block</a>, we already used Contrastive Learning methods in a supervised way, using labelled data for training models explicitly to differentiate between similar and dissimilar instances according to their class. Therefore, the loss in this case tries to put together embeddings <strong>from the same class</strong>. The objective is to learn a representation space where instances from the same class are clustered closer together, while instances from other classes are pushed apart.</p>
+<p><strong>Self-supervised contrastive learning</strong>  takes a different approach by learning representations from unlabeled data without relying on explicit labels. Since no labels are available, to identify similar inputs, methods often form variants of a single input using known semantic preserving transformations via data augmentation.  The augmented samples are called views. The variants of the inputs are called positive pairs or examples; the samples we wish to make dissimilar are called negatives. So here, the loss tries to put together embeddings <strong>from the same view</strong> since we don't have information of the labels.</p>
+<h3 id="simclr">SimCLR<a class="headerlink" href="#simclr" title="Permanent link">&para;</a></h3>
+<p><a href="http://proceedings.mlr.press/v119/chen20j/chen20j.pdf">SimCLR</a><sup id="fnref3:simclr"><a class="footnote-ref" href="#fn:simclr">2</a></sup>, a Simple framework for Contrastive Learning of visual Representations, is a technique introduced by Prof. Hinton’s Group.</p>
+<p><img alt="SIMCLR" src="../images/ssl/simclrdiag.png" /></p>
+<p>SimCLR learns representations by maximizing agreement between differently augmented views of the same data example via a contrastive loss in the latent space, as shown below.</p>
+<p><img alt="SIMCLR" src="../images/ssl/simclr.jpg" /></p>
+<p>SimCLR results were impressive, showing that  unsupervised learning benefits more from bigger models than its supervised counterpart.</p>
+<div class="admonition note">
+<p class="admonition-title">Homework</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> Read <a href="https://amitness.com/2020/03/illustrated-simclr/#simclr-framework">this post</a> to understand the basics of SimCLR. Estimated time: 🕑 30 min.</li>
+</ul>
+</div>
+<h2 id="the-self-distillation-family">The Self-Distillation Family<a class="headerlink" href="#the-self-distillation-family" title="Permanent link">&para;</a></h2>
+<p>Self-distillation methods such as BYOL<sup id="fnref:BYOL"><a class="footnote-ref" href="#fn:BYOL">6</a></sup>, SimSIAM, DINO, along with their variants rely on a simple mechanism: feeding two different views to two encoders, and mapping one to the other by means of a predictor. To prevent the encoders from collapsing by predicting a constant for any input, various techniques are employed. A common approach to prevent collapse is to update one of the two encoder weights with a running average of the other encoder’s weights.</p>
+<h3 id="byol">BYOL<a class="headerlink" href="#byol" title="Permanent link">&para;</a></h3>
+<p><a href="https://papers.nips.cc/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf">BYOL (bootstrap your own latent)</a><sup id="fnref2:BYOL"><a class="footnote-ref" href="#fn:BYOL">6</a></sup> introduced self-distillation as a means to avoid collapse. </p>
+<p><img alt="BYOL" src="../images/ssl/byol.jpg" /></p>
+<p>BYOL uses two networks along with a predictor to map the outputs of one network to the other. The network predicting the output is called the online or student network while the network producing the target is called the target or teacher network. Each network receives a different view of the same image formed by image transformations including random resizing, cropping, color jittering, and brightness alterations. </p>
+<p>The online (student) network is updated throughout training using gradient descent. The target (teacher) network is updated with an exponential moving average (EMA) updates of the weights of the online network. The slow updates induced by exponential moving average creates an asymmetry that is crucial to BYOL’s success.</p>
+<p>BYOL achieves higher performance than state-of-the-art contrastive methods without using negative pairs at all. Instead, it uses two networks that learn from each other to iteratively bootstrap the representations, by forcing one network to use an augmented view of an image to predict the output of the other network for a different augmented view of the same image. </p>
+<p>BYOL almost matches the best supervised baseline on top-1 accuracy on ImageNet and beats out the self-supervised baselines.</p>
+<div class="admonition note">
+<p class="admonition-title">Homework</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> Read <a href="https://towardsdatascience.com/byol-the-alternative-to-contrastive-self-supervised-learning-5d0a26983d7c-2/">this post</a> to understand the basics of BYOL. Estimated time: 🕑 45 min.</li>
+</ul>
+</div>
+<!---ALTERNATIVE VIDEO, MEJOR CREO: https://www.youtube.com/watch?v=YPfUiOMYOEE --->
+
+<h2 id="the-canonical-correlation-analysis-family">The Canonical Correlation Analysis Family<a class="headerlink" href="#the-canonical-correlation-analysis-family" title="Permanent link">&para;</a></h2>
+<p>The SSL canonical correlation analysis family originates with the Canonical Correlation Framework<sup id="fnref:CCA"><a class="footnote-ref" href="#fn:CCA">7</a></sup>. The high-level goal of CCA is to infer the relationship between two variables by analyzing their cross-covariance matrices. It includes methods such as VicReg<sup id="fnref2:vicreg"><a class="footnote-ref" href="#fn:vicreg">4</a></sup>, BarlowTwins, SWAV or W-MSE, among others. </p>
+<h3 id="vicreg">VicReg<a class="headerlink" href="#vicreg" title="Permanent link">&para;</a></h3>
+<!----![VicReg](images/ssl/vicreg.png) --->
+
+<p><img alt="VicReg2" src="../images/ssl/vicreg2.png" /></p>
+<p><a href="https://arxiv.org/abs/2105.04906">VICReg</a><sup id="fnref3:vicreg"><a class="footnote-ref" href="#fn:vicreg">4</a></sup> has the same basic architecture as its predecessors; augmented positive pairs are fed into Siamese encoders that produce representations, which are then passed into Siamese projectors that return projections.</p>
+<p>However, unlike previous models, VicReg requires none of the following: negative examples, momentum encoders, asymmetric mechanisms in the architecture, stop-gradients, predictors, or even normalization of the projector outputs. Instead, the heavy lifting is done by VICReg’s objective function, which contains three main terms: a variance term, an invariance term, and a covariance term.</p>
+<p>VICReg balances three objectives based on co-variance matrices of representations from two views: variance, invariance, co- variance. Regularizing the variance along each dimension of the representation prevents collapse, the invariance ensures two views are encoded similarly, and the co-variance encourages different dimensions of the representation to capture different features.</p>
+<div class="admonition note">
+<p class="admonition-title">Homework</p>
+<ul>
+<li><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3.75A.75.75 0 0 1 .75 3h7.497c1.566 0 2.945.8 3.751 2.014A4.5 4.5 0 0 1 15.75 3h7.5a.75.75 0 0 1 .75.75v15.063a.75.75 0 0 1-.755.75l-7.682-.052a3 3 0 0 0-2.142.878l-.89.891a.75.75 0 0 1-1.061 0l-.902-.901a3 3 0 0 0-2.121-.879H.75a.75.75 0 0 1-.75-.75Zm12.75 15.232a4.5 4.5 0 0 1 2.823-.971l6.927.047V4.5h-6.75a3 3 0 0 0-3 3ZM11.247 7.497a3 3 0 0 0-3-2.997H1.5V18h6.947c1.018 0 2.006.346 2.803.98Z"/></svg></span> Read <a href="https://imbue.com/open-source/2022-04-21-vicreg/#vicreg">this post</a> to understand the basics of VicReg. Estimated time: 🕑 30 min.</li>
+</ul>
+</div>
+<blockquote>
+<p>Using <a href="https://github.com/imbue-ai/self_supervised">this code</a> you can train SimCLR, BYOL or VicReg on ImageNet, STL-10, and CIFAR-10 and compare their results.</p>
+</blockquote>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:sslcookbook">
+<p>Randall Balestriero, Mark Ibrahim, Vlad Sobal, Ari Morcos, Shashank Shekhar, Tom Goldstein, Florian Bordes, Adrien Bardes, Gregoire Mialon, Yuandong Tian, Avi Schwarzschild, Andrew Gordon Wilson, Jonas Geiping, Quentin Garrido, Pierre Fernandez, Amir Bar, Hamed Pirsiavash, Yann LeCun, and Micah Goldblum. A cookbook of self-supervised learning. 2023. <a href="https://arxiv.org/abs/2304.12210">arXiv:2304.12210</a>.&#160;<a class="footnote-backref" href="#fnref:sslcookbook" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:sslcookbook" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:simclr">
+<p>Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey E. Hinton. A simple framework for contrastive learning of visual representations. <em>CoRR</em>, 2020. URL: <a href="https://arxiv.org/abs/2002.05709">https://arxiv.org/abs/2002.05709</a>, <a href="https://arxiv.org/abs/2002.05709">arXiv:2002.05709</a>.&#160;<a class="footnote-backref" href="#fnref:simclr" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:simclr" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:simclr" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:byol">
+<p>Jean-Bastien Grill, Florian Strub, Florent Altché, Corentin Tallec, Pierre Richemond, Elena Buchatskaya, Carl Doersch, Bernardo Avila Pires, Zhaohan Guo, Mohammad Gheshlaghi Azar, Bilal Piot, koray kavukcuoglu, Remi Munos, and Michal Valko. Bootstrap your own latent - a new approach to self-supervised learning. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, <em>Advances in Neural Information Processing Systems</em>, volume 33, 21271–21284. Curran Associates, Inc., 2020. URL: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf</a>.&#160;<a class="footnote-backref" href="#fnref:byol" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:vicreg">
+<p>Adrien Bardes, Jean Ponce, and Yann LeCun. Vicreg: variance-invariance-covariance regularization for self-supervised learning. 2022. <a href="https://arxiv.org/abs/2105.04906">arXiv:2105.04906</a>.&#160;<a class="footnote-backref" href="#fnref:vicreg" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:vicreg" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:vicreg" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:rotnet">
+<p>Spyros Gidaris, Praveer Singh, and Nikos Komodakis. Unsupervised representation learning by predicting image rotations. <em>CoRR</em>, 2018. URL: <a href="http://arxiv.org/abs/1803.07728">http://arxiv.org/abs/1803.07728</a>, <a href="https://arxiv.org/abs/1803.07728">arXiv:1803.07728</a>.&#160;<a class="footnote-backref" href="#fnref:rotnet" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:BYOL">
+<p>Jean-Bastien Grill, Florian Strub, Florent Altché, Corentin Tallec, Pierre Richemond, Elena Buchatskaya, Carl Doersch, Bernardo Avila Pires, Zhaohan Guo, Mohammad Gheshlaghi Azar, Bilal Piot, koray kavukcuoglu, Remi Munos, and Michal Valko. Bootstrap your own latent - a new approach to self-supervised learning. In H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin, editors, <em>Advances in Neural Information Processing Systems</em>, volume 33, 21271–21284. Curran Associates, Inc., 2020. URL: <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf">https://proceedings.neurips.cc/paper_files/paper/2020/file/f3ada80d5c4ee70142b17b8192b2958e-Paper.pdf</a>.&#160;<a class="footnote-backref" href="#fnref:BYOL" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:BYOL" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:CCA">
+<p>Harold Hotelling. <em>Relations Between Two Sets of Variates</em>, pages 162–190. Springer New York, New York, NY, 1992. URL: <a href="https://doi.org/10.1007/978-1-4612-4380-9_14">https://doi.org/10.1007/978-1-4612-4380-9_14</a>, <a href="https://doi.org/10.1007/978-1-4612-4380-9_14">doi:10.1007/978-1-4612-4380-9_14</a>.&#160;<a class="footnote-backref" href="#fnref:CCA" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1199 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ftkd/">
+      
+      
+        <link rel="next" href="../ssl/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>Few and Zero Shot Learning - Aprendizaje Profundo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#few-and-zero-shot-learning-feb-27-2026-contents-to-prepare-before-online" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Aprendizaje Profundo" class="md-header__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aprendizaje Profundo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Few and Zero Shot Learning
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Aprendizaje Profundo" class="md-nav__button md-logo" aria-label="Aprendizaje Profundo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aprendizaje Profundo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Summary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From Shallow to Deep Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cnn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convolutional Neural Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recurrent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recurrent Networks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ftkd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fine-tuning and model compression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Few and Zero Shot Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-few-shot-learning-fsl-and-zero-shot-learning-zsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Few-Shot Learning (FSL) and Zero-Shot Learning (ZSL)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#few-shot-learning-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-Shot Learning Foundations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Few-Shot Learning Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining the Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-learning-learning-to-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta Learning - Learning to Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#few-shot-learning-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-Shot Learning approaches
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Few-Shot Learning approaches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-metric-based-few-shot-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1- Metric-Based Few-Shot Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-optimization-based-few-shot-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2- Optimization-Based Few-Shot Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zero-shot-learning-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero-Shot Learning Foundations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#popular-fewzero-shot-learning-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Popular Few/Zero Shot learning models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Popular Few/Zero Shot learning models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-language-image-pre-training-clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contrastive Language-Image Pre-Training (CLIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openai-gpt-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenAI GPT-3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../drl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-few-shot-learning-fsl-and-zero-shot-learning-zsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is Few-Shot Learning (FSL) and Zero-Shot Learning (ZSL)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#few-shot-learning-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-Shot Learning Foundations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Few-Shot Learning Foundations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#defining-the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Defining the Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta-learning-learning-to-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Meta Learning - Learning to Learn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#few-shot-learning-approaches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Few-Shot Learning approaches
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Few-Shot Learning approaches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-metric-based-few-shot-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1- Metric-Based Few-Shot Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-optimization-based-few-shot-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2- Optimization-Based Few-Shot Learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zero-shot-learning-foundations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zero-Shot Learning Foundations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#popular-fewzero-shot-learning-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Popular Few/Zero Shot learning models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Popular Few/Zero Shot learning models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contrastive-language-image-pre-training-clip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contrastive Language-Image Pre-Training (CLIP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openai-gpt-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenAI GPT-3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="few-and-zero-shot-learning-feb-27-2026-contents-to-prepare-before-online">Few and Zero Shot Learning (Feb. 27 2026). Contents to prepare before (online)<a class="headerlink" href="#few-and-zero-shot-learning-feb-27-2026-contents-to-prepare-before-online" title="Permanent link">&para;</a></h1>
+<!---
+!!! danger
+
+    This is work in progress. The contents of this page are not final and, therefore, it is not recommended to start working on its contents yet.
+
+--->
+
+<!---
+Importante: Mirar este video para entender bien prototypical: https://www.youtube.com/watch?v=rHGPfl0pvLY
+--->
+
+<p>Part of the following contents are copied and adapted to the AI master from the <a href="https://github.com/music-fsl-zsl/tutorial">ISMIR 2022 tutorial</a> created by Yu Wang, Hugo Flores García, and Jeong Choi. This is shared under <a href="https://github.com/music-fsl-zsl/tutorial/blob/main/LICENSE">Creative Commons BY-NC-SA 4.0</a>.</p>
+<h2 id="what-is-few-shot-learning-fsl-and-zero-shot-learning-zsl">What is Few-Shot Learning (FSL) and Zero-Shot Learning (ZSL)?<a class="headerlink" href="#what-is-few-shot-learning-fsl-and-zero-shot-learning-zsl" title="Permanent link">&para;</a></h2>
+<p>Before we dive right into FSL and ZSL, we would like to start with a brief discussion about the labeled data scarcity problem to illustrate the motivation and relevance of few-shot and zero-shot learning.  </p>
+<p>Deep learning has been highly successful in data-intensive applications, but is often hampered when the dataset is small. A deep model that generalizes well typically needs to be trained on a large amount of labeled data. However, in some applications such as music, most datasets are small in size compared to datasets in other domains, such as image and text. This is not only because collecting musical data may be riddled with copyright issues, but annotating musical data can also be very costly. The annotation process often requires expert knowledge and takes a long time as we need to listen to audio recordings multiple times. Therefore, many current music studies are built upon relatively small datasets with less-than-ideal model generalizability. </p>
+<p>Researchers have been studying strategies to tackle this scarcity issue for labeled data. These strategies can be roughly summarized into two categories:</p>
+<ul>
+<li><strong>Data</strong>: crowdsourcing, data augmentation, data synthesis, etc.</li>
+<li><strong>Learning Paradigm</strong>: transfer learning, semi-supervised learning , etc.</li>
+</ul>
+<p>There are different challenges for each of these approaches. For example, crowdsourcing still requires a large amount of human effort with potential label noise, the diversity gain from data augmentation is limited, and models trained on synthetic data might have issues generalizing to real-world data.</p>
+<p>Even with the help of transfer learning or unsupervised learning, we often still need a significant amount of labeled data (e.g. hundreds of thousands of examples) for the target downstream tasks, which could still be hard for rare classes. </p>
+<p>Few-shot learning (FSL) and zero-shot learning (ZSL), on the other hand, tackle the labeled data scarcity issue from a different angle. They are learning paradigms that aim to learn a model that can learn a new concept (e.g. recognize a new class) quickly, based on just <em>a handful of labeled examples</em> (few-shot) or some <em>side information or metadata</em> (zero-shot). </p>
+<h4 id="an-example">An example<a class="headerlink" href="#an-example" title="Permanent link">&para;</a></h4>
+<p>To have a better idea of how FSL and ZSL differ from standard supervised learning, let's consider an example of training a musical instrument classifier. We assume that there is an existing dataset in which we have abundant labeled examples for common instruments.</p>
+<ul>
+<li>In a standard supervised learning scenario, we train the classification model on the training set <code>(guitar, piano)</code>, then at test time, the model classifies <em>"new examples"</em> of <em>"seen classes"</em> <code>(guitar, piano)</code>.</li>
+<li>In a few-shot learning scenario, we also train the model with the same training set that is available <code>(guitar, piano)</code>. But at test time, the goal is for the few-shot model to recognize new examples from <strong>unseen classes</strong> (like <code>(banjo, kazoo)</code>) by providing a <strong>very small amount</strong> of labeled examples.  </li>
+<li>In a zero-shot learning scenario, we train the model on the available training set <code>(guitar, piano)</code>. But at test time, the goal is for the zero-shot model to recognize new examples from <strong>unseen classes</strong> (like <code>(banjo, kazoo)</code>) by providing <strong>some side information or metadata</strong> (e.g. the instrument family, e.g. string, wind, percussion, etc.) or a text embedding.</li>
+</ul>
+<p><img alt="Alt text" src="../images/fsl/FZSL_tutorial_fig.png" /></p>
+<h2 id="few-shot-learning-foundations">Few-Shot Learning Foundations<a class="headerlink" href="#few-shot-learning-foundations" title="Permanent link">&para;</a></h2>
+<p>Data is at the core of few-shot learning problems. This chapter covers the foundations of few-shot learning – namely how we think about and structure our data – when trying to learn novel, unseen classes with very little labeled data.</p>
+<p>When solving traditional classification problems, we typically consider a closed set of classes. That is, we expect to see the same set of classes during inference as we did during training. Few-shot learning breaks that assumption and instead expects that the classification model will encounter novel classes during inference. There is one caveat: there are a <strong>few labeled examples</strong> for each novel class at inference time. </p>
+<p><img alt="thinking-about-data" src="../images/fsl/foundations/thinking-about-data.png" /></p>
+<p>In few-shot learning, we expect to see <strong>novel</strong> classes at inference time. We also expect to see a few labeled examples (a.k.a. "shots") for each of the novel classes. </p>
+<blockquote>
+<p>Transfer learning and data augmentation are often considered approaches to few-shot learning<sup id="fnref:song2022comprehensive"><a class="footnote-ref" href="#fn:song2022comprehensive">1</a></sup>, since both of these approaches are used to learn new tasks with limited data. However, we believe these approaches are extensive and deserve their own treatment, and so we will not cover them here. Instead, we will focus on the topic of <strong>meta-learning</strong> – or learning to learn – which is at the heart of recent advances for few-shot learning. Transfer learning and data augmentation are orthogonal to meta-learning and can be used in conjunction with meta-learning approaches.</p>
+</blockquote>
+<h3 id="defining-the-problem">Defining the Problem<a class="headerlink" href="#defining-the-problem" title="Permanent link">&para;</a></h3>
+<p>Consider that we would like to classify between <script type="math/tex">K</script> classes, and we have exactly <script type="math/tex">N</script> labeled examples for each of those classes. We say that few-shot models are trained to solve a <script type="math/tex">K</script>-way, <script type="math/tex">N</script>-Shot classification task. </p>
+<p><img alt="Support query" src="../images/fsl/foundations/support-query.png" /></p>
+<blockquote>
+<p>A few-shot learning problem splits data into two separate sets: the support set (the few labeled examples of novel data) and the query set (the data we want to label).</p>
+</blockquote>
+<p>Few shot learning tasks divide the few labeled data we have and the many unlabeled data we would like to to label into two separate subsets: the <strong>support set</strong> and the <strong>query set</strong>. </p>
+<p>The small set of labeled examples we are given at inference time is the <strong>support set</strong>. The support set is small in size and contains a few (<script type="math/tex">N</script>) examples for each of the classes we would like to consider. The purpose of the support set is to provide some form of guidance to help the model learn and adapt to the novel classification task. </p>
+<p>Formally, we define the support set as a set of labeled training pairs <script type="math/tex">S = \{(x_1, y_1,), (x_2, y_2), ..., (x_N, y_N)\}</script>, where:</p>
+<ul>
+<li>
+<script type="math/tex">x_i \in \mathbb{R}^D</script> is a <script type="math/tex">D</script>-dimensional input vector.</li>
+<li>
+<script type="math/tex">y_i \in \{1,...,C\}</script> is the class label that corresponds to <script type="math/tex">x_i</script>.</li>
+<li>
+<script type="math/tex">S_k</script> refers to the set of examples with label <script type="math/tex">K</script>.</li>
+<li>
+<script type="math/tex">N</script> is the size of the support set, where <script type="math/tex">N = C \times K</script>.  </li>
+</ul>
+<p>On the other hand, the query set – typically denoted as <script type="math/tex">Q</script> – contains all of the examples we would like to label. We can compare the model's predictions on the query set to the true labels (i.e., ground truth) to compute the loss used for training the model. In evaluation, we can use these predictions to compute metrics such as accuracy, precision, and recall.</p>
+<h4 id="the-goal">The Goal<a class="headerlink" href="#the-goal" title="Permanent link">&para;</a></h4>
+<p><img alt="The goal" src="../images/fsl/foundations/fsl-the-goal.png" /></p>
+<p>The goal of few-shot learning algorithms is to learn a classification model <script type="math/tex">f_\theta</script> that is able to generalize to a set of <script type="math/tex">K</script> previously unseen classes at inference time, with a small support set of <script type="math/tex">N</script> examples for each previously unseen class.</p>
+<h3 id="meta-learning-learning-to-learn">Meta Learning - Learning to Learn<a class="headerlink" href="#meta-learning-learning-to-learn" title="Permanent link">&para;</a></h3>
+<p>In order for a classifier to be able to learn a novel class with only a few labeled examples, we can employ a technique known as <strong>meta learning</strong>, or learning to learn.</p>
+<blockquote>
+<p>Even though our goal in few shot learning is to be able to learn novel classes with very few labeled examples, we <em>still</em> require a sizable training dataset with thousands of examples. The idea is that we can <em>learn how to learn new classes</em> from this large training set, and then apply that knowledge to learn novel classes with very few labeled examples.</p>
+</blockquote>
+<h4 id="class-conditional-splits">Class-conditional splits<a class="headerlink" href="#class-conditional-splits" title="Permanent link">&para;</a></h4>
+<p><img alt="Class-conditional splits" src="../images/fsl/foundations/class-conditional-splits.png" /></p>
+<p>In supervised learning, one typically creates a train/test split in the dataset while ensuring that the classes seen during training are the same as those seen during testing.</p>
+<p>In few-shot learning, because we'd like our model to generalize to novel classes at inference time, we must make sure that there is no overlap between classes in our train, and test sets.</p>
+<p>A train/test split with no overlap between classes is called a <strong>class-conditional</strong> split. </p>
+<h4 id="episodic-training">Episodic Training<a class="headerlink" href="#episodic-training" title="Permanent link">&para;</a></h4>
+<p>To take full advantage of a large training set for few-shot learning, we use a technique referred to as <strong>episodic training</strong><sup id="fnref:vinyals2016matching"><a class="footnote-ref" href="#fn:vinyals2016matching">2</a></sup><sup id="fnref:ravi2017optimization"><a class="footnote-ref" href="#fn:ravi2017optimization">3</a></sup>. </p>
+<p><img alt="Episodic training" src="../images/fsl/foundations/episodic-training.png" /></p>
+<blockquote>
+<p>Episodic training is an efficient way of leveraging a large training dataset to train a few-shot learning model.</p>
+</blockquote>
+<p>Episodic training aims to split each training iteration into it's own self-contained learning task. An episode is like a simulation of a few-shot learning scenario, typically with <script type="math/tex">K</script> classes and <script type="math/tex">N</script> labeled examples for each class -- similar to what we expect the model to be able to infer at inference time. </p>
+<p>During episodic training, our model will see a completely new <script type="math/tex">N</script>-shot, <script type="math/tex">K</script>-way classification task at each step. To build a single episode, we must sample a completely new support set and query set during each training step. </p>
+<p>Practically, this means that for each episode, we have to choose a subset of <script type="math/tex">K</script> classes from our training dataset and then sample <script type="math/tex">N</script> labeled examples (for the support set) and <script type="math/tex">q</script> examples (for the query set) for each class that we randomly sampled. </p>
+<!---
+### Evaluating a Few-Shot Model
+
+Validation and Evaluation during episodic training can be done in a similar fashion to training. We can build a series of episodes from our validation and evaluation datasets, and then evaluate the model on each episode using standard classification metrics. 
+
+<!---We've now covered the basic foundations of few-shot learning. Next, we'll look at some of the most common approaches to few-shot learning, namely **metric**-based, **optimization**-based, and **memory**-based approaches. 
+--->
+<hr />
+<h2 id="few-shot-learning-approaches">Few-Shot Learning approaches<a class="headerlink" href="#few-shot-learning-approaches" title="Permanent link">&para;</a></h2>
+<p>Now that we have a grasp of the foundations of few-shot learning,  we'll take a look at some of the most common approaches to the solving few-shot problems. </p>
+<!--
+Recall that the goal of few-shot learning is to be able to learn to solve a new machine learning task given only a few labeled examples. In few-shot learning problems, we are given a small set of labeled examples for each class we would like to predict (the support set), as well as a larger set of unlabeled examples (the query set). We tend to refer to few-shot learning tasks as \(K\)-way, \(N\)-shot classification tasks, where \(K\) is the number of classes we would like to predict, and \(N\) is the number of labeled examples we are given for each class. 
+-->
+
+<p>When training a model to solve a few-shot learning task, we typically sample episodes from a large training dataset. An episode is a simulation of a few-shot learning task, where we sample <script type="math/tex">K</script> classes and <script type="math/tex">N</script> labeled examples for each class. As we have seen, training a deep model by sampling few-shot learning episodes from a large training dataset is known as <strong>episodic training</strong>.</p>
+<p>Here are the few-shot learning approaches covered in this document:</p>
+<ol>
+<li>
+<p><strong>Metric-based few-shot learning</strong></p>
+</li>
+<li>
+<p><strong>Optimization-based few-shot learning</strong></p>
+</li>
+</ol>
+<h3 id="1-metric-based-few-shot-learning">1- Metric-Based Few-Shot Learning<a class="headerlink" href="#1-metric-based-few-shot-learning" title="Permanent link">&para;</a></h3>
+<p>Metric-based approaches to few-shot learning are able to <strong>learn an embedding space</strong> where examples that belong to the same class are close together according to some metric, even if the examples belong to classes that were not seen during training. </p>
+<p><img alt="Metric-based learning" src="../images/fsl/foundations/metric-based-learning.png" /></p>
+<!-- Episodic training is essential to making metric-based few-shot models succeed in practice. Without episodic training, training a model using only $K$ examples for each class would result in poor generalization, and the model would not be able to generalize to new classes.  -->
+
+<p>At the center of metric-based few-shot learning approches is a similarity <em>metric</em>, which we will refer to as <script type="math/tex">g_{sim}</script>. We use this similarity metric to compare how similar examples in the query set are to examples in the support set. After knowing how similar a query example is to each example in the support set, we can infer to which class in the support set the query example belongs to. Note that this is conceptually the same as performing a <a href="https://en.wikipedia.org/wiki/Nearest_neighbor_search">nearest neighbor search</a>. </p>
+<p>This similarity comparison is typically done in the embedding space of some neural net model, which we will refer to as <script type="math/tex">f_\theta</script>. Thus, during episodic training, we train <script type="math/tex">f_\theta</script> to <strong>learn an embedding space where examples that belong to the same class are close together, and examples that belong to different classes are far apart</strong>. This embedding model is sometimes also referred to as a <em>backbone</em> model.</p>
+<p>There are many different metric-based approaches to few-shot learning, and they all differ in how they define the similarity metric <script type="math/tex">g_{sim}</script>, and how they use it to compare query examples to support examples as well as formulate a training objective.</p>
+<p>Among the most popular metric-based approaches are Prototypical Networks<sup id="fnref:snell2017prototypical"><a class="footnote-ref" href="#fn:snell2017prototypical">4</a></sup>, Matching Networks<sup id="fnref2:vinyals2016matching"><a class="footnote-ref" href="#fn:vinyals2016matching">2</a></sup>, and Relation Networks<sup id="fnref:sung2018relation"><a class="footnote-ref" href="#fn:sung2018relation">5</a></sup>.</p>
+<h5 id="prototypical-networks">Prototypical networks<a class="headerlink" href="#prototypical-networks" title="Permanent link">&para;</a></h5>
+<p><img alt="Prototypical net" src="../images/fsl/foundations/prototypical-net.png" /></p>
+<p>The figure above illustrates a 5-shot, 3-way classification task between tambourine (red), maracas (green), and djembe (blue). In prototypical networks, each of the 5 support vectors are averaged to create a prototype for each class (<script type="math/tex">c_k</script>). The query vector <script type="math/tex">x</script> is compared against each of the prototypes using squared euclidean distance. The query vector (shown as <script type="math/tex">x</script>) is assigned to the class of the prototype that it is most similar to. Here, the prototypes <script type="math/tex">c_k</script> are shown as black circles. </p>
+<blockquote>
+<p>Prototypical networks<sup id="fnref2:snell2017prototypical"><a class="footnote-ref" href="#fn:snell2017prototypical">4</a></sup> work by creating a single embedding vector  for each class in the support set, called the <strong>prototype</strong>. The prototype for a class is the mean of the embeddings of all the examples in the support set for that class. </p>
+<p><a href="https://www.cs.cmu.edu/~rsalakhu/papers/oneshot1.pdf">Siamese Neural Networks</a> is a kind of metric learning predecessor for prototypical networks. Siamese networks embed all support objects and the query object into a latent space and do a pairwise comparison between the query and all other support objects. The label of the closest support object is assigned to the query. Prototypical networks improve by 1) requiring comparisons between query and support centroids, not individual samples, during inference and 2) suffering from less sample noise by taking the mean of support embeddings.</p>
+</blockquote>
+<p>The prototype (denoted as <script type="math/tex">c_k</script>) for a class <script type="math/tex">k</script> is defined as: </p>
+<p>
+<script type="math/tex; mode=display">c_k = \frac{1}{|S_k|} \sum_{x_k \in S_k} f_\theta(x_k)</script>
+</p>
+<p>where <script type="math/tex">S_k</script> is the set of all examples in the support set that belong to class <script type="math/tex">k</script>, <script type="math/tex">x_k</script> is an example in <script type="math/tex">S_k</script>, and <script type="math/tex">f_\theta</script> is the backbone model we are trying to learn. </p>
+<p>After creating a prototype for each class in the support set, we use the euclidean distance between the query example and each prototype to determine which class the query example belongs to. We can build a probability distribution over the classes by applying a softmax function to the negated distances between a given query example and each prototype:</p>
+<p>
+<script type="math/tex; mode=display">p(y = k | x_q) = \frac{exp(-d(x_q, c_k))}{\sum_{k'} exp(-d(x_q, c_{k'}))}</script>
+</p>
+<p>where <script type="math/tex">x_q</script> is a query example, <script type="math/tex">c_k</script> is the prototype for class <script type="math/tex">k</script>, and <script type="math/tex">d</script> is the squared euclidean distance between two vectors.</p>
+<!---
+## Prototypical Networks are Zero-Shot Learners too!
+
+![Protonet ZSL](images/fsl/foundations/protonet-zsl.png)
+
+When used for zero-shot learning (ZSL), prototypical networks don't require a labeled support set of examples for each class. Instead, the model is trained using a set of class metadata vectors, which are vectors that describe the characteristics of each class that the model should be able to classify. These metadata vectors are mapped to the same embedding space as the inputs using a separate model, \(g_\theta\), and used as the prototypes for each class. The prototypical network then uses the distances between the input and the class prototypes to make predictions about the input's category.
+
+The prototypical network method can also be used for zero-shot learning. The method remains mostly the same as above. 
+However, instead of relying on a support set \(S_k\) for each class \(k\), we are given some class metadata vector \(v_k\) for each class. 
+
+The class metadata vector \(v_k\) is a vector that contains some information about the class \(k\), which could be in the form of a text description of the class, an image, or any other form of data.  During training, we learn a mapping \(g_\theta\) from the class metadata vector \(v_k\) to the prototype vector \(c_k\): \(c_k = g_\theta(v_k)\).
+
+In this zero-shot learning scenario, we are mapping from two different domains: the domain of the class metadata vectors \(v_k\) (ex: text) and the domain of the query examples \(x_q\) (ex: audio). 
+
+This means that we are learning two different backbone models that map to the **same embedding space**: \(f_\theta\) for the input query and \(g_\theta\) for the class metadata vectors.
+--->
+
+<h3 id="2-optimization-based-few-shot-learning">2- Optimization-Based Few-Shot Learning<a class="headerlink" href="#2-optimization-based-few-shot-learning" title="Permanent link">&para;</a></h3>
+<p>Optimization-based approaches focus on learning model parameters <script type="math/tex">\theta</script> that can easily adapt to new tasks, and thus new classes. The canonical method for optimization-based few-shot learning is Model-Agnostic Meta Learning (MAML<sup id="fnref:finn2017model"><a class="footnote-ref" href="#fn:finn2017model">6</a></sup>),
+and it's successors<sup id="fnref:li2017meta"><a class="footnote-ref" href="#fn:li2017meta">7</a></sup><sup id="fnref:sun2019mtl"><a class="footnote-ref" href="#fn:sun2019mtl">8</a></sup>. </p>
+<p>The intuition behind MAML is that some representations are more easily transferrable to new tasks than others. </p>
+<p><img alt="Optimization-based FSL" src="../images/fsl/foundations/opt-based-fsl.png" /></p>
+<p>For example, assume we train a model with parameters <script type="math/tex">\theta</script> to classify between (<code>piano</code>, <code>guitar</code>, <code>saxophone</code> and <code>bagpipe</code>) samples. 
+Normally, we would expect that these parameters <script type="math/tex">\theta</script> would not be useful for classifying between instruments outside the training distribution, like <code>cello</code> and <code>flute</code>. The goal of MAML is to be able to learn parameters <script type="math/tex">\theta</script> that are useful not just for classifying between the instruments in the training set, but also are easy to adapt to new instrument classification tasks given a support set for each task, like <code>cello</code> vs <code>flute</code>, <code>violin</code> vs <code>trumpet</code>, etc.</p>
+<p>In other words, if we have some model parameters <script type="math/tex">\theta</script>, we want <script type="math/tex">\theta</script> to be adapted to new tasks using only a few labeled examples (a single support set) in a few gradient steps. </p>
+<p>The MAML algorithm accomplishes this by training the model to adapt from a starting set of parameters <script type="math/tex">\theta</script> to a new set of parameters <script type="math/tex">\theta_i</script> that are useful for a particular episode <script type="math/tex">E_i</script>. This is performed for all episodes in a batch, eventually learning a starting set of parameters <script type="math/tex">\theta</script> that can be successfully adapted to new tasks using only a few labeled examples.</p>
+<p>Note that MAML makes no assumption of the model architecture, thus the "model-agnostic" part of the method.</p>
+<h4 id="the-maml-algorithm">The MAML algorithm<a class="headerlink" href="#the-maml-algorithm" title="Permanent link">&para;</a></h4>
+<p><img alt="MAML" src="../images/fsl/foundations/maml.png" /></p>
+<blockquote>
+<p>The MAML<sup id="fnref3:finn2017model"><a class="footnote-ref" href="#fn:finn2017model">6</a></sup> algorithm. The starting model parameters are depicted as <script type="math/tex">\theta</script>, while the task-specific, fine-tuned parameters for tasks 1, 2, and 3 are depicted as <script type="math/tex">\theta_1^*</script>, <script type="math/tex">\theta_2^*</script>, and <script type="math/tex">\theta_3^*</script>, respectively. </p>
+</blockquote>
+<p>Suppose we are given a meta-training set composed of many few-shot episodes <script type="math/tex">D_{train} = \{E_1, E_2, ..., E_n\}</script>, where each episode contains a support set and a train set <script type="math/tex">E_i = (S_i, Q_i)</script>. We can follow the MAML algorithm to learn parameters <script type="math/tex">\theta</script> that can be adapted to new tasks using only a few examples and a few gradient steps. </p>
+<p>Overview of the MAML<sup id="fnref2:finn2017model"><a class="footnote-ref" href="#fn:finn2017model">6</a></sup> <strong>training</strong> algorithm:</p>
+<hr />
+<ol>
+<li>Initialize model parameters <script type="math/tex">\theta</script> randomly, choose step sizes <script type="math/tex">\alpha</script> and <script type="math/tex">\beta</script>.  </li>
+<li><strong>while</strong> not converged <strong>do</strong><ol start="3">
+<li>Sample a batch of episodes (tasks) from the training set <script type="math/tex">D_{train} = \{E_1, E_2, ..., E_n\}</script>
+</li>
+<li><strong>for</strong> each episode <script type="math/tex">E_i</script> in the batch <strong>do</strong><ol start="5">
+<li>Using the current parameters <script type="math/tex">\theta</script>, compute the gradient of the loss <script type="math/tex">L_if(\theta)</script> for episode <script type="math/tex">E_i</script>.</li>
+<li>Compute a new set of parameters <script type="math/tex">\theta_i</script> by fine-tuning in the direction of the gradient w.r.t. the starting parameters <script type="math/tex">\theta</script>: 
+<script type="math/tex; mode=display">\theta_i = \theta - \alpha \nabla_{\theta} L_i</script>
+</li>
+</ol>
+</li>
+<li>Using the fine-tuned parameters <script type="math/tex">\theta_i</script> for each episode, make a prediction and compute the loss <script type="math/tex">L_{i}f(\theta_i)</script>.</li>
+<li>Update the starting parameters <script type="math/tex">\theta</script> by taking a gradient step in the direction of the loss we computed with the fine-tuned parameters <script type="math/tex">L_{i}f(\theta_i)</script>:
+    <script type="math/tex; mode=display">\theta = \theta - \beta \nabla_{\theta} \sum_{E_i \in D_{train}}L_i f(\theta_i)</script>
+</li>
+</ol>
+</li>
+</ol>
+<hr />
+<p>At <strong>inference</strong> time, we are given a few-shot learning task with support and query set <script type="math/tex">E_{test} = (S_{test}, Q_{test})</script>. We can use the learned parameters <script type="math/tex">\theta</script> as a starting point, and follow a process similar to the one above to make a prediction for the query set <script type="math/tex">Q_{test}</script>:  </p>
+<hr />
+<ol>
+<li>Initialize model parameters <script type="math/tex">\theta</script> to the learned parameters from meta-training.</li>
+<li>Compute the gradient <script type="math/tex">\nabla_{\theta} L_{test} f(\theta)</script> of the loss <script type="math/tex">L_{test}f(\theta)</script> for the test episode <script type="math/tex">E_{test}</script>.</li>
+<li>Similar to step 6 of the training algorithm above, compute a new set of parameters <script type="math/tex">\theta_{test}</script> by fine-tuning in the direction of the gradient w.r.t. the starting parameters <script type="math/tex">\theta</script>. </li>
+<li>Make a prediction using the fine-tuned parameters <script type="math/tex">\theta_{test}</script>: <script type="math/tex">\hat{y} =(\theta_{test})</script>.</li>
+</ol>
+<hr />
+<h2 id="zero-shot-learning-foundations">Zero-Shot Learning Foundations<a class="headerlink" href="#zero-shot-learning-foundations" title="Permanent link">&para;</a></h2>
+<p>Zero-shot learning (ZSL) is yet another approach for classifying the classes that are not observed during training. Main difference from few-shot learning is that it does not require any additional label data for novel class inputs. </p>
+<p><img alt="Zero-shot" src="../images/fsl/zsl/zsl_01.png" /></p>
+<p>Therefore, in zero-shot learning, there is no further training step for unseen classes. Instead, during the training phase, the model learns how to use the side information that can potentially cover the relationship between any of both seen and unseen classes. After training, it can handle the cases where inputs from unseen classes are to be classified.</p>
+<p><img alt="Zero-shot 2" src="../images/fsl/zsl/zsl_02.png" /></p>
+<p>ZSL was originally inspired by human’s ability to infer novel objects or create new categories dynamically based on prior semantic knowledge, where general relationship between seen and unseen classes are learned.</p>
+<!---### Overview on Zero-shot Learning Paradigm 
+---->
+
+<p>Let's look into a case of an audio-based musical instrument classification task. </p>
+<p>First, given training audio and their associated class labels (seen classes), we train a classifier that projects input vectors onto the audio embedding space. </p>
+<p><img alt="Zero-shot process 1" src="../images/fsl/zsl/zsl_process_01.svg" /></p>
+<p>However, there isn't a way to make prediction of unseen labels for unseen audio inputs yet.</p>
+<p><img alt="Zero-shot process 2" src="../images/fsl/zsl/zsl_process_02.svg" /></p>
+<p>As forementioned we use the side information that can inform the relationships between both seen and unseen labels. </p>
+<p>There are various sources of the side information, such as class-attribute vectors infered from an annotated dataset, or general word embedding vectors trained on a large corpus of documents. </p>
+<!--
+We will go over in detail in the later section.  
+--->
+
+<p><img alt="Zero-shot process 3" src="../images/fsl/zsl/zsl_process_03.svg" /></p>
+<p>The core of zero-shot learning paradigm is to learn the compatibility function between the embedding space of the inputs and the side information space of their labels. </p>
+<ul>
+<li>Compatibility function : <script type="math/tex">F(x, y ; W)=\theta(x)^T W \phi(y)</script>
+<ul>
+<li>
+<script type="math/tex">\theta(x)</script> : input embedding function.</li>
+<li>
+<script type="math/tex">W</script> : mapping function. </li>
+<li>
+<script type="math/tex">\phi(y)</script> : label embedding function.</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Zero-shot process 4" src="../images/fsl/zsl/zsl_process_04.svg" /></p>
+<!--
+### Learning a mapping function
+--->
+
+<p>A typical approach is to train a mapping function between the two.
+By unveiling relationship between the side information space and our input feature space, it is possible to map vectors from one space to the other.</p>
+<p><img alt="Zero-shot process 5" src="../images/fsl/zsl/zsl_process_05.svg" /></p>
+<p>After training, arbitrary inputs of unseen labels can be predicted to the corresponding class. </p>
+<p><img alt="Zero-shot process 6" src="../images/fsl/zsl/zsl_process_06.svg" /></p>
+<p>Another option is to train a separate zero-shot embedding space where the embeddings from both spaces are projected (a metric-learning approach).</p>
+<ul>
+<li>E.g. Training mapping functions <script type="math/tex">W_1</script> and <script type="math/tex">W_2</script> with a pairwise loss function : <script type="math/tex">\sum_{y \in \mathcal{Y}^{seen}}\left[\Delta\left(y_n, y\right)+F\left(x_n, y ; W_1, W_2\right)-F\left(x_n, y_n ; W_1, W_2\right)\right]_{+}</script>
+<ul>
+<li>where <script type="math/tex">F(x, y ; W_1, W_2)= -\text{Distance}(\theta(x)^T W_1, \phi(y)^T W_2)</script>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Zero-shot process 7" src="../images/fsl/zsl/zsl_process_07.svg" /></p>
+<p>In this case, the inputs and the classes are projected onto another zero-shot embedding space.</p>
+<p><img alt="Zero-shot process 8" src="../images/fsl/zsl/zsl_process_08.svg" /></p>
+<p>This space-aligning technique is one of the main branches of zero-shot learning framework. </p>
+<!---
+Next, we'll go over another branch or research direction, the generative approach.  
+
+
+### Generative approach
+
+One example of the generative approach is to employ a conditional Generative Adversarial Network (GAN) to generate samples related to the unseen classes. Its training process  consists of two parts. 
+
+At the first part of the training phase, with the audio data annotated with the seen classes, we train the GAN architecture (a generator and a discriminator) combined with the audio encoder and an additional classification model. The convolutional neural network (CNN) audio encoder will try to embed the audio into the *CNN feature vectors* that well represents the class characteristics by being evaluated by the discriminator. At the same time, given the class representative vectors we get from the side information space, the generator will try to **mimic** the *CNN audio feature vector* that is produced by the audio encoder. There could be an additional classification module that is aimed to classify the labels from the generated *CNN audio feature vector*. This module helps the regularization of the GAN framework.  
+
+![ZSL Generative 1](images/fsl/zsl/zsl_generative_01.svg)
+
+After training the GAN framework, we can now generate the *CNN audio feature vector* of an arbitrary unseen class, given the class representative vector on the side information space. 
+
+![ZSL Generative 2](images/fsl/zsl/zsl_generative_02.svg)
+
+With the help of the generative model, we can actually generate as many vector samples we want for a certain class. 
+
+![ZSL Generative 3](images/fsl/zsl/zsl_generative_03.svg)
+
+After generating a sufficient number of the *CNN audio feature vector*, we now have a paired dataset (*CNN audio feature vector* / their labels) for training a classifier for the unseen classes. This is the second part of the training phase.
+
+![ZSL Generative 4](images/fsl/zsl/zsl_generative_04.svg)
+
+We could also train a classifier in the *generalized* zero-shot evaluation manner. 
+
+![ZSL Generative 5](images/fsl/zsl/zsl_generative_05.svg)
+
+After training, we are now ready with the audio encoder and the classifier. The model can make prediction of unseen classes given the audio input.
+
+![ZSL Generative 6](images/fsl/zsl/zsl_generative_06.svg)
+
+--->
+
+<h2 id="popular-fewzero-shot-learning-models">Popular Few/Zero Shot learning models<a class="headerlink" href="#popular-fewzero-shot-learning-models" title="Permanent link">&para;</a></h2>
+<p>So far, we've gone through the broad concepts of the major few and zero-shot learning paradigms. However, there are also recent approaches using other architectures that take advantage of massive data. </p>
+<p>In this section we describe two zero/few-shot mainstream alternatives with widespread application in the industry: OpenAI CLIP and GPT-3.</p>
+<h3 id="contrastive-language-image-pre-training-clip">Contrastive Language-Image Pre-Training (CLIP)<a class="headerlink" href="#contrastive-language-image-pre-training-clip" title="Permanent link">&para;</a></h3>
+<p>Introduced by OpenAI in 2021, <a href="https://openai.com/research/clip">CLIP</a><sup id="fnref:clip"><a class="footnote-ref" href="#fn:clip">9</a></sup> uses an encoder-decoder architecture for <strong>multimodal zero-shot</strong> learning. The figure below explains how CLIP works.</p>
+<p><img alt="CLIP" src="../images/fsl/clip.png" /></p>
+<p>CLIP (Contrastive Language–Image Pre-training) builds on a large body of work on zero-shot transfer, natural language supervision, and multimodal learning. It inputs text snippets into a text encoder (TE) and images into an image encoder (IE). It trains the encoders to predict the correct class by matching images with the appropriate text descriptions.</p>
+<p>The IE takes an image, the TE takes text, both of which return vector representations of the input. To match the dimensions of their results, a linear transformation layer is added to both IE and TE. For IE, the authors advise using ResNet<sup id="fnref:resnet"><a class="footnote-ref" href="#fn:resnet">10</a></sup> or VisionTransformer<sup id="fnref:vit"><a class="footnote-ref" href="#fn:vit">11</a></sup>. For TE, Continuous BOW (CBOW).</p>
+<p>For pre-training, 400 million pairs of the form (image, text) are used, which are fed to the input of IE and TE. Then a matrix is ​​considered, the element <script type="math/tex">(i, j)</script> of which is the cosine similarity from the normalized vector representation of the <script type="math/tex">i</script>-th image and the <script type="math/tex">j</script>-th textual description. </p>
+<p>Thus, the correct pairs will end up on the main diagonal. Finally, by minimizing the cross-entropy along each vertical and horizontal axis of the resulting matrix, we maximize its values ​​on the main diagonal.</p>
+<p>Once CLIP has been trained, you can use it to classify images from any set of classes — simply submit this set of classes, presented as descriptions, to TE, and the image to IE, and see which class represents the cosine similarity of the image with the highest value.</p>
+<h3 id="openai-gpt-3">OpenAI GPT-3<a class="headerlink" href="#openai-gpt-3" title="Permanent link">&para;</a></h3>
+<p>In 2020, OpenAI announced GPT-3. However, it wasn’t just another size upgrade. The paper, entitled <a href="https://arxiv.org/pdf/2005.14165.pdf"><em>Language Models are Few-Shot Learners</em></a><sup id="fnref:gpt3"><a class="footnote-ref" href="#fn:gpt3">12</a></sup>, describes a generative language model with 175 billion parameters, 10x more than any previous language model. They published its performance on NLP benchmarks in which GPT-3 showed the improved capability to handle tasks purely via text interaction.</p>
+<p>Those tasks include zero-shot, one-shot, and few-shot learning, where the model is given a task deﬁnition and/or a few examples and must perform the task without additional training. That is, no ﬁne-tuning is used. It is as though humans perform a new language task from only a few examples of simple instructions. The question posed in the paper is: can a pre-trained language model become a meta-learner?</p>
+<p>To answer this, they use in-context learning. Below is a demonstrative diagram of how in-context learning works, where the model develops a broad set of capabilities and learns to adapt them to perform tasks defined via natural language examples.</p>
+<p><img alt="Figure 1.1 of the paper" src="../images/fsl/gpt31.png" /></p>
+<p>The outer loop refers to the unsupervised pre-training where the model acquires language skills. On the other hand, the inner loop occurs when we feed forward a sequence of examples to the model, which learns the context from the sequence to predict what comes next. It is like a human reading a sequence of examples and thinking about the next instance. As the model uses the language skills learned during the pre-training phase to learn the context given in the sequence, no neural network parameter updates are involved in this learning phase. They call it <strong>in-context learning</strong>.</p>
+<p>The diagram’s first (left-most) example provides a context for performing arithmetic addition. Then, the second (middle) demonstrates how to correct spelling mistakes. The last (right-most) provides examples of English-to-French word translations. Given the respective context, the model must learn how to perform the intended task. They tried this approach with GPT-2, but the result wasn’t good enough to be a practical method of solving language tasks.</p>
+<p>Since then, however, they saw a growing trend in the capacity of transformer language models in terms of the number of parameters, bringing improvements to text generation and other downstream NLP tasks. They hypothesized that in-context learning would show similarly substantial gains with scale.</p>
+<p>Therefore, OpenAI researchers trained a 175 billion parameter language model (GPT-3) and measured its in-context learning abilities.</p>
+<h4 id="few-shot-one-shot-and-zero-shot-learning-in-gpt-3">Few-Shot, One-Shot, and Zero-Shot Learning in GPT-3<a class="headerlink" href="#few-shot-one-shot-and-zero-shot-learning-in-gpt-3" title="Permanent link">&para;</a></h4>
+<p>They evaluated GPT-3 on three conditions:</p>
+<ul>
+<li>Zero-Shot allows no demonstrations and gives only instruction in natural language.</li>
+<li>One-Shot allows only one demonstration.</li>
+<li>Few-Shot (or in-context) learning allows as many demonstrations (typically 10 to 100).</li>
+</ul>
+<p>The below diagram explains the three settings (on the left) of GPT-3 evaluations, compared with the traditional fine-tuning (on the right).</p>
+<p><img alt="Figure 2.1 from the paper" src="../images/fsl/gpt32.png" /></p>
+<p>The following graph shows the model performance on the learning task where it needs to remove extraneous (unnecessary) symbols from a word. The model performance improves over the number of in-context examples (<script type="math/tex">K</script>), with or without a prompt (natural language task description), where <script type="math/tex">K = 0</script> is zero-shot, <script type="math/tex">K = 1</script> is one-shot, and <script type="math/tex">K > 1</script> is few-short learning. It makes sense that the model performs better with a larger <script type="math/tex">K</script> as it can learn from more examples. Moreover, a prompt would give more context, improving the model’s accuracy, especially where <script type="math/tex">K</script> is smaller. In other words, no prompt means that the model must infer what is being asked (i.e., guess the prompt) from the examples.</p>
+<p><img alt="Figure 1.2 from the paper" src="../images/fsl/gpt33.png" /></p>
+<p>As we can see, the largest model with 175 billion parameters has the steepest improvement, proving that the larger capacity of the model increases the model’s ability to recognize patterns from the in-context examples. Therefore, the main conclusion is that <strong>LLM size Does Matter To In-Context Learning</strong>.</p>
+<p>It should be reiterated that the accuracy improvement does not require gradient updates or fine-tuning. The increasing number of demonstrations given as conditioning allows the model to learn more contexts to improve its prediction accuracy.</p>
+<!---
+TODO: Add SAM, it's zero-shot!
+--->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:song2022comprehensive">
+<p>Yisheng Song, Ting-Yuan Wang, Subrota Kumar Mondal, and Jyoti Prakash Sahoo. A comprehensive survey of few-shot learning: evolution, applications, challenges, and opportunities. <em>ArXiv</em>, 2022.&#160;<a class="footnote-backref" href="#fnref:song2022comprehensive" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:vinyals2016matching">
+<p>Oriol Vinyals, Charles Blundell, Timothy Lillicrap, Koray Kavukcuoglu, and Daan Wierstra. Matching networks for one shot learning. In <em>Proceedings of the 30th International Conference on Neural Information Processing Systems</em>, NIPS'16, 3637–3645. Red Hook, NY, USA, 2016. Curran Associates Inc.&#160;<a class="footnote-backref" href="#fnref:vinyals2016matching" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:vinyals2016matching" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ravi2017optimization">
+<p>Sachin Ravi and Hugo Larochelle. Optimization as a model for few-shot learning. In <em>International Conference on Learning Representations</em>. 2017. URL: <a href="https://openreview.net/forum?id=rJY0-Kcll">https://openreview.net/forum?id=rJY0-Kcll</a>.&#160;<a class="footnote-backref" href="#fnref:ravi2017optimization" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:snell2017prototypical">
+<p>Jake Snell, Kevin Swersky, and Richard Zemel. Prototypical networks for few-shot learning. In I. Guyon, U. V. Luxburg, S. Bengio, H. Wallach, R. Fergus, S. Vishwanathan, and R. Garnett, editors, <em>Advances in Neural Information Processing Systems</em>, volume 30. Curran Associates, Inc., 2017.&#160;<a class="footnote-backref" href="#fnref:snell2017prototypical" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:snell2017prototypical" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sung2018relation">
+<p>Flood Sung, Yongxin Yang, Li Zhang, Tao Xiang, Philip H.S. Torr, and Timothy M. Hospedales. Learning to compare: relation network for few-shot learning. In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>. June 2018.&#160;<a class="footnote-backref" href="#fnref:sung2018relation" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:finn2017model">
+<p>Chelsea Finn, Pieter Abbeel, and Sergey Levine. Model-agnostic meta-learning for fast adaptation of deep networks. In Doina Precup and Yee Whye Teh, editors, <em>Proceedings of the 34th International Conference on Machine Learning</em>, volume 70 of Proceedings of Machine Learning Research, 1126–1135. PMLR, 06–11 Aug 2017. URL: <a href="https://proceedings.mlr.press/v70/finn17a.html">https://proceedings.mlr.press/v70/finn17a.html</a>.&#160;<a class="footnote-backref" href="#fnref:finn2017model" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:finn2017model" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:finn2017model" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:li2017meta">
+<p>Zhenguo Li, Fengwei Zhou, Fei Chen, and Hang Li. Meta-sgd: learning to learn quickly for few shot learning. <em>CoRR</em>, 2017. URL: <a href="http://arxiv.org/abs/1707.09835">http://arxiv.org/abs/1707.09835</a>, <a href="https://arxiv.org/abs/1707.09835">arXiv:1707.09835</a>.&#160;<a class="footnote-backref" href="#fnref:li2017meta" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sun2019mtl">
+<p>Qianru Sun, Yaoyao Liu, Tat-Seng Chua, and Bernt Schiele. Meta-transfer learning for few-shot learning. In <em>CVPR</em>, 403–412. 2019.&#160;<a class="footnote-backref" href="#fnref:sun2019mtl" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:clip">
+<p>Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. Learning transferable visual models from natural language supervision. <em>CoRR</em>, 2021. URL: <a href="https://arxiv.org/abs/2103.00020">https://arxiv.org/abs/2103.00020</a>, <a href="https://arxiv.org/abs/2103.00020">arXiv:2103.00020</a>.&#160;<a class="footnote-backref" href="#fnref:clip" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:resnet">
+<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Deep residual learning for image recognition. <em>CoRR</em>, 2015. URL: <a href="http://arxiv.org/abs/1512.03385">http://arxiv.org/abs/1512.03385</a>, <a href="https://arxiv.org/abs/1512.03385">arXiv:1512.03385</a>.&#160;<a class="footnote-backref" href="#fnref:resnet" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:vit">
+<p>Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. An image is worth 16x16 words: transformers for image recognition at scale. <em>CoRR</em>, 2020. URL: <a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a>, <a href="https://arxiv.org/abs/2010.11929">arXiv:2010.11929</a>.&#160;<a class="footnote-backref" href="#fnref:vit" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:gpt3">
+<p>Tom B. Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel M. Ziegler, Jeffrey Wu, Clemens Winter, Christopher Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei. Language models are few-shot learners. <em>CoRR</em>, 2020. URL: <a href="https://arxiv.org/abs/2005.14165">https://arxiv.org/abs/2005.14165</a>, <a href="https://arxiv.org/abs/2005.14165">arXiv:2005.14165</a>.&#160;<a class="footnote-backref" href="#fnref:gpt3" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      
+    
+  </body>
+</html>
