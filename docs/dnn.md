@@ -34,8 +34,6 @@
 
 To understand the proposed theoretical contents, the following bibliographic resources are proposed for reading: (Three and a half hours)
 
-- **For a quick introduction** to the concept of neural networks, activation functions, loss function, gradient descent, backpropagation, chain rule, hyperparameters, we recommend reading: (30 minutes)
-  - [Brief Introduction to Artificial Neural Networks. Section 3.](https://eduscol.education.fr/sti/sites/eduscol.education.fr.sti/files/ressources/pedagogiques/14500/14500-brief-introduction-to-artificial-neural-networks-ensps.pdf)
 - To **develop** the **concepts** of **linear regression**, loss function, gradient descent and linear regression understood as a basic neural network, the following reading is proposed: (30 minutes)
   - Dive into Deep Learning. Section 3.1. Linear Regression.
   - <https://d2l.ai/chapter_linear-regression/linear-regression.html>
@@ -61,8 +59,8 @@ To understand the proposed theoretical contents, the following bibliographic res
 
 **Moodle Test**
 
-- The moodle test must be taken **in advance of the practice session** on February 6. 
-- The test will be open between **February 2 at 9:00 am and February 5 at 11:59 pm**. 
+- The moodle test must be taken **in advance of the practice session** on October 21. 
+- The test will be open between **October 18 at 9:00 am and October 20 at 11:59 pm**. 
 - The test has a **maximum duration of 75 minutes** from the start.
 - The test consists of **24 triple choice questions**. 
 - **Each wrong answer subtracts 1/3** of the value of a correct answer.
@@ -112,4 +110,4 @@ For the practical part of the course, **two notebooks** have been prepared to ex
 
 - To work with the practice you will need to make a local copy of the notebook and answer all the questions that are posed. 
 - For the delivery you will have to send a copy of the notebook with the answers. You will have to use the delivery control of "UACloud -> Evaluación" called "FROM SHALLOW TO DEEP NN. NoteBook X".
-- The **deadline** for delivery of **notebooks 1 and 2** will be on February 13.
+- The **deadline** for delivery of **notebooks 1 and 2** will be on October 27.
