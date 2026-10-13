@@ -1,11 +1,12 @@
 # Summary
 
-These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa](https://www.dlsi.ua.es/~pertusa) and also taught by professors [Juan Antonio Pérez](https://cvnet.cpd.ua.es/curriculum-breve/es/perez-ortiz-juan-antonio/15404), [Andrés Fuster](https://cvnet.cpd.ua.es/curriculum-breve/es/fuster-guillo-andres/10095), [Jorge Azorín](https://cvnet.cpd.ua.es/curriculum-breve/es/azorin-lopez-jorge/9826), and [Jorge Calvo](https://www.dlsi.ua.es/~jcalvo/).
+These are the teaching materials for the course _Aprendizaje Profundo_ (deep learning), coordinated by [Antonio Pertusa](https://www.dlsi.ua.es/~pertusa) and also taught by professors [Juan Antonio Pérez](https://cvnet.cpd.ua.es/curriculum-breve/es/perez-ortiz-juan-antonio/15404), [Andrés Fuster](https://cvnet.cpd.ua.es/curriculum-breve/es/fuster-guillo-andres/10095), and [Jorge Azorín](https://cvnet.cpd.ua.es/curriculum-breve/es/azorin-lopez-jorge/9826).
 
-For information regarding the course assessment, please refer to the Moodle contents at UACloud and the [course official info page](https://cvnet.cpd.ua.es/Guia-Docente/GuiaDocente/Index?wcodest=D114&wcodasi=43509&wlengua=es&scaca=2024-25). 
+<!----, and [Jorge Calvo](https://www.dlsi.ua.es/~jcalvo/). --->
+
+For information regarding the course assessment, please refer to the Moodle contents at UACloud and the [course official info page](https://cvnet.cpd.ua.es/Guia-Docente/GuiaDocente/Index?wcodest=D114&wcodasi=43509&wlengua=es&scaca=2026-27). 
 
 ## Methodology and evaluation
-
 
 - The theory contents should be revised by the student **before** attending the practical sessions. A test will be answered to ensure that these contents are read and understood by the student. 
 - Practical assignments (jupyter notebooks) are to be completed as indicated in each assignment description. Each of the course blocks will have one or more practical assignments. 
@@ -19,14 +20,14 @@ The theory tests represent 30% of the final grade.  The assignments represent 70
 
 The course has the following blocks:
 
-* Feb. 6: [From Shallow to Deep Neural Networks](dnn.md) (Andrés Fuster)
-* Feb. 6 & Feb. 13: [Convolutional Neural Networks](cnn.md) (Jorge Azorín)
-* Feb. 13: [Deep Reinforcement Learning (1/2)](drl.md) (Jorge Calvo)
-* Feb. 20: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
-* Feb. 20: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
-* Feb. 27: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
-* Feb. 27: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
-* Mar. 6: [Deep Reinforcement Learning (2/2)](drl.md) (Jorge Calvo)
+* Oct. 21: [From Shallow to Deep Neural Networks](dnn.md) (Andrés Fuster)
+* Oct. 28: [Convolutional Neural Networks](cnn.md) (Jorge Azorín)
+* Nov. 4: [Recurrent architectures](recurrent.md) (Juan Antonio Pérez)
+* Nov. 4: [Fine tuning and knowledge distillation](ftkd.md) (Juan Antonio Pérez)
+* Nov. 11: [Few and Zero Shot Learning](fsl.md) (Antonio Pertusa)
+* Nov. 11: [Self-Supervised Learning](ssl.md) (Antonio Pertusa)
+* Nov. 18: [Deep Reinforcement Learning](drl.md) (Juan Antonio Pérez)
+<!----* Nov. 18: [Deep Reinforcement Learning (2/2)](drl.md) (Juan Antonio Pérez)--->
 
 ## More information
 
